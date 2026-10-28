@@ -1,0 +1,1 @@
+"""Core module containing system-wide constants, enums, and custom exceptions."""

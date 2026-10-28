@@ -1,0 +1,1 @@
+"""Utility modules for input validation, camera frame acquisition, and QR code decoding."""

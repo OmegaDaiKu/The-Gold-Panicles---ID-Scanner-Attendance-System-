@@ -1,0 +1,1 @@
+"""User interface layer package for PySide6 components, views, and stylesheets."""

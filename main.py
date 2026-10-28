@@ -1,0 +1,76 @@
+"""Application entry point for The Gold Panicles QR Attendance System."""
+
+import logging
+import sys
+from pathlib import Path
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QFont, QIcon
+from PySide6.QtWidgets import QApplication
+
+from src.database.connection import DatabaseConnectionManager
+from src.database.schema import SchemaInitializer
+from src.services.auth_service import AuthService
+from src.ui.main_window import MainWindow
+from src.ui.theme import STYLESHEET_RELATIVE_PATH
+from src.utils.font_loader import load_application_fonts
+
+logger = logging.getLogger(__name__)
+
+
+class AttendanceApplication:
+    """Application runner initializing database, default admin credentials, and main window."""
+
+    def __init__(self):
+        QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+
+        self.app = QApplication(sys.argv)
+        self.app.setStyle("Fusion")
+
+        if hasattr(sys, "_MEIPASS"):
+            base_dir = Path(sys._MEIPASS)
+        else:
+            base_dir = Path(__file__).resolve().parent
+
+        loaded_fonts = load_application_fonts(base_dir)
+        if loaded_fonts:
+            unique_families = sorted(set(loaded_fonts))
+            logger.info("Custom fonts available this session: %s", ", ".join(unique_families))
+
+            if "Helvetica Neue" in unique_families:
+                self.app.setFont(QFont("Helvetica Neue", 10))
+            elif "Degular Display" in unique_families:
+                self.app.setFont(QFont("Degular Display", 10))
+
+        qss_path = base_dir / STYLESHEET_RELATIVE_PATH
+        if not qss_path.exists():
+            logger.critical("Required stylesheet not found at: %s", qss_path)
+            raise FileNotFoundError(
+                f"The application theme stylesheet is missing: {qss_path}\n"
+                "The application cannot start without it. If you intentionally "
+                "moved or renamed this file, update STYLESHEET_RELATIVE_PATH "
+                "in src/ui/theme.py to match."
+            )
+        with open(qss_path, "r", encoding="utf-8") as f:
+            self.app.setStyleSheet(f.read())
+
+        icon_path = base_dir / "assets" / "images" / "logo.png"
+        if icon_path.exists():
+            self.app.setWindowIcon(QIcon(str(icon_path)))
+
+        self.db_manager = DatabaseConnectionManager()
+        self.schema_init = SchemaInitializer(self.db_manager)
+        self.schema_init.ensure_schema_exists()
+
+        self.auth_service = AuthService(self.db_manager)
+        self.auth_service.ensure_default_admin_exists()
+
+        self.main_window = MainWindow(self.db_manager)
+        self.main_window.showMaximized()
+
+    def run(self) -> int:
+        return self.app.exec()
+
+
+if __name__ == "__main__":
+    app_runner = AttendanceApplication()
+    sys.exit(app_runner.run())

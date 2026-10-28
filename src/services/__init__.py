@@ -1,0 +1,1 @@
+"""Business services module encapsulating domain logic and repository coordination."""

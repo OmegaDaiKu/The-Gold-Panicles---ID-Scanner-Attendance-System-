@@ -1,0 +1,22 @@
+# GUI Framework (Supports Python 3.11, 3.12, 3.13+)
+PySide6>=6.6.0
+
+# Camera & QR Processing
+opencv-python>=4.8.0
+pyzbar>=0.1.9
+numpy>=1.24.0
+
+# Security & Password Hashing
+argon2-cffi>=23.1.0
+
+# Google Sheets API Integration
+google-api-python-client>=2.100.0
+google-auth-httplib2>=0.1.1
+google-auth-oauthlib>=1.1.0
+
+# Packaging & Build Tools
+pyinstaller>=6.3.0
+
+# Development & Testing
+pytest>=7.4.0
+pytest-qt>=4.2.0
