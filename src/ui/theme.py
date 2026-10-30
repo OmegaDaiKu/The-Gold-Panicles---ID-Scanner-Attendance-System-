@@ -4,56 +4,63 @@ STYLESHEET_RELATIVE_PATH = "src/ui/styles/theme.qss"
 
 
 class Colors:
-    CANVAS = "#0B0B0C"
-    SURFACE = "#141416"
-    BORDER = "#222226"
-    BORDER_STRONG = "#24242A"
-    BORDER_HOVER = "#33333A"
+    """Design palette tokens.
+
+    Theme: Minimal Editorial Publication
+    Color Scheme:
+      --text: #040316;
+      --background: #fbfbfe;
+      --primary: #ece3da;
+      --secondary: #eee6e2;
+      --accent: #0c0f18;
+    """
+    # Core User-Defined Palette
+    TEXT = "#040316"
+    BACKGROUND = "#FBFBFE"
+    PRIMARY = "#ECE3DA"
+    SECONDARY = "#EEE6E2"
+    ACCENT = "#0C0F18"
+
+    # Surface & Canvas Mapping
+    CANVAS = BACKGROUND
+    SURFACE = PRIMARY
+    SURFACE_ALT = SECONDARY
+    BORDER = "#DDD5CE"
+    BORDER_STRONG = "#C8BFB7"
+    BORDER_HOVER = ACCENT
 
     ELEVATION_0 = CANVAS
     ELEVATION_1 = SURFACE
-    ELEVATION_2 = "#1B1B1F"
+    ELEVATION_2 = SURFACE_ALT
 
-    TEXT_PRIMARY = "#F4EFEA"
-    TEXT_MUTED = "#8E8E93"
-    TEXT_SECONDARY = "#A1A1AA"
+    # Text hierarchy
+    TEXT_PRIMARY = TEXT
+    TEXT_MUTED = "#6B6775"
+    TEXT_SECONDARY = "#504C5A"
 
-    ACCENT_GOLD = "#DAA520"
-    ACCENT_GOLD_HOVER = "#E5B842"
-    ACCENT_GOLD_PRESSED = "#B8860B"
+    # Accent tokens (Clean charcoal-black accent)
+    ACCENT_DARK = ACCENT
+    ACCENT_GOLD = ACCENT              # Kept for backward-compatibility with existing references
+    ACCENT_GOLD_HOVER = "#242A38"
+    ACCENT_GOLD_PRESSED = "#040316"
 
-    STATUS_OVERDUE_BG = "#58111A"
-    STATUS_OVERDUE = "#FF99A4"
-    STATUS_OVERDUE_BORDER = "#7A1B28"
+    # Refined Semantic & Status Colors (Crisp, minimal, high-contrast on light surfaces)
+    STATUS_OVERDUE_BG = "#FCE8E6"
+    STATUS_OVERDUE = "#A51D24"
+    STATUS_OVERDUE_BORDER = "#F5C2C7"
 
-    STATUS_COMPLETED_BG = "#122B3D"
-    STATUS_COMPLETED = "#80C8FF"
-    STATUS_COMPLETED_BORDER = "#1C3D54"
+    STATUS_COMPLETED_BG = "#E8F0FE"
+    STATUS_COMPLETED = "#1A56DB"
+    STATUS_COMPLETED_BORDER = "#B8D5F8"
 
-    # FIXED THIS SESSION: STATUS_OPEN_* previously aliased directly to
-    # STATUS_COMPLETED_* (STATUS_OPEN_BG = STATUS_COMPLETED_BG, etc.), which
-    # meant the live attendance board rendered OPEN ("still in the office")
-    # and COMPLETED ("already checked out") status pills as pixel-identical
-    # blue badges -- no color cue distinguished the two most important states
-    # on the board's single busiest column. Given its own distinct hue
-    # entirely (green, conventionally "currently active"), built with the
-    # same dark-bg / light-pastel-text / mid-saturation-border construction
-    # used by every other status triplet here, so it can never collide with
-    # OVERDUE (red), COMPLETED (blue), or RESOLVED (gold-brown) again.
-    STATUS_OPEN_BG = "#113B24"
-    STATUS_OPEN = "#8FE3B0"
-    STATUS_OPEN_BORDER = "#1E5A38"
+    STATUS_OPEN_BG = "#E6F4EA"
+    STATUS_OPEN = "#0F6D38"
+    STATUS_OPEN_BORDER = "#B7E1CD"
 
-    STATUS_RESOLVED_BG = "#3A2E12"
-    STATUS_RESOLVED = "#D9B872"
-    STATUS_RESOLVED_BORDER = "#4E3E1A"
+    STATUS_RESOLVED_BG = "#FEF7E0"
+    STATUS_RESOLVED = "#8F5800"
+    STATUS_RESOLVED_BORDER = "#FCE293"
 
-    # NOTE: SUCCESS_BG/SUCCESS_BORDER now resolve to the new green OPEN
-    # colors rather than the old blue COMPLETED colors, as a direct
-    # consequence of the fix above. This is flagged as a net improvement,
-    # not a regression -- green is the more conventional semantic for a
-    # "success" state than blue was -- but noted in case green appears
-    # somewhere unexpected that was relying on the old blue value.
     SUCCESS_BG = STATUS_OPEN_BG
     SUCCESS_BORDER = STATUS_OPEN_BORDER
     INFO_BG = STATUS_COMPLETED_BG
@@ -63,19 +70,19 @@ class Colors:
     WARNING_BG = STATUS_RESOLVED_BG
     WARNING_BORDER = STATUS_RESOLVED_BORDER
 
-    CHIP_DUTY_BG = "#2E2512"
-    CHIP_NEUTRAL_BG = ELEVATION_2
+    CHIP_DUTY_BG = PRIMARY
+    CHIP_NEUTRAL_BG = SECONDARY
 
-    FLASH_SUCCESS = "rgba(218, 165, 32, 0.2)"
-    FLASH_FAILURE = "rgba(255, 90, 90, 0.18)"
-    DANGER_SOLID = "#C62828"
+    FLASH_SUCCESS = "rgba(15, 109, 56, 0.20)"
+    FLASH_FAILURE = "rgba(165, 29, 36, 0.20)"
+    DANGER_SOLID = "#C5221F"
 
-    CALENDAR_SELECTED_BG = ACCENT_GOLD
-    CALENDAR_SELECTED_TEXT = "#0B0B0C"
+    CALENDAR_SELECTED_BG = ACCENT
+    CALENDAR_SELECTED_TEXT = "#FBFBFE"
 
-    TONAL_GOLD_BG = "#2E2512"
-    TONAL_GOLD_BORDER = "rgba(218, 165, 32, 0.35)"
-    TONAL_GOLD_TEXT = ACCENT_GOLD_HOVER
+    TONAL_GOLD_BG = SECONDARY
+    TONAL_GOLD_BORDER = BORDER
+    TONAL_GOLD_TEXT = TEXT
 
 
 class ObjectNames:
@@ -106,17 +113,6 @@ class ObjectNames:
     TEXT_MUTED = "textMuted"
     TEXT_SECONDARY = "textSecondary"
 
-    # --- Restored this session: flagged by an external code-review pass
-    # as referenced by admin-dashboard/dialog files (admin_login.py,
-    # shutdown_dialog.py, modals.py, and the admin tab modules) but
-    # missing from this class, which would raise AttributeError on
-    # construction of every one of those screens. Mapped against the
-    # real theme.qss selectors reviewed earlier this session; not
-    # re-verified against theme.qss in this exact turn (see chat caveat)
-    # pending a re-paste to close the loop fully. Button-style names use
-    # this file's existing snake_case convention (matching btn_chrome/
-    # btn_tonal/btn_macro); everything else uses the existing camelCase
-    # convention (matching brandHeader/liveClockLabel/adminUserBadge).
     BTN_PRIMARY = "btn_primary"
     BTN_CANCEL = "btn_cancel"
     BTN_DANGER_SOLID = "btn_danger_solid"
@@ -138,13 +134,6 @@ class ObjectNames:
     DIALOG_EMPHASIS_TEXT = "dialogEmphasisText"
     DIALOG_HEADER_INFO = "dialogHeaderInfo"
     INFO_CHIP_GOLD = "infoChipGold"
-
-    # Not in the external audit's explicit list of 20, but added
-    # proactively: theme.qss (per this session's earlier review) defines
-    # a #dialogHeaderDanger rule as the direct sibling of the now-restored
-    # #dialogHeaderInfo, and it would be a near-certain miss otherwise.
-    # Flagging rather than silently assuming it's definitely referenced
-    # anywhere — please confirm against the real dialog files.
     DIALOG_HEADER_DANGER = "dialogHeaderDanger"
 
 
@@ -158,7 +147,7 @@ class Spacing:
 
 
 class Radius:
-    SUPER = 28
+    SUPER = 8
     SHARP = 4
     XS = 2
     SM = 6
@@ -171,9 +160,9 @@ class Motion:
 
 
 class Typography:
-    DISPLAY_FAMILY = "Degular Display"
+    DISPLAY_FAMILY = "M Ying Hei PRC W5"
     BODY_FAMILY = "Helvetica Neue"
-    BODY_FAMILY_FALLBACK = "Arial"
+    BODY_FAMILY_FALLBACK = "Helvetica"
     DATA_GRID_PT = 11
     LABEL_PT = 12
     BODY_PT = 13

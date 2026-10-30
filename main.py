@@ -32,14 +32,24 @@ class AttendanceApplication:
             base_dir = Path(__file__).resolve().parent
 
         loaded_fonts = load_application_fonts(base_dir)
-        if loaded_fonts:
-            unique_families = sorted(set(loaded_fonts))
+        unique_families = sorted(set(loaded_fonts)) if loaded_fonts else []
+        if unique_families:
             logger.info("Custom fonts available this session: %s", ", ".join(unique_families))
 
-            if "Helvetica Neue" in unique_families:
-                self.app.setFont(QFont("Helvetica Neue", 10))
-            elif "Degular Display" in unique_families:
-                self.app.setFont(QFont("Degular Display", 10))
+        # Font configuration: Primary is M Ying Hei PRC W5, secondary is Helvetica
+        if "M Ying Hei PRC W5" in unique_families:
+            self.app.setFont(QFont("M Ying Hei PRC W5", 10))
+        elif "M Ying Hei PRC" in unique_families:
+            self.app.setFont(QFont("M Ying Hei PRC", 10))
+        elif "Helvetica Neue" in unique_families:
+            self.app.setFont(QFont("Helvetica Neue", 10))
+        elif "Helvetica" in unique_families:
+            self.app.setFont(QFont("Helvetica", 10))
+        else:
+            # System font database fallback
+            app_font = QFont("M Ying Hei PRC W5", 10)
+            app_font.setStyleHint(QFont.StyleHint.SansSerif)
+            self.app.setFont(app_font)
 
         qss_path = base_dir / STYLESHEET_RELATIVE_PATH
         if not qss_path.exists():

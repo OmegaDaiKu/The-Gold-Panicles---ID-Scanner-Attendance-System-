@@ -1,20 +1,15 @@
 /* ==========================================================================
    THE GOLD PANICLES — QR ATTENDANCE SYSTEM
-   Desktop Kiosk Terminal v2.4 (HTML Parity Build)
+   Minimal Editorial Publication Theme
    ========================================================================== */
 
+/* Main Containers & Dialog Windows */
 QMainWindow,
 QDialog,
 QWidget#mainContainer {
-    /* FLAGGED, NOT CHANGED: this value (#050507) disagrees both with
-       theme.py's Colors.CANVAS (#0B0B0C) AND with this same file's own
-       QScrollBar:vertical background-color (#0B0B0C) below -- i.e. this
-       file is internally inconsistent about its own canvas color, not just
-       out of sync with theme.py. Awaiting confirmation on which value is
-       canonical before changing either location. */
-    background-color: #050507;
-    color: #F4EFEA;
-    font-family: "Helvetica Neue", "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+    background-color: #FBFBFE;
+    color: #040316;
+    font-family: "M Ying Hei PRC W5", "M Ying Hei PRC", "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-size: 13px;
 }
 
@@ -23,7 +18,7 @@ QWidget {
 }
 
 QWidget:focus {
-    border: 2px solid #DAA520;
+    border: 1.5px solid #0C0F18;
 }
 
 QMenuBar:focus,
@@ -31,13 +26,13 @@ QStatusBar:focus {
     border: none;
 }
 
-/* OS Window Title Header Bar */
+/* Header Masthead */
 QFrame#mainHeaderFrame {
-    background-color: #08080A;
-    border-bottom: 1px solid #1C1C20;
+    background-color: #ECE3DA;
+    border-bottom: 1px solid #DDD5CE;
 }
 
-/* Primary Container Cards — Asymmetric Super Graphic Motif */
+/* Primary Container Cards & Panels */
 QFrame#surfaceCard,
 QFrame#headerCard,
 QWidget#cardPanel,
@@ -45,163 +40,158 @@ QFrame#cardSuper,
 QFrame#cardSurface,
 QFrame#verificationCard,
 QGroupBox {
-    background-color: #141416;
-    border: 1px solid #24242A;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    color: #F4EFEA;
+    background-color: #ECE3DA;
+    border: 1px solid #DDD5CE;
+    border-radius: 6px;
+    color: #040316;
 }
 
-/* ADDED THIS SESSION: QFrame has no generic base rule in this stylesheet,
-   so QFrame#statCard (overview.py's StatCard, used on the admin dashboard's
-   landing tab) previously rendered with zero background/border/radius at
-   all -- a confirmed, zero-fallback visual bug, not merely a missing
-   polish item. Uses a smaller corner radius than the main surface cards
-   (20px vs 24px) since stat cards are a smaller, denser grid element. */
+/* Summary / Metric Cards */
 QFrame#statCard {
-    background-color: #141416;
-    border: 1px solid #24242A;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+    background-color: #ECE3DA;
+    border: 1px solid #DDD5CE;
+    border-radius: 6px;
 }
 
-/* Typography */
+/* Typography Hierarchy */
 QLabel {
-    color: #F4EFEA;
-    font-family: "Helvetica Neue", "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+    color: #040316;
+    font-family: "M Ying Hei PRC W5", "M Ying Hei PRC", "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-size: 13px;
     background: transparent;
 }
 
 QLabel#brandHeader {
-    color: #DAA520;
-    font-family: "Helvetica Neue", "Segoe UI", sans-serif;
-    font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 0.6px;
+    color: #0C0F18;
+    font-family: "M Ying Hei PRC W5", "M Ying Hei PRC", "Helvetica Neue", "Helvetica", sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
 }
 
 QLabel#textSecondary,
 QLabel#subText {
-    color: #8E8E93;
+    color: #504C5A;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-size: 11px;
 }
 
 QLabel#textMuted {
-    color: #8E8E93;
+    color: #6B6775;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-size: 11px;
 }
 
 QLabel#liveClockLabel {
-    color: #F4EFEA;
+    color: #040316;
     font-size: 11px;
     font-weight: 600;
     font-family: "Consolas", "JetBrains Mono", "Courier New", monospace;
-    padding: 4px 12px;
-    background-color: #08080A;
-    border: 1px solid #24242A;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+    padding: 5px 12px;
+    background-color: #EEE6E2;
+    border: 1px solid #DDD5CE;
+    border-radius: 4px;
 }
 
-/* ADDED THIS SESSION: stat card title/value had no QSS rule at all. Falls
-   back to the generic QLabel rule above (plain #F4EFEA body text) rather
-   than crashing, but with no visual hierarchy between a card's label and
-   its big headline number. */
-QLabel#statCardTitle {
-    color: #8E8E93;
+QLabel#adminUserBadge {
+    color: #0C0F18;
+    background-color: #EEE6E2;
+    border: 1px solid #DDD5CE;
+    border-radius: 4px;
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.4px;
+    font-weight: 700;
+    padding: 5px 10px;
+    font-family: "Consolas", "JetBrains Mono", monospace;
+}
+
+QLabel#statCardTitle {
+    color: #6B6775;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
 }
 
 QLabel#statCardValue {
-    color: #F4EFEA;
+    color: #040316;
     font-size: 28px;
     font-weight: 800;
     font-family: "Consolas", "JetBrains Mono", monospace;
 }
 
-/* ADDED THIS SESSION: section titles had no dedicated rule; fell back to
-   generic QLabel body-text styling with no emphasis at all. */
 QLabel#sectionTitle {
-    color: #F4EFEA;
+    color: #0C0F18;
+    font-family: "M Ying Hei PRC W5", "M Ying Hei PRC", "Helvetica Neue", "Helvetica", sans-serif;
     font-size: 15px;
     font-weight: 800;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.3px;
 }
 
 QLabel#sectionTitleDanger {
-    color: #FF99A4;
+    color: #A51D24;
+    font-family: "M Ying Hei PRC W5", "M Ying Hei PRC", "Helvetica Neue", "Helvetica", sans-serif;
     font-size: 15px;
     font-weight: 800;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.3px;
 }
 
 QLabel#headingSection {
-    color: #DAA520;
+    color: #0C0F18;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.5px;
 }
 
-/* ADDED THIS SESSION: FORM_ERROR_LABEL previously had no styling, meaning
-   a validation error message would render as plain white body text --
-   indistinguishable from a normal label. This was the clearest
-   semantically-meaningful gap in this whole missing-selector batch. */
 QLabel#formLabel {
-    color: #A1A1AA;
+    color: #504C5A;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-size: 11px;
     font-weight: 600;
 }
 
 QLabel#formErrorLabel {
-    color: #FF99A4;
+    color: #A51D24;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-size: 11px;
     font-weight: 600;
 }
 
-/* ADDED THIS SESSION: dialog text/chip roles had no styling. */
 QLabel#dialogSubjectName {
-    color: #F4EFEA;
+    color: #040316;
+    font-family: "M Ying Hei PRC W5", "M Ying Hei PRC", "Helvetica Neue", "Helvetica", sans-serif;
     font-size: 16px;
     font-weight: 800;
 }
 
 QLabel#dialogEmphasisText {
-    color: #DAA520;
+    color: #0C0F18;
     font-weight: 700;
 }
 
 QLabel#dialogHeaderInfo {
-    background-color: #122B3D;
-    color: #80C8FF;
-    border: 1px solid #1C3D54;
-    border-radius: 6px;
+    background-color: #E8F0FE;
+    color: #1A56DB;
+    border: 1px solid #B8D5F8;
+    border-radius: 4px;
     padding: 8px 12px;
     font-weight: 600;
 }
 
 QLabel#dialogHeaderDanger {
-    background-color: #58111A;
-    color: #FF99A4;
-    border: 1px solid #7A1B28;
-    border-radius: 6px;
+    background-color: #FCE8E6;
+    color: #A51D24;
+    border: 1px solid #F5C2C7;
+    border-radius: 4px;
     padding: 8px 12px;
     font-weight: 600;
 }
 
 QLabel#infoChipGold {
-    background-color: #2E2512;
-    color: #E5B842;
-    border: 1px solid rgba(218, 165, 32, 0.35);
-    border-radius: 10px;
+    background-color: #ECE3DA;
+    color: #0C0F18;
+    border: 1px solid #DDD5CE;
+    border-radius: 4px;
     padding: 3px 10px;
     font-weight: 700;
     font-size: 10px;
@@ -213,272 +203,316 @@ QComboBox,
 QSpinBox,
 QDateEdit,
 QTextEdit {
-    background-color: #08080A;
-    color: #F4EFEA;
+    background-color: #FBFBFE;
+    color: #040316;
     font-family: "Consolas", "JetBrains Mono", monospace;
-    border: 1px solid #24242A;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+    border: 1px solid #DDD5CE;
+    border-radius: 4px;
     padding: 8px 12px;
     min-height: 20px;
 }
 
 QLineEdit:focus,
-QComboBox:focus {
-    border: 1px solid #DAA520;
-    background-color: #08080A;
+QComboBox:focus,
+QSpinBox:focus,
+QDateEdit:focus,
+QTextEdit:focus {
+    border: 1.5px solid #0C0F18;
+    background-color: #FFFFFF;
 }
 
 QLineEdit#gpSuperInput {
-    background-color: #08080A;
-    color: #F4EFEA;
+    background-color: #FFFFFF;
+    color: #040316;
+    font-family: "Consolas", "JetBrains Mono", monospace;
     font-size: 13px;
     font-weight: 500;
-    border: 1px solid #24242A;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+    border: 1px solid #DDD5CE;
+    border-radius: 4px;
     padding: 10px 14px;
 }
+
 QLineEdit#gpSuperInput:focus {
-    border: 1px solid #DAA520;
+    border: 1.5px solid #0C0F18;
 }
 
 QLineEdit#searchInput {
-    background-color: #08080A;
-    border: 1px solid #24242A;
+    background-color: #FFFFFF;
+    color: #040316;
+    border: 1px solid #DDD5CE;
     border-radius: 4px;
     padding: 6px 10px;
 }
 
+QLineEdit#searchInput:focus {
+    border: 1.5px solid #0C0F18;
+}
+
 /* Push Buttons */
 QPushButton {
-    background-color: #1C1C20;
-    color: #F4EFEA;
-    font-family: "Helvetica Neue", "Segoe UI", sans-serif;
-    border: 1px solid #24242A;
+    background-color: #EEE6E2;
+    color: #040316;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    border: 1px solid #DDD5CE;
     border-radius: 4px;
     font-size: 11px;
     font-weight: 600;
     padding: 6px 14px;
 }
+
 QPushButton:hover {
-    background-color: #24242A;
-    border-color: #3A3A44;
+    background-color: #ECE3DA;
+    border-color: #0C0F18;
 }
 
+QPushButton:disabled {
+    color: #A09BAE;
+    border-color: #E2DBD4;
+    background-color: #F4EFEB;
+}
+
+/* Primary Action Buttons */
 QPushButton#btn_primary,
 QPushButton#primaryButton {
-    background-color: #DAA520;
-    color: #000000;
-    border: none;
-    border-top-left-radius: 8px;
+    background-color: #0C0F18;
+    color: #FBFBFE;
+    border: 1px solid #0C0F18;
+    border-radius: 4px;
     font-weight: 700;
+    padding: 6px 16px;
 }
+
 QPushButton#btn_primary:hover,
 QPushButton#primaryButton:hover {
-    background-color: #E5B842;
+    background-color: #242A38;
+    border-color: #242A38;
 }
 
-/* ADDED THIS SESSION: previously fell back to the generic QPushButton rule
-   above -- not broken, but not role-differentiated (a Cancel button looked
-   identical to every other neutral button). */
 QPushButton#btn_cancel {
-    background-color: #1C1C20;
-    color: #A1A1AA;
-    border: 1px solid #24242A;
-    border-top-left-radius: 8px;
-}
-QPushButton#btn_cancel:hover {
-    background-color: #24242A;
-    color: #F4EFEA;
+    background-color: #EEE6E2;
+    color: #504C5A;
+    border: 1px solid #DDD5CE;
+    border-radius: 4px;
 }
 
+QPushButton#btn_cancel:hover {
+    background-color: #ECE3DA;
+    color: #040316;
+    border-color: #C8BFB7;
+}
+
+/* Solid Danger Action Button */
 QPushButton#btn_danger_solid {
-    background-color: #C62828;
+    background-color: #C5221F;
     color: #FFFFFF;
-    border: none;
-    border-top-left-radius: 8px;
+    border: 1px solid #C5221F;
+    border-radius: 4px;
     font-weight: 700;
 }
+
 QPushButton#btn_danger_solid:hover {
-    background-color: #E53935;
+    background-color: #A51D24;
+    border-color: #A51D24;
 }
 
-/* ADDED THIS SESSION: row-action buttons (presumed used by staff_mgmt.py /
-   overdue_resolution.py table rows -- not directly re-verified against
-   those files' exact usage this turn) previously had no color
-   differentiation from a plain neutral button. */
+/* Row Action Buttons in Tables */
 QPushButton#btn_row_edit {
-    background-color: #1C1C20;
-    color: #80C8FF;
-    border: 1px solid #1C3D54;
-    border-top-left-radius: 8px;
+    background-color: #E8F0FE;
+    color: #1A56DB;
+    border: 1px solid #B8D5F8;
+    border-radius: 4px;
 }
+
 QPushButton#btn_row_edit:hover {
-    background-color: #122B3D;
+    background-color: #D2E3FC;
 }
 
 QPushButton#btn_row_delete {
-    background-color: #1C1C20;
-    color: #FF99A4;
-    border: 1px solid #58111A;
-    border-top-left-radius: 8px;
+    background-color: #FCE8E6;
+    color: #A51D24;
+    border: 1px solid #F5C2C7;
+    border-radius: 4px;
 }
+
 QPushButton#btn_row_delete:hover {
-    background-color: #2A1014;
+    background-color: #FAD2CF;
 }
 
 QPushButton#btn_row_warning {
-    background-color: #1C1C20;
-    color: #D9B872;
-    border: 1px solid #4E3E1A;
-    border-top-left-radius: 8px;
+    background-color: #FEF7E0;
+    color: #8F5800;
+    border: 1px solid #FCE293;
+    border-radius: 4px;
 }
+
 QPushButton#btn_row_warning:hover {
-    background-color: #3A2E12;
+    background-color: #FEEFC3;
 }
 
 QPushButton#btn_row_success {
-    background-color: #1C1C20;
-    color: #8FE3B0;
-    border: 1px solid #1E5A38;
-    border-top-left-radius: 8px;
+    background-color: #E6F4EA;
+    color: #0F6D38;
+    border: 1px solid #B7E1CD;
+    border-radius: 4px;
 }
+
 QPushButton#btn_row_success:hover {
-    background-color: #113B24;
+    background-color: #CEEAD6;
 }
 
 QPushButton#btn_tonal {
-    background-color: #1C1C20;
-    color: #E5B842;
-    border: 1px solid #24242A;
+    background-color: #ECE3DA;
+    color: #040316;
+    border: 1px solid #DDD5CE;
+    border-radius: 4px;
     font-weight: 700;
 }
+
 QPushButton#btn_tonal:hover {
-    background-color: #24242A;
-    border-color: #DAA520;
+    background-color: #EEE6E2;
+    border-color: #0C0F18;
 }
 
 QPushButton#filterPill {
-    background-color: #1C1C20;
-    color: #CBD5E1;
-    border: none;
+    background-color: #EEE6E2;
+    color: #504C5A;
+    border: 1px solid #DDD5CE;
     border-radius: 4px;
     font-size: 10px;
     font-weight: 600;
     padding: 4px 12px;
 }
+
 QPushButton#filterPill:hover {
-    background-color: #24242A;
+    background-color: #ECE3DA;
+    color: #040316;
 }
+
 QPushButton#filterPill:checked {
-    background-color: #DAA520;
-    color: #000000;
-    border-top-left-radius: 6px;
+    background-color: #0C0F18;
+    color: #FBFBFE;
+    border-color: #0C0F18;
     font-weight: 700;
 }
 
 QPushButton#btn_chrome {
-    background-color: #1C1C20;
-    color: #F4EFEA;
-    border: 1px solid #24242A;
-    border-top-left-radius: 8px;
+    background-color: #EEE6E2;
+    color: #040316;
+    border: 1px solid #DDD5CE;
+    border-radius: 4px;
 }
+
 QPushButton#btn_chrome:hover {
-    border-color: #DAA520;
+    border-color: #0C0F18;
+    background-color: #ECE3DA;
 }
 
 QPushButton#btn_chrome_danger {
-    background-color: #2A1014;
-    color: #FDA4AF;
-    border: 1px solid #58111A;
-    border-top-left-radius: 8px;
-}
-QPushButton#btn_chrome_danger:hover {
-    background-color: #3D141A;
+    background-color: #FCE8E6;
+    color: #A51D24;
+    border: 1px solid #F5C2C7;
+    border-radius: 4px;
 }
 
-/* High-Density Data Log Stream Table */
+QPushButton#btn_chrome_danger:hover {
+    background-color: #FAD2CF;
+}
+
+/* Tab Navigation Container (Admin Dashboard) */
+QTabWidget::pane {
+    border: 1px solid #DDD5CE;
+    background-color: #FBFBFE;
+    border-radius: 4px;
+}
+
+QTabBar::tab {
+    background-color: #EEE6E2;
+    color: #504C5A;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border: 1px solid #DDD5CE;
+    border-bottom: none;
+    margin-right: 3px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: #FBFBFE;
+    color: #0C0F18;
+    font-weight: 700;
+    border-top: 2.5px solid #0C0F18;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #ECE3DA;
+    color: #040316;
+}
+
+/* Data Table Styling */
 QTableWidget,
 QTableView {
-    background-color: #070709;
-    alternate-background-color: #0E0E12;
-    color: #F4EFEA;
-    border: 1px solid #24242A;
+    background-color: #FFFFFF;
+    alternate-background-color: #F8F5F2;
+    color: #040316;
+    border: 1px solid #DDD5CE;
     border-radius: 4px;
-    gridline-color: #16161A;
+    gridline-color: #ECE3DA;
     font-size: 11px;
+    selection-background-color: #ECE3DA;
+    selection-color: #040316;
 }
 
 QHeaderView::section {
-    background-color: #141418;
-    color: #DAA520;
-    font-family: "Consolas", "JetBrains Mono", monospace;
-    font-size: 9px;
+    background-color: #EEE6E2;
+    color: #0C0F18;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.5px;
     padding: 8px;
     border: none;
-    border-bottom: 1px solid rgba(218, 165, 32, 0.6);
+    border-bottom: 2px solid #0C0F18;
 }
 
-/* Status Badges
-   NOTE: these two rules (badge_overdue / badge_completed) have no matching
-   ObjectNames constant in theme.py, unlike every other styled element in
-   this file. Flagged as likely-dead CSS, superseded by the custom-painted
-   PillWidget used on the live attendance board (which reads Colors
-   directly in Python and never touches QSS). Left in place rather than
-   removed, per standing dead-code convention -- only their drifted border
-   hex values were corrected to match theme.py's Colors exactly below. */
+/* Status Badges */
 QLabel#badge_overdue {
-    background-color: #58111A;
-    color: #FF99A4;
-    border: 1px solid #7A1B28;
-    border-top-left-radius: 8px;
-    border-bottom-right-radius: 2px;
+    background-color: #FCE8E6;
+    color: #A51D24;
+    border: 1px solid #F5C2C7;
+    border-radius: 3px;
     padding: 2px 8px;
     font-weight: 700;
     font-size: 10px;
 }
 
 QLabel#badge_completed {
-    background-color: #122B3D;
-    color: #80C8FF;
-    border: 1px solid #1C3D54;
-    border-top-left-radius: 8px;
-    border-bottom-right-radius: 2px;
+    background-color: #E8F0FE;
+    color: #1A56DB;
+    border: 1px solid #B8D5F8;
+    border-radius: 3px;
     padding: 2px 8px;
     font-weight: 700;
     font-size: 10px;
 }
 
-/* ADDED THIS SESSION: unlike badge_overdue/completed above, BADGE_ACTIVE
-   and BADGE_INACTIVE DO have real ObjectNames constants predating this
-   session's audit-driven additions, strongly suggesting genuine usage
-   (most likely staff_mgmt.py's active/inactive status display) -- yet had
-   no styling at all. Colored using the same green/neutral hues introduced
-   this session for the new STATUS_OPEN semantic, for visual consistency. */
 QLabel#badge_active {
-    background-color: #113B24;
-    color: #8FE3B0;
-    border: 1px solid #1E5A38;
-    border-top-left-radius: 8px;
-    border-bottom-right-radius: 2px;
+    background-color: #E6F4EA;
+    color: #0F6D38;
+    border: 1px solid #B7E1CD;
+    border-radius: 3px;
     padding: 2px 8px;
     font-weight: 700;
     font-size: 10px;
 }
 
 QLabel#badge_inactive {
-    background-color: #1B1B1F;
-    color: #8E8E93;
-    border: 1px solid #24242A;
-    border-top-left-radius: 8px;
-    border-bottom-right-radius: 2px;
+    background-color: #EEE6E2;
+    color: #6B6775;
+    border: 1px solid #DDD5CE;
+    border-radius: 3px;
     padding: 2px 8px;
     font-weight: 700;
     font-size: 10px;
@@ -486,37 +520,73 @@ QLabel#badge_inactive {
 
 /* Scrollbars */
 QScrollBar:vertical {
-    background-color: #0B0B0C;
-    width: 4px;
+    background-color: #FBFBFE;
+    width: 6px;
     margin: 0;
 }
+
 QScrollBar::handle:vertical {
-    background-color: #24242A;
-    min-height: 20px;
-    border-radius: 2px;
+    background-color: #DDD5CE;
+    min-height: 24px;
+    border-radius: 3px;
 }
+
 QScrollBar::handle:vertical:hover {
-    background-color: #DAA520;
+    background-color: #0C0F18;
+}
+
+QScrollBar:horizontal {
+    background-color: #FBFBFE;
+    height: 6px;
+    margin: 0;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #DDD5CE;
+    min-width: 24px;
+    border-radius: 3px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #0C0F18;
 }
 
 /* Calendar Widget */
 QCalendarWidget QWidget {
-    background-color: #070709;
-    color: #F4EFEA;
-}
-#qt_calendar_navigationbar {
-    background-color: #141416;
-}
-QCalendarWidget QAbstractItemView {
-    selection-background-color: #DAA520;
-    selection-color: #000000;
+    background-color: #FBFBFE;
+    color: #040316;
 }
 
+#qt_calendar_navigationbar {
+    background-color: #ECE3DA;
+    border-bottom: 1px solid #DDD5CE;
+}
+
+QCalendarWidget QAbstractItemView {
+    selection-background-color: #0C0F18;
+    selection-color: #FBFBFE;
+}
+
+/* Status Bar */
 QStatusBar#mainStatusBar {
-    background-color: #08080A;
-    border-top: 1px solid #1C1C20;
-    color: #8E8E93;
+    background-color: #ECE3DA;
+    border-top: 1px solid #DDD5CE;
+    color: #504C5A;
     font-size: 10px;
     font-family: "Consolas", monospace;
     padding: 2px 10px;
+}
+
+/* Camera Count Frame */
+QFrame#cameraCountFrame {
+    background-color: #EEE6E2;
+    border: 1px solid #DDD5CE;
+    border-radius: 4px;
+}
+
+QLabel#cameraStatusLabel {
+    color: #504C5A;
+    font-family: "Consolas", monospace;
+    font-size: 10px;
+    font-weight: 700;
 }

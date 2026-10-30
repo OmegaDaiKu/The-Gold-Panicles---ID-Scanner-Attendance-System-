@@ -14,27 +14,24 @@ from PySide6.QtWidgets import (
 
 from src.core.exceptions import ValidationError
 from src.ui.components.animations import attach_press_feedback, fade_in_widget
-from src.ui.theme import ObjectNames
+from src.ui.theme import Colors, ObjectNames
 from src.utils.validators import validate_person_name, validate_student_id_format
 
 
 class _BaseCountdownDialog(QDialog):
-    """Base modal dialog with asymmetric brand container styling and auto-close countdown."""
+    """Base modal dialog with minimal clean styling and auto-close countdown."""
 
     def __init__(self, timeout_seconds: int = 20, parent=None):
         super().__init__(parent)
         self.setModal(True)
         self.setMinimumWidth(440)
         self.setStyleSheet(
-            """
-            QDialog {
-                background-color: #141416;
-                border: 1px solid #222226;
-                border-top-left-radius: 28px;
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-                border-bottom-left-radius: 4px;
-            }
+            f"""
+            QDialog {{
+                background-color: {Colors.BACKGROUND};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 6px;
+            }}
             """
         )
         self.timeout_ms = timeout_seconds * 1000
@@ -49,7 +46,20 @@ class _BaseCountdownDialog(QDialog):
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(100)
         self.progress_bar.setTextVisible(False)
-        self.progress_bar.setFixedHeight(4)
+        self.progress_bar.setFixedHeight(3)
+        self.progress_bar.setStyleSheet(
+            f"""
+            QProgressBar {{
+                background-color: {Colors.SECONDARY};
+                border: none;
+                border-radius: 1px;
+            }}
+            QProgressBar::chunk {{
+                background-color: {Colors.ACCENT_DARK};
+                border-radius: 1px;
+            }}
+            """
+        )
 
         self._progress_anim = QPropertyAnimation(self.progress_bar, b"value", self)
         self._progress_anim.setDuration(100)
@@ -104,7 +114,7 @@ class TimeOutConfirmationDialog(_BaseCountdownDialog):
         layout.setContentsMargins(28, 28, 28, 24)
 
         lbl_header = QLabel("TIME-OUT CONFIRMATION")
-        lbl_header.setStyleSheet("color: #FF99A4; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
+        lbl_header.setStyleSheet(f"color: {Colors.DANGER_SOLID}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
         lbl_header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_header)
 
@@ -174,7 +184,7 @@ class GuestVisitorNameDialog(_BaseCountdownDialog):
         layout.setContentsMargins(28, 28, 28, 24)
 
         lbl_header = QLabel("GUEST VISITOR CHECK-IN")
-        lbl_header.setStyleSheet("color: #DAA520; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
+        lbl_header.setStyleSheet(f"color: {Colors.ACCENT_DARK}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
         lbl_header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_header)
 
@@ -251,7 +261,7 @@ class ManualIdEntryDialog(_BaseCountdownDialog):
         layout.setContentsMargins(28, 28, 28, 24)
 
         lbl_header = QLabel("MANUAL STUDENT ID ENTRY")
-        lbl_header.setStyleSheet("color: #DAA520; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
+        lbl_header.setStyleSheet(f"color: {Colors.ACCENT_DARK}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
         lbl_header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_header)
 

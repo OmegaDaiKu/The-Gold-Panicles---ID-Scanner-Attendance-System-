@@ -1,12 +1,6 @@
 """Custom hand-rolled calendar grid widget for the Gold Panicles station view.
 
-Built from scratch (QWidget + QGridLayout of QPushButton day cells) instead
-of QCalendarWidget, because QCalendarWidget's internal views (native nav bar,
-QAbstractItemView day grid, QToolButton month/year selectors) are notoriously
-difficult to restyle consistently across Qt versions/platforms and fought the
-bespoke Obsidian/Gold theme in previous iterations. This widget is fully
-owned, fully themeable, and reuses the same press-feedback micro-interaction
-as the rest of the app.
+Minimal Editorial Publication Theme.
 """
 
 from __future__ import annotations
@@ -22,16 +16,16 @@ _WEEKDAY_LABELS = ["S", "M", "T", "W", "T", "F", "S"]
 _ROWS = 6
 _COLS = 7
 
-_COLOR_SELECTED_BG = "#DAA520"
-_COLOR_SELECTED_BG_HOVER = "#E8B82E"
-_COLOR_SELECTED_TEXT = "#0B0B0C"
-_COLOR_TODAY_BORDER = "#DAA520"
-_COLOR_TODAY_TEXT = "#DAA520"
-_COLOR_WEEKEND_TEXT = "#E0626E"
-_COLOR_NORMAL_TEXT = "#F4EFEA"
-_COLOR_NO_RECORD_TEXT = "#55555C"
-_COLOR_OUTSIDE_MONTH_TEXT = "#303034"
-_COLOR_CELL_HOVER_BG = "#1C1C20"
+_COLOR_SELECTED_BG = "#0C0F18"
+_COLOR_SELECTED_BG_HOVER = "#242A38"
+_COLOR_SELECTED_TEXT = "#FBFBFE"
+_COLOR_TODAY_BORDER = "#0C0F18"
+_COLOR_TODAY_TEXT = "#0C0F18"
+_COLOR_WEEKEND_TEXT = "#C5221F"
+_COLOR_NORMAL_TEXT = "#040316"
+_COLOR_NO_RECORD_TEXT = "#A09BAE"
+_COLOR_OUTSIDE_MONTH_TEXT = "#D0C9D8"
+_COLOR_CELL_HOVER_BG = "#EEE6E2"
 
 
 class GoldCalendar(QWidget):
@@ -68,7 +62,7 @@ class GoldCalendar(QWidget):
         for i, label_text in enumerate(_WEEKDAY_LABELS):
             lbl = QLabel(label_text)
             lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            color = _COLOR_WEEKEND_TEXT if i in (0, 6) else "#8E8E93"
+            color = _COLOR_WEEKEND_TEXT if i in (0, 6) else "#6B6775"
             lbl.setStyleSheet(
                 f"color: {color}; font-size: 10px; font-weight: 800; "
                 "font-family: monospace; background: transparent;"
@@ -186,7 +180,7 @@ class GoldCalendar(QWidget):
     @staticmethod
     def _cell_style(in_month, is_future, is_selected, is_today, is_weekend, has_record) -> str:
         base = (
-            "QPushButton { border: none; border-radius: 6px; "
+            "QPushButton { border: none; border-radius: 4px; "
             "font-family: monospace; font-size: 11px; }"
         )
 
@@ -204,7 +198,7 @@ class GoldCalendar(QWidget):
 
         if is_today:
             return base + (
-                f" QPushButton {{ background: transparent; border: 1px solid {_COLOR_TODAY_BORDER}; "
+                f" QPushButton {{ background: transparent; border: 1.5px solid {_COLOR_TODAY_BORDER}; "
                 f"color: {_COLOR_TODAY_TEXT}; font-weight: 800; }}"
                 f" QPushButton:hover {{ background-color: {_COLOR_CELL_HOVER_BG}; }}"
             )

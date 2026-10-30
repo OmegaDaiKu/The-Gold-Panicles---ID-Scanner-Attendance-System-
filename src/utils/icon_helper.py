@@ -47,7 +47,7 @@ class IconHelper:
         return cls._icon_dir() / filename
 
     @classmethod
-    def get_pixmap(cls, name: str, color: str = "#F4EFEA", size: int = 20) -> QPixmap:
+    def get_pixmap(cls, name: str, color: str = "#040316", size: int = 20) -> QPixmap:
         """Returns a tinted, cached QPixmap for the given Lucide icon name."""
         cache_key = (name, color, size)
         if cache_key in cls._pixmap_cache:
@@ -75,7 +75,7 @@ class IconHelper:
     def get_icon(
         cls,
         name: str,
-        color: str = "#F4EFEA",
+        color: str = "#040316",
         size: int = 20,
         fallback_pixmap: Optional[object] = None,  # kept for backward-compat call sites; unused
     ) -> QIcon:

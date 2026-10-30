@@ -17,7 +17,7 @@ from PySide6.QtWidgets import (
 
 from src.core.exceptions import AuthenticationError
 from src.services.auth_service import AuthService
-from src.ui.theme import ObjectNames
+from src.ui.theme import Colors, ObjectNames
 from src.utils.icon_helper import IconHelper
 
 logger = logging.getLogger(__name__)
@@ -73,15 +73,12 @@ class AdminAuthDialog(QDialog):
         self.setMinimumWidth(400)
         self.setModal(True)
         self.setStyleSheet(
-            """
-            QDialog {
-                background-color: #141416;
-                border: 1px solid #222226;
-                border-top-left-radius: 28px;
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-                border-bottom-left-radius: 4px;
-            }
+            f"""
+            QDialog {{
+                background-color: {Colors.BACKGROUND};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 6px;
+            }}
             """
         )
 
@@ -103,7 +100,7 @@ class AdminAuthDialog(QDialog):
             layout.addWidget(lbl_logo)
 
         lbl_title = QLabel("ADMINISTRATOR CONSOLE")
-        lbl_title.setStyleSheet("color: #DAA520; font-size: 15px; font-weight: 800; letter-spacing: 0.6px;")
+        lbl_title.setStyleSheet(f"color: {Colors.ACCENT_DARK}; font-size: 15px; font-weight: 800; letter-spacing: 0.6px;")
         lbl_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_title)
 
@@ -120,7 +117,7 @@ class AdminAuthDialog(QDialog):
         self.txt_username.returnPressed.connect(self._handle_login)
 
         self.lbl_caps = QLabel("Caps Lock is ON")
-        self.lbl_caps.setStyleSheet("color: #DAA520; font-size: 11px; font-weight: 600;")
+        self.lbl_caps.setStyleSheet(f"color: {Colors.DANGER_SOLID}; font-size: 11px; font-weight: 600;")
         self.lbl_caps.setVisible(False)
 
         self.txt_password = _PasswordLineEdit(self.lbl_caps)
@@ -148,7 +145,7 @@ class AdminAuthDialog(QDialog):
         self.btn_login = QPushButton("Authenticate")
         self.btn_login.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_login.setObjectName(ObjectNames.BTN_PRIMARY)
-        self.btn_login.setIcon(IconHelper.get_icon("shield"))
+        self.btn_login.setIcon(IconHelper.get_icon("shield", color="#FBFBFE"))
         self.btn_login.clicked.connect(self._handle_login)
 
         btn_cancel = QPushButton("Cancel")

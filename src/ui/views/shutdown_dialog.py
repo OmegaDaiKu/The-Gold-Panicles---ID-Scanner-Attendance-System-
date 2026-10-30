@@ -16,7 +16,7 @@ from PySide6.QtWidgets import (
 from src.core.exceptions import AuthenticationError
 from src.database.connection import DatabaseConnectionManager
 from src.services.auth_service import AuthService
-from src.ui.theme import ObjectNames
+from src.ui.theme import Colors, ObjectNames
 from src.utils.icon_helper import IconHelper
 
 logger = logging.getLogger(__name__)
@@ -34,15 +34,12 @@ class ShutdownAuthDialog(QDialog):
         self.setMinimumWidth(380)
         self.setModal(True)
         self.setStyleSheet(
-            """
-            QDialog {
-                background-color: #141416;
-                border: 1px solid #222226;
-                border-top-left-radius: 28px;
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-                border-bottom-left-radius: 4px;
-            }
+            f"""
+            QDialog {{
+                background-color: {Colors.BACKGROUND};
+                border: 1px solid {Colors.BORDER};
+                border-radius: 6px;
+            }}
             """
         )
 
@@ -54,7 +51,7 @@ class ShutdownAuthDialog(QDialog):
         layout.setContentsMargins(28, 28, 28, 24)
 
         lbl_header = QLabel("RESTRICTED SYSTEM SHUTDOWN")
-        lbl_header.setStyleSheet("color: #FF99A4; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
+        lbl_header.setStyleSheet(f"color: {Colors.DANGER_SOLID}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
         lbl_header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_header)
 
@@ -94,7 +91,7 @@ class ShutdownAuthDialog(QDialog):
         self.btn_shutdown = QPushButton("Authorize Shutdown")
         self.btn_shutdown.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_shutdown.setObjectName(ObjectNames.BTN_DANGER_SOLID)
-        self.btn_shutdown.setIcon(IconHelper.get_icon("log-out"))
+        self.btn_shutdown.setIcon(IconHelper.get_icon("log-out", color="#FFFFFF"))
         self.btn_shutdown.clicked.connect(self._handle_auth)
 
         btn_cancel = QPushButton("Cancel")

@@ -140,8 +140,8 @@ class StationView(QWidget):
         else:
             border_left = f"border-left: 3px solid {accent_color};" if accent_color else ""
             card.setStyleSheet(
-                "QFrame { background-color: #101014; border: 1px solid #202024; "
-                f"border-radius: 10px; {border_left} }}"
+                "QFrame { background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; "
+                f"border-radius: 6px; {border_left} }}"
             )
         layout = QVBoxLayout(card)
         layout.setContentsMargins(Spacing.MD, Spacing.MD, Spacing.MD, Spacing.MD)
@@ -149,7 +149,7 @@ class StationView(QWidget):
         if title:
             lbl = QLabel(title.upper())
             lbl.setStyleSheet(
-                "color: #F4EFEA; font-weight: 800; font-size: 10px; "
+                f"color: {Colors.TEXT_PRIMARY}; font-weight: 800; font-size: 10px; "
                 "letter-spacing: 0.5px; background: transparent;"
             )
             layout.addWidget(lbl)
@@ -158,10 +158,10 @@ class StationView(QWidget):
     @staticmethod
     def _icon_button_style() -> str:
         return (
-            "QPushButton { background-color: #1C1C20; border: 1px solid #24242A; "
-            "border-radius: 6px; padding: 0px; } "
-            "QPushButton:hover { border-color: #DAA520; background-color: #24242A; }"
-            "QPushButton:disabled { border-color: #1C1C20; }"
+            f"QPushButton {{ background-color: {Colors.SURFACE_ALT}; border: 1px solid {Colors.BORDER}; "
+            "border-radius: 4px; padding: 0px; }} "
+            f"QPushButton:hover {{ border-color: {Colors.ACCENT_DARK}; background-color: {Colors.SURFACE}; }}"
+            f"QPushButton:disabled {{ border-color: {Colors.BORDER}; color: {Colors.TEXT_MUTED}; }}"
         )
 
     @staticmethod
@@ -172,12 +172,12 @@ class StationView(QWidget):
         row.setSpacing(4)
         if icon_name:
             icon_lbl = QLabel()
-            icon_lbl.setPixmap(IconHelper.get_pixmap(icon_name, color="#8E8E93", size=11))
+            icon_lbl.setPixmap(IconHelper.get_pixmap(icon_name, color=Colors.TEXT_MUTED, size=11))
             icon_lbl.setStyleSheet("background: transparent;")
             row.addWidget(icon_lbl)
         lbl = QLabel(text.upper())
         lbl.setStyleSheet(
-            "color: #8E8E93; font-weight: 800; font-size: 9px; "
+            f"color: {Colors.TEXT_MUTED}; font-weight: 800; font-size: 9px; "
             "letter-spacing: 1px; background: transparent;"
         )
         row.addWidget(lbl)
@@ -245,18 +245,18 @@ class StationView(QWidget):
         footer_row = QHBoxLayout()
 
         self.lbl_record_count = QLabel("Showing: 0 entries")
-        self.lbl_record_count.setStyleSheet("color: #8E8E93; font-family: monospace; font-size: 10px;")
+        self.lbl_record_count.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-family: monospace; font-size: 10px;")
         footer_row.addWidget(self.lbl_record_count)
         footer_row.addSpacing(12)
 
         sync_box = QHBoxLayout()
         sync_box.setSpacing(4)
         sync_icon = QLabel()
-        sync_icon.setPixmap(IconHelper.get_pixmap("database", color="#34D399", size=10))
+        sync_icon.setPixmap(IconHelper.get_pixmap("database", color=Colors.STATUS_OPEN, size=10))
         sync_icon.setStyleSheet("background: transparent;")
         sync_box.addWidget(sync_icon)
         lbl_sync = QLabel("Database Synced")
-        lbl_sync.setStyleSheet("color: #34D399; font-family: monospace; font-size: 10px;")
+        lbl_sync.setStyleSheet(f"color: {Colors.STATUS_OPEN}; font-family: monospace; font-size: 10px;")
         sync_box.addWidget(lbl_sync)
         footer_row.addLayout(sync_box)
 
@@ -276,20 +276,20 @@ class StationView(QWidget):
 
         ready_frame = QFrame()
         ready_frame.setStyleSheet(
-            "background-color: #08080A; border: 1px solid #24242A; border-radius: 4px;"
+            f"background-color: {Colors.SURFACE_ALT}; border: 1px solid {Colors.BORDER}; border-radius: 4px;"
         )
         ready_layout = QHBoxLayout(ready_frame)
         ready_layout.setContentsMargins(10, 6, 10, 6)
         ready_layout.setSpacing(6)
 
         ready_icon = QLabel()
-        ready_icon.setPixmap(IconHelper.get_pixmap("zap", color="#34D399", size=12))
+        ready_icon.setPixmap(IconHelper.get_pixmap("zap", color=Colors.STATUS_OPEN, size=12))
         ready_icon.setStyleSheet("background: transparent;")
         ready_layout.addWidget(ready_icon)
 
         lbl_ready = QLabel("READY")
         lbl_ready.setStyleSheet(
-            "color: #34D399; font-weight: 800; font-size: 10px; font-family: monospace; background: transparent;"
+            f"color: {Colors.STATUS_OPEN}; font-weight: 800; font-size: 10px; font-family: monospace; background: transparent;"
         )
         ready_layout.addWidget(lbl_ready)
         input_row.addWidget(ready_frame)
@@ -307,7 +307,7 @@ class StationView(QWidget):
         btn_scan = QPushButton("Scan ID")
         btn_scan.setObjectName("btn_primary")
         btn_scan.setCursor(Qt.CursorShape.PointingHandCursor)
-        btn_scan.setIcon(IconHelper.get_icon("qr-code", color="#000000", size=16))
+        btn_scan.setIcon(IconHelper.get_icon("qr-code", color="#FBFBFE", size=16))
         btn_scan.setIconSize(QSize(16, 16))
         btn_scan.clicked.connect(self._submit_hardware_input)
         attach_press_feedback(btn_scan)
@@ -355,8 +355,8 @@ class StationView(QWidget):
         btn.setCursor(Qt.CursorShape.PointingHandCursor)
         btn.setIconSize(QSize(13, 13))
 
-        icon_unchecked = IconHelper.get_icon(icon_name, color="#CBD5E1", size=13)
-        icon_checked = IconHelper.get_icon(icon_name, color="#000000", size=13)
+        icon_unchecked = IconHelper.get_icon(icon_name, color=Colors.TEXT_SECONDARY, size=13)
+        icon_checked = IconHelper.get_icon(icon_name, color="#FBFBFE", size=13)
         btn.setIcon(icon_unchecked)
 
         def _sync_icon(checked: bool, _u=icon_unchecked, _c=icon_checked, _b=btn) -> None:
@@ -398,10 +398,10 @@ class StationView(QWidget):
         self.lbl_verify_icon.setStyleSheet("background: transparent;")
 
         self.lbl_verify_name = QLabel("Awaiting Scan")
-        self.lbl_verify_name.setStyleSheet("color: #F4EFEA; font-size: 14px; font-weight: 800;")
+        self.lbl_verify_name.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-size: 14px; font-weight: 800;")
 
         self.lbl_verify_id = QLabel("—")
-        self.lbl_verify_id.setStyleSheet("color: #DAA520; font-family: monospace; font-size: 10px; font-weight: 700;")
+        self.lbl_verify_id.setStyleSheet(f"color: {Colors.ACCENT_DARK}; font-family: monospace; font-size: 10px; font-weight: 700;")
 
         header_row = QHBoxLayout()
         header_row.setSpacing(8)
@@ -416,23 +416,23 @@ class StationView(QWidget):
         layout.addWidget(self.lbl_verify_designation)
 
         time_box = QFrame()
-        time_box.setStyleSheet("background-color: #070709; border: 1px solid #24242A; border-radius: 4px;")
+        time_box.setStyleSheet(f"background-color: {Colors.SURFACE_ALT}; border: 1px solid {Colors.BORDER}; border-radius: 4px;")
         tb_layout = QHBoxLayout(time_box)
         tb_layout.setContentsMargins(8, 6, 8, 6)
 
         v_in = QVBoxLayout()
         lbl_in_t = QLabel("TIME IN")
-        lbl_in_t.setStyleSheet("color: #8E8E93; font-size: 8px; font-family: monospace;")
+        lbl_in_t.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 8px; font-family: monospace;")
         self.lbl_verify_time_in = QLabel("--:--:--")
-        self.lbl_verify_time_in.setStyleSheet("color: #F4EFEA; font-size: 10px; font-weight: 700; font-family: monospace;")
+        self.lbl_verify_time_in.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-size: 10px; font-weight: 700; font-family: monospace;")
         v_in.addWidget(lbl_in_t)
         v_in.addWidget(self.lbl_verify_time_in)
 
         v_out = QVBoxLayout()
         lbl_out_t = QLabel("TIME OUT")
-        lbl_out_t.setStyleSheet("color: #8E8E93; font-size: 8px; font-family: monospace;")
+        lbl_out_t.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 8px; font-family: monospace;")
         self.lbl_verify_time_out = QLabel("--:--:--")
-        self.lbl_verify_time_out.setStyleSheet("color: #F4EFEA; font-size: 10px; font-weight: 700; font-family: monospace;")
+        self.lbl_verify_time_out.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-size: 10px; font-weight: 700; font-family: monospace;")
         v_out.addWidget(lbl_out_t)
         v_out.addWidget(self.lbl_verify_time_out)
 
@@ -497,9 +497,9 @@ class StationView(QWidget):
         row = QHBoxLayout()
         row.setSpacing(Spacing.SM)
 
-        self.lbl_gauge_total = self._build_metric_tile(row, "Total", "#F4EFEA", "layers", Colors.ACCENT_GOLD)
-        self.lbl_gauge_duty = self._build_metric_tile(row, "Duty", "#80C8FF", "briefcase", "#80C8FF")
-        self.lbl_gauge_visitors = self._build_metric_tile(row, "Visitors", "#F4EFEA", "users", "#34D399")
+        self.lbl_gauge_total = self._build_metric_tile(row, "Total", Colors.TEXT_PRIMARY, "layers", Colors.ACCENT_DARK)
+        self.lbl_gauge_duty = self._build_metric_tile(row, "Duty", Colors.STATUS_COMPLETED, "briefcase", Colors.STATUS_COMPLETED)
+        self.lbl_gauge_visitors = self._build_metric_tile(row, "Visitors", Colors.STATUS_OPEN, "users", Colors.STATUS_OPEN)
 
         container = QWidget()
         container.setLayout(row)
@@ -514,12 +514,12 @@ class StationView(QWidget):
         title_row = QHBoxLayout()
         title_row.setSpacing(4)
         icon_lbl = QLabel()
-        icon_lbl.setPixmap(IconHelper.get_pixmap(icon_name, color="#8E8E93", size=10))
+        icon_lbl.setPixmap(IconHelper.get_pixmap(icon_name, color=Colors.TEXT_MUTED, size=10))
         icon_lbl.setStyleSheet("background: transparent;")
         title_row.addWidget(icon_lbl)
 
         lbl_t = QLabel(title.upper())
-        lbl_t.setStyleSheet("color: #8E8E93; font-size: 8px; font-family: monospace;")
+        lbl_t.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 8px; font-family: monospace;")
         title_row.addWidget(lbl_t)
         title_row.addStretch()
 
@@ -534,7 +534,7 @@ class StationView(QWidget):
     def _flash_edge_glow(self, success: bool) -> None:
         color = Colors.ACCENT_GOLD if success else Colors.DANGER_SOLID
         self._edge_glow_overlay.setStyleSheet(
-            f"QFrame#edgeGlowOverlay {{ background-color: transparent; border: 4px solid {color}; }}"
+            f"QFrame#edgeGlowOverlay {{ background-color: transparent; border: 3px solid {color}; }}"
         )
         self._edge_glow_anim.stop()
         self._edge_glow_effect.setOpacity(0.0)
@@ -569,7 +569,7 @@ class StationView(QWidget):
         self.lbl_cal_title = QLabel("")
         self.lbl_cal_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lbl_cal_title.setStyleSheet(
-            "color: #DAA520; font-weight: 800; font-size: 12px; letter-spacing: 0.6px; background: transparent;"
+            f"color: {Colors.ACCENT_DARK}; font-weight: 800; font-size: 12px; letter-spacing: 0.6px; background: transparent;"
         )
 
         self.btn_cal_next = QPushButton()

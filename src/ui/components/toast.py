@@ -27,24 +27,20 @@ _MAX_WIDTH_MARGIN = 80  # keeps the toast from touching the parent's edges
 class ToastNotification(QFrame):
     """A transient, auto-dismissing notification banner matching GP Brand guidelines."""
 
-    # FIXED THIS SESSION: "success" now uses the same green as theme.py's
-    # STATUS_OPEN/SUCCESS_BG (fixed earlier this session) instead of the old
-    # blue, which coincidentally matched the COMPLETED/info color and made
-    # "success" and "informational" toasts look like the same semantic.
     _STYLE_BY_KIND = {
         "success": (
-            "QFrame#toastFrame { background-color: #113B24; border: 1px solid #1E5A38; border-radius: 8px; }",
-            "#8FE3B0",
+            "QFrame#toastFrame { background-color: #E6F4EA; border: 1px solid #B7E1CD; border-radius: 6px; }",
+            "#0F6D38",
             "check-circle",
         ),
         "error": (
-            "QFrame#toastFrame { background-color: #58111A; border: 1px solid #7A1B28; border-radius: 8px; }",
-            "#FF99A4",
+            "QFrame#toastFrame { background-color: #FCE8E6; border: 1px solid #F5C2C7; border-radius: 6px; }",
+            "#A51D24",
             "alert-circle",
         ),
         "info": (
-            "QFrame#toastFrame { background-color: #2E2512; border: 1px solid rgba(218, 165, 32, 0.45); border-radius: 8px; }",
-            "#E5B842",
+            "QFrame#toastFrame { background-color: #ECE3DA; border: 1px solid #DDD5CE; border-radius: 6px; }",
+            "#040316",
             "info",
         ),
     }
@@ -79,8 +75,6 @@ class ToastNotification(QFrame):
             max_width = max(240, min(max_width, parent.width() - _MAX_WIDTH_MARGIN))
         self.setMaximumWidth(max_width)
 
-        # FIXED THIS SESSION: toasts previously only slid; now paired with an
-        # opacity fade for a softer, less mechanical entrance/exit.
         self._opacity_effect = QGraphicsOpacityEffect(self)
         self._opacity_effect.setOpacity(0.0)
         self.setGraphicsEffect(self._opacity_effect)
@@ -141,12 +135,6 @@ class ToastNotification(QFrame):
             return
         self._is_dismissing = True
 
-        # FIXED THIS SESSION: if dismiss is triggered while the entrance
-        # animation is still running (e.g. a new scan replaces the toast
-        # almost immediately), the old code would start a second
-        # QPropertyAnimation on the same `pos` property concurrently with
-        # the still-running entrance animation, causing visible jitter.
-        # Stopping the entrance group first prevents that collision.
         if self._enter_group is not None:
             self._enter_group.stop()
 
