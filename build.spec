@@ -9,6 +9,8 @@ a = Analysis(
     datas=[
         ('src/ui/styles/theme.qss', 'src/ui/styles'),
         ('src/database/schema.sql', 'src/database'),
+        ('assets/fonts/', 'assets/font'),
+        ('assets/images/, 'assets/images'),
     ],
     hiddenimports=[
         'pyzbar',

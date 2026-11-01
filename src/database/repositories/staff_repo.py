@@ -69,7 +69,7 @@ class StaffRepository:
         with self._db_scope() as conn:
             cursor = conn.cursor()
             cursor.execute("PRAGMA table_info(staff)")
-            cols = [row[1] for row in cursor.fetchall()]
+            cols = [str(row[1]) for row in cursor.fetchall()]
 
             col_map: Dict[str, str] = {}
 
@@ -121,7 +121,7 @@ class StaffRepository:
         with self._db_scope() as conn:
             cursor = conn.cursor()
             cursor.execute("PRAGMA table_info(staff)")
-            return {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            return {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
 
     def _coerce_timestamp(self, value: Optional[str], col_type: str) -> Any:
         if value is None:
@@ -525,7 +525,7 @@ class StaffRepository:
             session_count = 0
             if table_exists:
                 cursor.execute("PRAGMA table_info(attendance_sessions)")
-                session_cols = [r[1] for r in cursor.fetchall()]
+                session_cols = [str(r[1]) for r in cursor.fetchall()]
                 fk_col = None
                 for candidate in ['staff_id', 'student_id', 'student_id_no']:
                     if candidate in session_cols:

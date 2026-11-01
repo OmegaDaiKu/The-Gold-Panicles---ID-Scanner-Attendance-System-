@@ -43,7 +43,7 @@ class AttendanceRepository:
             return False, "", "", ""
 
         cursor.execute("PRAGMA table_info(staff)")
-        cols = [row[1] for row in cursor.fetchall()]
+        cols = [str(row[1]) for row in cursor.fetchall()]
         name_col = "full_name" if "full_name" in cols else "name"
         desig_col = "designation" if "designation" in cols else "primary_designation"
         sid_col = "student_id_no" if "student_id_no" in cols else ("staff_id" if "staff_id" in cols else "id")
@@ -102,7 +102,7 @@ class AttendanceRepository:
         with self._db_scope() as conn:
             cursor = conn.cursor()
             cursor.execute("PRAGMA table_info(attendance_sessions)")
-            col_info = {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            col_info = {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
 
             if col_info.get("time_in") in ("INTEGER", "INT"):
                 try:
@@ -161,7 +161,7 @@ class AttendanceRepository:
         with self._db_scope() as conn:
             cursor = conn.cursor()
             cursor.execute("PRAGMA table_info(attendance_sessions)")
-            col_info = {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            col_info = {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
 
             if col_info.get("time_out") in ("INTEGER", "INT"):
                 try:
@@ -220,7 +220,7 @@ class AttendanceRepository:
         with self._db_scope() as conn:
             cursor = conn.cursor()
             cursor.execute("PRAGMA table_info(attendance_sessions)")
-            col_info = {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            col_info = {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
             col_names = set(col_info.keys())
             fields = []
             values = []
@@ -260,7 +260,7 @@ class AttendanceRepository:
         with self._db_scope() as conn:
             cursor = conn.cursor()
             cursor.execute("PRAGMA table_info(attendance_sessions)")
-            col_info = {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            col_info = {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
 
             cutoff_dt = datetime.now(timezone.utc) - timedelta(hours=cutoff_hours)
 
@@ -289,7 +289,7 @@ class AttendanceRepository:
         with self._db_scope() as conn:
             cursor = conn.cursor()
             cursor.execute("PRAGMA table_info(attendance_sessions)")
-            col_info = {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            col_info = {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
             col_names = set(col_info.keys())
             is_integer_time = col_info.get("time_in") in ("INTEGER", "INT")
             has_resolution_notes_col = "resolution_notes" in col_names

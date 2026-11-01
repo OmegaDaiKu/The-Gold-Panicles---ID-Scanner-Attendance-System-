@@ -1,8 +1,10 @@
-""""Attendance Logs Review Tab with full CRUD: search, filter, manual create, edit, and delete."""
+"""
+Attendance Logs Review Tab with full CRUD: search, filter, manual create, edit, and delete.
+"""
 
 from datetime import date, datetime, timezone
 
-from PySide6.QtCore import Qt, QDate, Signal
+from PySide6.QtCore import QDate, QSize, Qt, Signal
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import (
     QCalendarWidget,
@@ -26,7 +28,9 @@ from src.database.repositories.attendance_repo import AttendanceRepository
 from src.database.repositories.audit_repo import AuditRepository
 from src.database.repositories.staff_repo import StaffRepository
 from src.database.repositories.visitor_repo import VisitorRepository
-from src.ui.theme import Colors, ObjectNames
+from src.ui.components.animations import attach_press_feedback, fade_in_widget
+from src.ui.theme import Colors, ObjectNames, Radius, Spacing
+from src.utils.icon_helper import IconHelper
 from src.utils.time_utils import PHT_TIMEZONE, format_iso_to_pht, get_utc_now_iso
 
 
@@ -56,8 +60,15 @@ class AttendanceLogsTab(QWidget):
         self._init_ui()
         self.refresh_logs()
 
-    def _log_action(self, action_type: str, entity_type: str, entity_id, reason: str,
-                     old_values: dict | None, new_values: dict | None) -> bool:
+    def _log_action(
+        self,
+        action_type: str,
+        entity_type: str,
+        entity_id,
+        reason: str,
+        old_values: dict | None,
+        new_values: dict | None,
+    ) -> bool:
         try:
             self.audit_repo.log_action(
                 admin_id=self.admin_id,
@@ -75,28 +86,45 @@ class AttendanceLogsTab(QWidget):
 
     def _init_ui(self) -> None:
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 18, 20, 18)
-        layout.setSpacing(12)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        layout.setSpacing(Spacing.MD)
 
         title_row = QHBoxLayout()
+        title_row.setSpacing(Spacing.XS)
+
+        icon_title = QLabel()
+        icon_title.setPixmap(IconHelper.get_pixmap("list", color=Colors.ACCENT_GOLD, size=18))
+        icon_title.setStyleSheet("background: transparent;")
+        title_row.addWidget(icon_title)
+
         lbl_title = QLabel("STAFF & VISITOR ATTENDANCE LOGS")
         lbl_title.setObjectName(ObjectNames.SECTION_TITLE)
+        lbl_title.setStyleSheet(
+            f"color: {Colors.TEXT_PRIMARY}; font-size: 14px; font-weight: 800; letter-spacing: 0.8px;"
+        )
         title_row.addWidget(lbl_title)
         title_row.addStretch()
 
-        btn_manual = QPushButton("+ MANUAL LOG ENTRY")
+        btn_manual = QPushButton(" MANUAL LOG ENTRY")
         btn_manual.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_manual.setObjectName(ObjectNames.BTN_PRIMARY)
+        btn_manual.setIcon(IconHelper.get_icon("plus-circle", color=Colors.BACKGROUND, size=15))
         btn_manual.clicked.connect(self._show_create_dialog)
+        attach_press_feedback(btn_manual)
         title_row.addWidget(btn_manual)
 
         layout.addLayout(title_row)
 
         filter_row = QHBoxLayout()
-        filter_row.setSpacing(10)
+        filter_row.setSpacing(Spacing.SM)
 
         self.txt_search = QLineEdit()
-        self.txt_search.setPlaceholderText("🔍  Search by Student ID, Name, or Designation...")
+        self.txt_search.setObjectName(ObjectNames.SEARCH_INPUT)
+        self.txt_search.setPlaceholderText("Search by Student ID, Name, or Designation...")
+        self.txt_search.addAction(
+            IconHelper.get_icon("search", color=Colors.TEXT_MUTED, size=14),
+            QLineEdit.ActionPosition.LeadingPosition,
+        )
         self.txt_search.textChanged.connect(self._apply_filter)
         filter_row.addWidget(self.txt_search, stretch=3)
 
@@ -115,10 +143,12 @@ class AttendanceLogsTab(QWidget):
         self.cmb_status_filter.currentIndexChanged.connect(self._apply_filter)
         filter_row.addWidget(self.cmb_status_filter, stretch=1)
 
-        self.btn_date_filter = QPushButton("📅  Filter by Date")
+        self.btn_date_filter = QPushButton(" Filter by Date")
         self.btn_date_filter.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_date_filter.setObjectName(ObjectNames.BTN_CHROME)
+        self.btn_date_filter.setIcon(IconHelper.get_icon("calendar", color=Colors.ACCENT_GOLD, size=14))
         self.btn_date_filter.clicked.connect(self._open_date_filter_dialog)
+        attach_press_feedback(self.btn_date_filter)
         filter_row.addWidget(self.btn_date_filter)
 
         self.btn_clear_date_filter = QPushButton("✕")
@@ -128,6 +158,7 @@ class AttendanceLogsTab(QWidget):
         self.btn_clear_date_filter.setObjectName(ObjectNames.BTN_ROW_DELETE)
         self.btn_clear_date_filter.clicked.connect(self._clear_date_filter)
         self.btn_clear_date_filter.setVisible(False)
+        attach_press_feedback(self.btn_clear_date_filter)
         filter_row.addWidget(self.btn_clear_date_filter)
 
         layout.addLayout(filter_row)
@@ -136,21 +167,24 @@ class AttendanceLogsTab(QWidget):
         self.table.setColumnCount(len(self.HEADERS))
         self.table.setHorizontalHeaderLabels(self.HEADERS)
         self.table.verticalHeader().setVisible(False)
+        self.table.verticalHeader().setDefaultSectionSize(40)
         self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.table.setAlternatingRowColors(True)
         self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.table.setShowGrid(False)
 
         header = self.table.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(9, QHeaderView.ResizeMode.Fixed)
-        self.table.setColumnWidth(9, 190)
+        self.table.setColumnWidth(9, 180)
 
         layout.addWidget(self.table)
 
         self.lbl_count = QLabel("0 records")
         self.lbl_count.setObjectName(ObjectNames.TEXT_MUTED)
+        self.lbl_count.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-family: monospace; font-size: 10px;")
         layout.addWidget(self.lbl_count)
 
     def refresh_logs(self) -> None:
@@ -208,13 +242,13 @@ class AttendanceLogsTab(QWidget):
                 self._clear_date_filter()
             elif dialog.result_date is not None:
                 self._selected_date_filter = dialog.result_date
-                self.btn_date_filter.setText(f"📅  {dialog.result_date.strftime('%b %d, %Y')}")
+                self.btn_date_filter.setText(f" Filter: {dialog.result_date.strftime('%b %d, %Y')}")
                 self.btn_clear_date_filter.setVisible(True)
                 self._apply_filter()
 
     def _clear_date_filter(self) -> None:
         self._selected_date_filter = None
-        self.btn_date_filter.setText("📅  Filter by Date")
+        self.btn_date_filter.setText(" Filter by Date")
         self.btn_clear_date_filter.setVisible(False)
         self._apply_filter()
 
@@ -246,7 +280,7 @@ class AttendanceLogsTab(QWidget):
             filtered.append(item)
 
         self._render_rows(filtered)
-        self.lbl_count.setText(f"{len(filtered)} of {len(self._all_records)} records")
+        self.lbl_count.setText(f"Showing: {len(filtered)} of {len(self._all_records)} log records")
 
     def _render_rows(self, records: list) -> None:
         self.table.setRowCount(0)
@@ -286,7 +320,9 @@ class AttendanceLogsTab(QWidget):
             items[8].setForeground(QColor(STATUS_COLORS.get(status_text, Colors.TEXT_MUTED)))
 
             for col_idx, table_item in enumerate(items):
-                table_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                table_item.setTextAlignment(
+                    Qt.AlignmentFlag.AlignCenter if col_idx in (0, 1, 2, 3, 4, 7, 8) else Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter
+                )
                 self.table.setItem(row_idx, col_idx, table_item)
 
             actions_widget = QWidget()
@@ -297,12 +333,18 @@ class AttendanceLogsTab(QWidget):
             btn_edit = QPushButton("EDIT")
             btn_edit.setCursor(Qt.CursorShape.PointingHandCursor)
             btn_edit.setObjectName(ObjectNames.BTN_ROW_EDIT)
+            btn_edit.setIcon(IconHelper.get_icon("edit-2", color=Colors.TEXT_PRIMARY, size=12))
+            btn_edit.setIconSize(QSize(12, 12))
             btn_edit.clicked.connect(lambda _, r=item: self._show_edit_dialog(r))
+            attach_press_feedback(btn_edit)
 
             btn_delete = QPushButton("DELETE")
             btn_delete.setCursor(Qt.CursorShape.PointingHandCursor)
             btn_delete.setObjectName(ObjectNames.BTN_ROW_DELETE)
+            btn_delete.setIcon(IconHelper.get_icon("trash-2", color="#FFFFFF", size=12))
+            btn_delete.setIconSize(QSize(12, 12))
             btn_delete.clicked.connect(lambda _, r=item: self._handle_delete(r))
+            attach_press_feedback(btn_delete)
 
             actions_layout.addWidget(btn_edit)
             actions_layout.addWidget(btn_delete)
@@ -360,7 +402,7 @@ class AttendanceLogsTab(QWidget):
                     entity_type=entity_type,
                     entity_id=record.get("id"),
                     reason=f"Permanently deleted {record_kind.lower()} attendance record for "
-                           f"'{name}' (Time In: {time_in}, Status: {record.get('status', '')}).",
+                    f"'{name}' (Time In: {time_in}, Status: {record.get('status', '')}).",
                     old_values={
                         "student_id_no": record.get("student_id_no", ""),
                         "full_name": name,
@@ -415,20 +457,25 @@ class _DateFilterDialog(QDialog):
         self.valid_dates = valid_dates
         self.result_date: date | None = None
         self.clear_filter = False
+        self._fade_anim = None
 
         self.setWindowTitle("Filter by Date")
-        self.setFixedSize(400, 460)
+        self.setFixedSize(420, 480)
         self.setModal(True)
+        self.setStyleSheet(
+            f"QDialog {{ background-color: {Colors.BACKGROUND}; border: 1px solid {Colors.BORDER}; border-radius: {Radius.SUPER}px; }}"
+        )
 
         self._init_ui()
 
     def _init_ui(self) -> None:
         layout = QVBoxLayout(self)
-        layout.setSpacing(14)
-        layout.setContentsMargins(24, 20, 24, 20)
+        layout.setSpacing(Spacing.MD)
+        layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.LG)
 
         lbl_title = QLabel("SELECT A DATE")
         lbl_title.setObjectName(ObjectNames.DIALOG_HEADER_INFO)
+        lbl_title.setStyleSheet(f"color: {Colors.ACCENT_GOLD}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
         lbl_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_title)
 
@@ -443,21 +490,27 @@ class _DateFilterDialog(QDialog):
         layout.addWidget(self.calendar)
 
         btn_layout = QHBoxLayout()
-        btn_layout.setSpacing(10)
+        btn_layout.setSpacing(Spacing.MD)
 
         btn_clear = QPushButton("CLEAR FILTER")
         btn_clear.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_clear.setObjectName(ObjectNames.BTN_CHROME)
         btn_clear.clicked.connect(self._on_clear_clicked)
+        attach_press_feedback(btn_clear)
 
         btn_close = QPushButton("CLOSE")
         btn_close.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_close.setObjectName(ObjectNames.BTN_CANCEL)
         btn_close.clicked.connect(self.reject)
+        attach_press_feedback(btn_close)
 
         btn_layout.addWidget(btn_clear)
         btn_layout.addWidget(btn_close)
         layout.addLayout(btn_layout)
+
+    def showEvent(self, event) -> None:
+        super().showEvent(event)
+        self._fade_anim = fade_in_widget(self)
 
     def _on_date_confirmed(self, qdate: QDate) -> None:
         self.result_date = qdate.toPython()
@@ -482,16 +535,31 @@ class _AttendanceFormDialog(QDialog):
         self.admin_id = admin_id
         self.audit_repo = audit_repo
         self.is_visitor = bool(record.get("is_visitor")) if record else False
+        self._fade_anim = None
 
         title = "EDIT ATTENDANCE RECORD" if mode == "edit" else "MANUAL ATTENDANCE LOG ENTRY"
         self.setWindowTitle(title)
-        self.setFixedSize(480, 420)
+        self.setFixedSize(480, 430)
         self.setModal(True)
+        self.setStyleSheet(
+            f"QDialog {{ background-color: {Colors.BACKGROUND}; border: 1px solid {Colors.BORDER}; border-radius: {Radius.SUPER}px; }}"
+        )
 
         self._init_ui()
 
-    def _log_action(self, action_type: str, entity_type: str, entity_id, reason: str,
-                     old_values: dict | None, new_values: dict | None) -> bool:
+    def showEvent(self, event) -> None:
+        super().showEvent(event)
+        self._fade_anim = fade_in_widget(self)
+
+    def _log_action(
+        self,
+        action_type: str,
+        entity_type: str,
+        entity_id,
+        reason: str,
+        old_values: dict | None,
+        new_values: dict | None,
+    ) -> bool:
         if self.audit_repo is None or self.admin_id is None:
             return False
         try:
@@ -511,17 +579,18 @@ class _AttendanceFormDialog(QDialog):
 
     def _init_ui(self) -> None:
         layout = QVBoxLayout(self)
-        layout.setSpacing(14)
-        layout.setContentsMargins(24, 20, 24, 20)
+        layout.setSpacing(Spacing.MD)
+        layout.setContentsMargins(Spacing.XL, Spacing.XL, Spacing.XL, Spacing.LG)
 
         title_text = "EDIT ATTENDANCE RECORD" if self.mode == "edit" else "CREATE MANUAL LOG ENTRY"
         lbl_title = QLabel(title_text)
         lbl_title.setObjectName(ObjectNames.DIALOG_HEADER_INFO)
+        lbl_title.setStyleSheet(f"color: {Colors.ACCENT_GOLD}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
         lbl_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_title)
 
         form_layout = QFormLayout()
-        form_layout.setSpacing(12)
+        form_layout.setSpacing(Spacing.SM)
 
         if self.mode == "create":
             self.cmb_staff = QComboBox()
@@ -552,6 +621,7 @@ class _AttendanceFormDialog(QDialog):
             form_layout.addRow(lbl_status, self.cmb_status)
 
         self.txt_notes = QLineEdit()
+        self.txt_notes.setObjectName(ObjectNames.GP_SUPER_INPUT)
         self.txt_notes.setPlaceholderText("Resolution notes (optional)")
         lbl_notes = QLabel("Notes:")
         lbl_notes.setObjectName(ObjectNames.FORM_LABEL)
@@ -572,17 +642,20 @@ class _AttendanceFormDialog(QDialog):
             self.txt_notes.setText(notes)
 
         btn_layout = QHBoxLayout()
-        btn_layout.setSpacing(10)
+        btn_layout.setSpacing(Spacing.MD)
 
-        btn_save = QPushButton("✓  SAVE" if self.mode == "edit" else "✓  CREATE LOG")
+        btn_save = QPushButton(" SAVE" if self.mode == "edit" else " CREATE LOG")
         btn_save.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_save.setObjectName(ObjectNames.BTN_PRIMARY)
+        btn_save.setIcon(IconHelper.get_icon("check", color=Colors.BACKGROUND, size=15))
         btn_save.clicked.connect(self._handle_save)
+        attach_press_feedback(btn_save)
 
         btn_cancel = QPushButton("CANCEL")
         btn_cancel.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_cancel.setObjectName(ObjectNames.BTN_CANCEL)
         btn_cancel.clicked.connect(self.reject)
+        attach_press_feedback(btn_cancel)
 
         btn_layout.addWidget(btn_save)
         btn_layout.addWidget(btn_cancel)
@@ -663,8 +736,7 @@ class _AttendanceFormDialog(QDialog):
                     action_type="UPDATE",
                     entity_type=entity_type,
                     entity_id=record_id,
-                    reason=f"Edited attendance record for '{name}' "
-                           f"(Status: {old_values['status']} → {status}).",
+                    reason=f"Edited attendance record for '{name}' (Status: {old_values['status']} → {status}).",
                     old_values=old_values,
                     new_values=new_values,
                 )

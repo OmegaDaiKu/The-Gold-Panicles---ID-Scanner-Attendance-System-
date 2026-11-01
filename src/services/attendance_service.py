@@ -187,16 +187,15 @@ class AttendanceService:
                 return {
                     "type": "INACTIVE_STAFF",
                     "action": "INACTIVE_STAFF",
-                    "message": f"Staff account for {staff['full_name']} ({clean_id}) is deactivated. Please contact an administrator.",
-                    "staff": staff,
+                    "message": f"Staff account for {staff['full_name']} ({clean_id}) is deactivated. Please see an administrator.",
                     "student_id_no": clean_id,
                 }
 
+            # Fallback block: No active session exists, proceed to authorize Time-In
             return {
-                "type": "STAFF_TIME_IN_SELECT_CATEGORY",
+                "type": "STAFF_TIME_IN_READY",
                 "action": "TIME_IN",
                 "staff": staff,
-                "open_session": None,
                 "student_id_no": clean_id,
             }
 

@@ -3,19 +3,28 @@
 import csv
 from datetime import datetime, timezone
 
-from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel,
-    QPushButton, QFrame, QGridLayout, QDateEdit,
-    QFileDialog, QMessageBox
-)
-from PySide6.QtCore import Qt, QDate
+from PySide6.QtCore import QDate, QSize, Qt
 from PySide6.QtGui import QFont
+from PySide6.QtWidgets import (
+    QDateEdit,
+    QFileDialog,
+    QFrame,
+    QGridLayout,
+    QHBoxLayout,
+    QLabel,
+    QMessageBox,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
 
 from src.database.repositories.attendance_repo import AttendanceRepository
-from src.database.repositories.visitor_repo import VisitorRepository
 from src.database.repositories.audit_repo import AuditRepository
-from src.ui.theme import Colors, ObjectNames
-from src.utils.time_utils import format_iso_to_pht, get_utc_now_iso, PHT_TIMEZONE
+from src.database.repositories.visitor_repo import VisitorRepository
+from src.ui.components.animations import attach_press_feedback
+from src.ui.theme import Colors, ObjectNames, Radius, Spacing
+from src.utils.icon_helper import IconHelper
+from src.utils.time_utils import PHT_TIMEZONE, format_iso_to_pht, get_utc_now_iso
 
 
 class ReportsView(QWidget):
@@ -32,40 +41,79 @@ class ReportsView(QWidget):
             self.audit_repo = AuditRepository(db_manager)
         self._init_ui()
 
-    def _init_ui(self):
+    def _init_ui(self) -> None:
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(16)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        layout.setSpacing(Spacing.MD)
 
+        # Header Card
         header_card = QFrame()
         header_card.setObjectName(ObjectNames.SURFACE_CARD)
+        header_card.setStyleSheet(
+            f"QFrame#{ObjectNames.SURFACE_CARD} {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: {Radius.CARD}px; }}"
+        )
         header_layout = QVBoxLayout(header_card)
+        header_layout.setContentsMargins(Spacing.LG, Spacing.MD, Spacing.LG, Spacing.MD)
+        header_layout.setSpacing(Spacing.XS)
 
-        title = QLabel("Reports & Data Export")
+        title_row = QHBoxLayout()
+        title_row.setSpacing(Spacing.XS)
+
+        icon_title = QLabel()
+        icon_title.setPixmap(IconHelper.get_pixmap("file-text", color=Colors.ACCENT_GOLD, size=18))
+        icon_title.setStyleSheet("background: transparent;")
+        title_row.addWidget(icon_title)
+
+        title = QLabel("REPORTS & DATA EXPORT")
         title.setObjectName(ObjectNames.SECTION_TITLE)
+        title.setStyleSheet(
+            f"color: {Colors.TEXT_PRIMARY}; font-size: 14px; font-weight: 800; letter-spacing: 0.8px; background: transparent;"
+        )
+        title_row.addWidget(title)
+        title_row.addStretch()
 
-        desc = QLabel("Export publication attendance logs, visitor records, and summary reports to CSV.")
+        header_layout.addLayout(title_row)
+
+        desc = QLabel("Export publication attendance logs, visitor records, summary statistics, and administrative audit trails to CSV.")
         desc.setObjectName(ObjectNames.TEXT_SECONDARY)
+        desc.setStyleSheet(f"color: {Colors.TEXT_SECONDARY}; font-size: 11px; background: transparent;")
+        desc.setWordWrap(True)
 
-        header_layout.addWidget(title)
         header_layout.addWidget(desc)
         layout.addWidget(header_card)
 
+        # Date Range Filter Card
         filter_card = QFrame()
         filter_card.setObjectName(ObjectNames.SURFACE_CARD)
+        filter_card.setStyleSheet(
+            f"QFrame#{ObjectNames.SURFACE_CARD} {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: {Radius.CARD}px; }}"
+        )
         filter_layout = QHBoxLayout(filter_card)
+        filter_layout.setContentsMargins(Spacing.LG, Spacing.MD, Spacing.LG, Spacing.MD)
+        filter_layout.setSpacing(Spacing.MD)
+
+        lbl_filter_icon = QLabel()
+        lbl_filter_icon.setPixmap(IconHelper.get_pixmap("calendar", color=Colors.ACCENT_GOLD, size=16))
+        lbl_filter_icon.setStyleSheet("background: transparent;")
+        filter_layout.addWidget(lbl_filter_icon)
 
         lbl_start = QLabel("Start Date:")
         lbl_start.setObjectName(ObjectNames.FORM_LABEL)
+        lbl_start.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; background: transparent;")
+
         self.date_start = QDateEdit()
         self.date_start.setCalendarPopup(True)
         self.date_start.setDate(QDate.currentDate().addDays(-7))
+        self.date_start.setDisplayFormat("yyyy-MM-dd")
 
         lbl_end = QLabel("End Date:")
         lbl_end.setObjectName(ObjectNames.FORM_LABEL)
+        lbl_end.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-weight: 600; background: transparent;")
+
         self.date_end = QDateEdit()
         self.date_end.setCalendarPopup(True)
         self.date_end.setDate(QDate.currentDate())
+        self.date_end.setDisplayFormat("yyyy-MM-dd")
 
         filter_layout.addWidget(lbl_start)
         filter_layout.addWidget(self.date_start)
@@ -75,41 +123,76 @@ class ReportsView(QWidget):
 
         layout.addWidget(filter_card)
 
+        # Export Grid
         export_grid = QGridLayout()
-        export_grid.setSpacing(12)
+        export_grid.setSpacing(Spacing.MD)
 
         export_grid.addWidget(
-            self._create_export_card("Staff Attendance Logs", "Export complete staff check-in/out records.", "📄", self._export_staff_logs),
-            0, 0
+            self._create_export_card(
+                "Staff Attendance Logs",
+                "Export complete staff check-in/out records, categories, and resolution notes.",
+                "file-text",
+                self._export_staff_logs,
+            ),
+            0,
+            0,
         )
         export_grid.addWidget(
-            self._create_export_card("Visitor Sign-In Logs", "Export visitor log entries and details.", "👥", self._export_visitor_logs),
-            0, 1
+            self._create_export_card(
+                "Visitor Sign-In Logs",
+                "Export guest and visitor log entries, categories, and status history.",
+                "users",
+                self._export_visitor_logs,
+            ),
+            0,
+            1,
         )
         export_grid.addWidget(
-            self._create_export_card("Monthly Summary Report", "Generate summary statistics and designation breakdowns.", "📊", self._export_summary_report),
-            1, 0
+            self._create_export_card(
+                "Monthly Summary Report",
+                "Generate aggregate duty session statistics and designation breakdowns per staffer.",
+                "bar-chart-3",
+                self._export_summary_report,
+            ),
+            1,
+            0,
         )
         export_grid.addWidget(
-            self._create_export_card("Audit Trail Logs", "Export administrative actions and security log history.", "🛡️", self._export_audit_logs),
-            1, 1
+            self._create_export_card(
+                "Audit Trail Logs",
+                "Export administrative activity, overrides, backups, and security log history.",
+                "shield-check",
+                self._export_audit_logs,
+            ),
+            1,
+            1,
         )
 
         layout.addLayout(export_grid)
         layout.addStretch()
 
-    def _create_export_card(self, title: str, description: str, icon_symbol: str, export_callback) -> QFrame:
+    def _create_export_card(self, title: str, description: str, icon_name: str, export_callback) -> QFrame:
         card = QFrame()
         card.setObjectName(ObjectNames.SURFACE_CARD)
+        card.setStyleSheet(
+            f"QFrame#{ObjectNames.SURFACE_CARD} {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: {Radius.CARD}px; }}"
+        )
         layout = QVBoxLayout(card)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        layout.setSpacing(Spacing.SM)
 
         top_layout = QHBoxLayout()
-        icon_lbl = QLabel(icon_symbol)
-        icon_lbl.setFont(QFont("Segoe UI Emoji", 18))
-        icon_lbl.setStyleSheet(f"color: {Colors.ACCENT_GOLD}; background: transparent;")
+        top_layout.setSpacing(Spacing.XS)
+
+        icon_lbl = QLabel()
+        icon_lbl.setPixmap(IconHelper.get_pixmap(icon_name, color=Colors.ACCENT_GOLD, size=20))
+        icon_lbl.setStyleSheet("background: transparent;")
 
         lbl_title = QLabel(title)
         lbl_title.setObjectName(ObjectNames.HEADING_SECTION)
+        lbl_title.setStyleSheet(
+            f"color: {Colors.TEXT_PRIMARY}; font-size: 13px; font-weight: 700; background: transparent;"
+        )
 
         top_layout.addWidget(icon_lbl)
         top_layout.addWidget(lbl_title)
@@ -117,15 +200,21 @@ class ReportsView(QWidget):
 
         lbl_desc = QLabel(description)
         lbl_desc.setObjectName(ObjectNames.TEXT_SECONDARY)
+        lbl_desc.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 11px; background: transparent;")
         lbl_desc.setWordWrap(True)
 
-        btn_export = QPushButton("Export to CSV")
+        btn_export = QPushButton(" Export to CSV")
+        btn_export.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_export.setObjectName(ObjectNames.BTN_PRIMARY)
+        btn_export.setIcon(IconHelper.get_icon("download", color=Colors.BACKGROUND, size=14))
+        btn_export.setIconSize(QSize(14, 14))
         btn_export.clicked.connect(export_callback)
+        attach_press_feedback(btn_export)
 
         layout.addLayout(top_layout)
         layout.addWidget(lbl_desc)
-        layout.addWidget(btn_export, alignment=Qt.AlignRight)
+        layout.addSpacing(Spacing.XS)
+        layout.addWidget(btn_export, alignment=Qt.AlignmentFlag.AlignRight)
 
         return card
 
@@ -202,7 +291,10 @@ class ReportsView(QWidget):
 
             with open(filepath, "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                writer.writerow(["ID", "Student ID", "Full Name", "Designation", "Category", "Status", "Time In (PHT)", "Time Out (PHT)", "Resolution Notes"])
+                writer.writerow([
+                    "ID", "Student ID", "Full Name", "Designation",
+                    "Category", "Status", "Time In (PHT)", "Time Out (PHT)", "Resolution Notes"
+                ])
                 for s in sessions:
                     writer.writerow([
                         self._csv_safe(s.get("id")),
@@ -245,7 +337,10 @@ class ReportsView(QWidget):
 
             with open(filepath, "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                writer.writerow(["ID", "Student ID", "Visitor Name", "Category", "Status", "Time In (PHT)", "Time Out (PHT)", "Resolution Notes"])
+                writer.writerow([
+                    "ID", "Student ID", "Visitor Name", "Category",
+                    "Status", "Time In (PHT)", "Time Out (PHT)", "Resolution Notes"
+                ])
                 for v in visits:
                     writer.writerow([
                         self._csv_safe(v.get("id")),
@@ -288,7 +383,7 @@ class ReportsView(QWidget):
             conn = self.db_manager.get_connection()
 
             cursor = conn.execute("PRAGMA table_info(staff)")
-            staff_cols = [row[1] for row in cursor.fetchall()]
+            staff_cols = [str(row[1]) for row in cursor.fetchall()]
             sid_col = "student_id_no" if "student_id_no" in staff_cols else ("staff_id" if "staff_id" in staff_cols else "id")
 
             query = f"""
@@ -312,7 +407,10 @@ class ReportsView(QWidget):
 
             with open(filepath, "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                writer.writerow(["Student ID", "Full Name", "Designation", "Total Sessions", "Duty Sessions", "Visit Sessions", "Overdue Sessions"])
+                writer.writerow([
+                    "Student ID", "Full Name", "Designation",
+                    "Total Sessions", "Duty Sessions", "Visit Sessions", "Overdue Sessions"
+                ])
                 for r in rows:
                     writer.writerow([self._csv_safe(v) for v in r])
 
@@ -345,7 +443,10 @@ class ReportsView(QWidget):
 
             with open(filepath, "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                writer.writerow(["ID", "Admin Username", "Action", "Entity Type", "Entity ID", "Reason", "Timestamp (PHT)"])
+                writer.writerow([
+                    "ID", "Admin Username", "Action", "Entity Type",
+                    "Entity ID", "Reason", "Timestamp (PHT)"
+                ])
                 for item in logs:
                     writer.writerow([
                         self._csv_safe(item.get("id")),

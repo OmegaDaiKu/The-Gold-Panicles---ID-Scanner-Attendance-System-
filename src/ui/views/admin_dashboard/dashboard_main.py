@@ -1,12 +1,14 @@
-"""""Top-Level QMainWindow Admin Dashboard container hosting the management tabs."""
+"""
+Top-Level QMainWindow Admin Dashboard container hosting the management tabs.
+"""
 
 import logging
 import sys
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
-from PySide6.QtCore import Qt, QTimer
-from PySide6.QtGui import QPixmap, QIcon
+from PySide6.QtCore import QSize, Qt, QTimer
+from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
@@ -18,39 +20,29 @@ from PySide6.QtWidgets import (
 )
 
 from src.database.connection import DatabaseConnectionManager
-from src.ui.theme import ObjectNames
-from src.ui.views.admin_dashboard.overview import OverviewTab
-from src.ui.views.admin_dashboard.staff_mgmt import StaffManagementTab
+from src.ui.components.animations import attach_press_feedback
+from src.ui.theme import Colors, ObjectNames, Radius, Spacing
 from src.ui.views.admin_dashboard.attendance_logs import AttendanceLogsTab
 from src.ui.views.admin_dashboard.overdue_resolution import OverdueResolutionTab
+from src.ui.views.admin_dashboard.overview import OverviewTab
 from src.ui.views.admin_dashboard.reports import ReportsExportsTab
 from src.ui.views.admin_dashboard.settings_view import SettingsViewTab
+from src.ui.views.admin_dashboard.staff_mgmt import StaffManagementTab
+from src.utils.icon_helper import IconHelper
 from src.utils.time_utils import PHT_TIMEZONE
 
 logger = logging.getLogger(__name__)
 
 
 def _get_base_dir() -> Path:
-    """FIXED THIS SESSION: previously this file resolved its base directory
-    inline as `Path(__file__).parent.parent.parent.parent` -- but this file
-    lives at src/ui/views/admin_dashboard/dashboard_main.py, ONE directory
-    deeper than admin_login.py (src/ui/views/admin_login.py), which uses
-    that same 4-parent pattern correctly for its own, shallower location.
-    Four parents from here lands on src/, not the project root, so
-    self._logo_path.exists() was always False: the window icon silently
-    never got set, and the header's logo block silently never ran. Also
-    added frozen/_MEIPASS handling to match admin_login.py's existing
-    _get_base_dir(), since this file previously had none at all -- it
-    would have resolved incorrectly in a packaged build on top of the
-    directory-depth bug.
-    """
+    """Resolves project root directory whether running as raw Python or PyInstaller freeze."""
     if getattr(sys, "frozen", False):
         return Path(getattr(sys, "_MEIPASS", Path(sys.executable).parent))
     return Path(__file__).parent.parent.parent.parent.parent
 
 
 class AdminDashboardWindow(QMainWindow):
-    """Standalone Top-Level Admin Dashboard Window."""
+    """Top-Level Admin Dashboard Window hosting administrative management views."""
 
     def __init__(self, db_manager: DatabaseConnectionManager, admin_user: dict, parent=None):
         super().__init__(parent)
@@ -65,8 +57,8 @@ class AdminDashboardWindow(QMainWindow):
         self.admin_id = self.admin_user["id"]
 
         self.setWindowTitle("The Gold Panicles – Administrator Dashboard")
-        self.resize(1200, 780)
-        self.setMinimumSize(1000, 640)
+        self.resize(1240, 800)
+        self.setMinimumSize(1024, 680)
 
         self._logo_path = _get_base_dir() / "assets" / "images" / "logo.png"
         if self._logo_path.exists():
@@ -85,13 +77,13 @@ class AdminDashboardWindow(QMainWindow):
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
-        # Header Branding Bar
+        # Chrome Header Frame
         header = QWidget()
         header.setObjectName(ObjectNames.MAIN_HEADER_FRAME)
         header.setFixedHeight(64)
         header_layout = QHBoxLayout(header)
-        header_layout.setContentsMargins(20, 0, 20, 0)
-        header_layout.setSpacing(14)
+        header_layout.setContentsMargins(Spacing.LG, 0, Spacing.LG, 0)
+        header_layout.setSpacing(Spacing.MD)
 
         if self._logo_path.exists():
             lbl_logo = QLabel()
@@ -119,24 +111,28 @@ class AdminDashboardWindow(QMainWindow):
 
         header_layout.addStretch()
 
+        # Clock & Live Status Indicators
         self.lbl_clock = QLabel("")
         self.lbl_clock.setObjectName(ObjectNames.LIVE_CLOCK)
         self.lbl_clock.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.lbl_clock.setFixedHeight(30)
-        self.lbl_clock.setMinimumWidth(195)
+        self.lbl_clock.setFixedHeight(32)
+        self.lbl_clock.setMinimumWidth(210)
         header_layout.addWidget(self.lbl_clock, alignment=Qt.AlignmentFlag.AlignVCenter)
-        header_layout.addSpacing(10)
+        header_layout.addSpacing(Spacing.XS)
 
         admin_name = self.admin_user.get("username", "admin").upper()
         lbl_admin_badge = QLabel(f"  ● {admin_name}  ")
         lbl_admin_badge.setObjectName(ObjectNames.ADMIN_USER_BADGE)
         header_layout.addWidget(lbl_admin_badge, alignment=Qt.AlignmentFlag.AlignVCenter)
-        header_layout.addSpacing(8)
+        header_layout.addSpacing(Spacing.XS)
 
-        btn_close = QPushButton("← Return to Kiosk")
+        btn_close = QPushButton("Return to Kiosk")
         btn_close.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_close.setObjectName(ObjectNames.BTN_CHROME)
+        btn_close.setIcon(IconHelper.get_icon("arrow-left", color=Colors.TEXT_PRIMARY, size=14))
+        btn_close.setIconSize(QSize(14, 14))
         btn_close.clicked.connect(self.close)
+        attach_press_feedback(btn_close)
         header_layout.addWidget(btn_close, alignment=Qt.AlignmentFlag.AlignVCenter)
 
         main_layout.addWidget(header)
@@ -171,15 +167,15 @@ class AdminDashboardWindow(QMainWindow):
     def _on_tab_changed(self, index: int) -> None:
         widget = self.tabs.widget(index)
         try:
-            if widget is self.tab_overview and hasattr(widget, 'refresh_metrics'):
+            if widget is self.tab_overview and hasattr(widget, "refresh_metrics"):
                 widget.refresh_metrics()
-            elif widget is self.tab_staff and hasattr(widget, 'refresh_table'):
+            elif widget is self.tab_staff and hasattr(widget, "refresh_table"):
                 widget.refresh_table()
-            elif widget is self.tab_logs and hasattr(widget, 'refresh_logs'):
+            elif widget is self.tab_logs and hasattr(widget, "refresh_logs"):
                 widget.refresh_logs()
-            elif widget is self.tab_overdue and hasattr(widget, 'refresh_table'):
+            elif widget is self.tab_overdue and hasattr(widget, "refresh_table"):
                 widget.refresh_table()
-            elif widget is self.tab_settings and hasattr(widget, 'refresh_backups_list'):
+            elif widget is self.tab_settings and hasattr(widget, "refresh_backups_list"):
                 widget.refresh_backups_list()
         except Exception:
             logger.exception(

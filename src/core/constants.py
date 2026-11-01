@@ -128,5 +128,7 @@ def get_slot_limit(designation: str) -> Optional[int]:
 
 
 def is_unlimited_designation(designation: str) -> bool:
-    """Returns True if the designation has no slot cap (also True for unrecognized strings)."""
-    return get_slot_limit(designation) is None
+    """Returns True if the designation is officially recognized AND has no slot cap."""
+    if designation not in DESIGNATION_SLOT_LIMITS:
+        return False  # Unrecognized titles are invalid, not unlimited
+    return DESIGNATION_SLOT_LIMITS.get(designation) is None

@@ -1,8 +1,10 @@
-"""Staff Directory CRUD Management Tab with slot-capacity-aware designation selection."""
+"""
+Staff Directory CRUD Management Tab with slot-capacity-aware designation selection.
+"""
 
 from typing import Optional
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QColor, QStandardItem, QStandardItemModel
 from PySide6.QtWidgets import (
     QComboBox,
@@ -24,7 +26,9 @@ from src.core.constants import DESIGNATION_DEPARTMENTS, get_slot_limit
 from src.core.exceptions import AppError
 from src.database.connection import DatabaseConnectionManager
 from src.services.directory_service import DirectoryService
-from src.ui.theme import Colors, ObjectNames
+from src.ui.components.animations import attach_press_feedback
+from src.ui.theme import Colors, ObjectNames, Radius, Spacing
+from src.utils.icon_helper import IconHelper
 
 
 class StaffManagementTab(QWidget):
@@ -45,24 +49,43 @@ class StaffManagementTab(QWidget):
 
     def _init_ui(self) -> None:
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(20, 18, 20, 18)
-        layout.setSpacing(18)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
+        layout.setSpacing(Spacing.LG)
 
         # Left Panel: Staff Directory Table
         left_panel = QWidget()
         left_layout = QVBoxLayout(left_panel)
         left_layout.setContentsMargins(0, 0, 0, 0)
-        left_layout.setSpacing(12)
+        left_layout.setSpacing(Spacing.MD)
+
+        header_row = QHBoxLayout()
+        header_row.setSpacing(Spacing.XS)
+
+        icon_title = QLabel()
+        icon_title.setPixmap(IconHelper.get_pixmap("users", color=Colors.ACCENT_GOLD, size=18))
+        icon_title.setStyleSheet("background: transparent;")
+        header_row.addWidget(icon_title)
 
         lbl_title = QLabel("STAFF DIRECTORY")
         lbl_title.setObjectName(ObjectNames.SECTION_TITLE)
-        left_layout.addWidget(lbl_title)
+        lbl_title.setStyleSheet(
+            f"color: {Colors.TEXT_PRIMARY}; font-size: 14px; font-weight: 800; letter-spacing: 0.8px;"
+        )
+        header_row.addWidget(lbl_title)
+        header_row.addStretch()
+
+        left_layout.addLayout(header_row)
 
         filter_row = QHBoxLayout()
-        filter_row.setSpacing(10)
+        filter_row.setSpacing(Spacing.SM)
 
         self.txt_search = QLineEdit()
-        self.txt_search.setPlaceholderText("🔍  Search by Student ID or Name...")
+        self.txt_search.setObjectName(ObjectNames.SEARCH_INPUT)
+        self.txt_search.setPlaceholderText("Search by Student ID or Name...")
+        self.txt_search.addAction(
+            IconHelper.get_icon("search", color=Colors.TEXT_MUTED, size=14),
+            QLineEdit.ActionPosition.LeadingPosition,
+        )
         self.txt_search.textChanged.connect(self._apply_filter)
         filter_row.addWidget(self.txt_search, stretch=3)
 
@@ -77,21 +100,24 @@ class StaffManagementTab(QWidget):
         self.table.setColumnCount(len(self.HEADERS))
         self.table.setHorizontalHeaderLabels(self.HEADERS)
         self.table.verticalHeader().setVisible(False)
+        self.table.verticalHeader().setDefaultSectionSize(40)
         self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.table.setAlternatingRowColors(True)
+        self.table.setShowGrid(False)
 
         header = self.table.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
         header.setSectionResizeMode(5, QHeaderView.ResizeMode.Fixed)
-        self.table.setColumnWidth(5, 220)
+        self.table.setColumnWidth(5, 210)
 
         self.table.cellDoubleClicked.connect(self._on_row_double_clicked)
         left_layout.addWidget(self.table)
 
         self.lbl_count = QLabel("0 records")
         self.lbl_count.setObjectName(ObjectNames.TEXT_MUTED)
+        self.lbl_count.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-family: monospace; font-size: 10px;")
         left_layout.addWidget(self.lbl_count)
 
         layout.addWidget(left_panel, stretch=7)
@@ -99,12 +125,18 @@ class StaffManagementTab(QWidget):
         # Right Panel: Registration & Edit Form
         right_panel = QFrame()
         right_panel.setObjectName(ObjectNames.SURFACE_CARD)
+        right_panel.setStyleSheet(
+            f"QFrame#{ObjectNames.SURFACE_CARD} {{ background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; border-radius: {Radius.CARD}px; }}"
+        )
         right_layout = QVBoxLayout(right_panel)
-        right_layout.setSpacing(14)
-        right_layout.setContentsMargins(20, 18, 20, 18)
+        right_layout.setSpacing(Spacing.MD)
+        right_layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
 
         self.lbl_form_title = QLabel("REGISTER NEW STAFF")
         self.lbl_form_title.setObjectName(ObjectNames.SECTION_TITLE)
+        self.lbl_form_title.setStyleSheet(
+            f"color: {Colors.ACCENT_GOLD}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px; background: transparent;"
+        )
         right_layout.addWidget(self.lbl_form_title)
 
         self.lbl_form_mode = QLabel()
@@ -113,12 +145,14 @@ class StaffManagementTab(QWidget):
         right_layout.addWidget(self.lbl_form_mode)
 
         form_layout = QFormLayout()
-        form_layout.setSpacing(12)
+        form_layout.setSpacing(Spacing.SM)
 
         self.txt_student_id = QLineEdit()
+        self.txt_student_id.setObjectName(ObjectNames.GP_SUPER_INPUT)
         self.txt_student_id.setPlaceholderText("e.g. 261-00105")
 
         self.txt_full_name = QLineEdit()
+        self.txt_full_name.setObjectName(ObjectNames.GP_SUPER_INPUT)
         self.txt_full_name.setPlaceholderText("Enter Full Name")
 
         self.cmb_designation = QComboBox()
@@ -139,23 +173,29 @@ class StaffManagementTab(QWidget):
         right_layout.addLayout(form_layout)
 
         btn_layout = QVBoxLayout()
-        btn_layout.setSpacing(8)
+        btn_layout.setSpacing(Spacing.XS)
 
-        self.btn_save = QPushButton("✓  REGISTER STAFF")
+        self.btn_save = QPushButton(" REGISTER STAFF")
         self.btn_save.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_save.setObjectName(ObjectNames.BTN_PRIMARY)
+        self.btn_save.setIcon(IconHelper.get_icon("user-plus", color=Colors.BACKGROUND, size=15))
         self.btn_save.clicked.connect(self._handle_save)
+        attach_press_feedback(self.btn_save)
 
-        self.btn_delete = QPushButton("✕  DELETE STAFF")
+        self.btn_delete = QPushButton(" DELETE STAFF")
         self.btn_delete.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_delete.setObjectName(ObjectNames.BTN_DANGER_SOLID)
+        self.btn_delete.setIcon(IconHelper.get_icon("trash-2", color="#FFFFFF", size=15))
         self.btn_delete.clicked.connect(self._handle_delete)
         self.btn_delete.setVisible(False)
+        attach_press_feedback(self.btn_delete)
 
         self.btn_cancel = QPushButton("CANCEL / CLEAR")
         self.btn_cancel.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_cancel.setObjectName(ObjectNames.BTN_CANCEL)
+        self.btn_cancel.setIcon(IconHelper.get_icon("x-circle", color=Colors.TEXT_MUTED, size=15))
         self.btn_cancel.clicked.connect(self._reset_form)
+        attach_press_feedback(self.btn_cancel)
 
         btn_layout.addWidget(self.btn_save)
         btn_layout.addWidget(self.btn_delete)
@@ -173,7 +213,6 @@ class StaffManagementTab(QWidget):
 
     def _populate_designation_combo(self, keep_designation: Optional[str] = None) -> None:
         counts = self.directory_service.staff_repo.get_active_designation_counts()
-
         model = QStandardItemModel(self.cmb_designation)
 
         for department, designations in DESIGNATION_DEPARTMENTS.items():
@@ -247,13 +286,15 @@ class StaffManagementTab(QWidget):
             if status_filter == 2 and staff["is_active"] != 0:
                 continue
             if search_text:
-                if (search_text not in staff["student_id_no"].lower()
-                        and search_text not in staff["full_name"].lower()):
+                if (
+                    search_text not in staff["student_id_no"].lower()
+                    and search_text not in staff["full_name"].lower()
+                ):
                     continue
             filtered.append(staff)
 
         self._render_rows(filtered)
-        self.lbl_count.setText(f"{len(filtered)} of {len(self._all_staff)} records")
+        self.lbl_count.setText(f"Showing: {len(filtered)} of {len(self._all_staff)} staff records")
 
     def _render_rows(self, staff_list: list) -> None:
         self.table.setRowCount(0)
@@ -278,7 +319,9 @@ class StaffManagementTab(QWidget):
                 status_item.setForeground(QColor(Colors.STATUS_OVERDUE))
 
             for col_idx, table_item in enumerate(items):
-                table_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                table_item.setTextAlignment(
+                    Qt.AlignmentFlag.AlignCenter if col_idx in (0, 1, 4) else Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter
+                )
                 self.table.setItem(row_idx, col_idx, table_item)
 
             actions_widget = QWidget()
@@ -289,15 +332,22 @@ class StaffManagementTab(QWidget):
             btn_edit = QPushButton("EDIT")
             btn_edit.setCursor(Qt.CursorShape.PointingHandCursor)
             btn_edit.setObjectName(ObjectNames.BTN_ROW_EDIT)
+            btn_edit.setIcon(IconHelper.get_icon("edit-2", color=Colors.TEXT_PRIMARY, size=12))
+            btn_edit.setIconSize(QSize(12, 12))
             btn_edit.clicked.connect(lambda _, s=staff: self._populate_edit(s))
+            attach_press_feedback(btn_edit)
 
             btn_toggle = QPushButton("DEACTIVATE" if staff["is_active"] == 1 else "REACTIVATE")
             btn_toggle.setCursor(Qt.CursorShape.PointingHandCursor)
             if staff["is_active"] == 1:
                 btn_toggle.setObjectName(ObjectNames.BTN_ROW_WARNING)
+                btn_toggle.setIcon(IconHelper.get_icon("user-x", color=Colors.TEXT_PRIMARY, size=12))
             else:
                 btn_toggle.setObjectName(ObjectNames.BTN_ROW_SUCCESS)
+                btn_toggle.setIcon(IconHelper.get_icon("user-check", color=Colors.TEXT_PRIMARY, size=12))
+            btn_toggle.setIconSize(QSize(12, 12))
             btn_toggle.clicked.connect(lambda _, s=staff: self._toggle_status(s))
+            attach_press_feedback(btn_toggle)
 
             actions_layout.addWidget(btn_edit)
             actions_layout.addWidget(btn_toggle)
@@ -322,7 +372,8 @@ class StaffManagementTab(QWidget):
         self._select_designation(staff["designation"])
 
         self.lbl_form_title.setText("EDIT STAFF RECORD")
-        self.btn_save.setText("✓  UPDATE STAFF")
+        self.btn_save.setText(" UPDATE STAFF")
+        self.btn_save.setIcon(IconHelper.get_icon("check", color=Colors.BACKGROUND, size=15))
         self.btn_delete.setVisible(True)
         self._set_form_mode_badge(ObjectNames.FORM_MODE_EDIT, "Edit Mode")
 
@@ -441,6 +492,7 @@ class StaffManagementTab(QWidget):
         self._populate_designation_combo()
         self._select_first_available_designation()
         self.lbl_form_title.setText("REGISTER NEW STAFF")
-        self.btn_save.setText("✓  REGISTER STAFF")
+        self.btn_save.setText(" REGISTER STAFF")
+        self.btn_save.setIcon(IconHelper.get_icon("user-plus", color=Colors.BACKGROUND, size=15))
         self.btn_delete.setVisible(False)
         self._set_form_mode_badge(ObjectNames.FORM_MODE_CREATE, "Create Mode")

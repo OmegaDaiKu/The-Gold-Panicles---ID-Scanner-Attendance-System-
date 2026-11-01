@@ -1,4 +1,4 @@
-"""Application entry point for The Gold Panicles QR Attendance System."""
+""""Application entry point for The Gold Panicles QR Attendance System."""
 
 import logging
 import sys
@@ -14,6 +14,7 @@ from src.ui.main_window import MainWindow
 from src.ui.theme import STYLESHEET_RELATIVE_PATH
 from src.utils.font_loader import load_application_fonts
 
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -36,7 +37,7 @@ class AttendanceApplication:
         if unique_families:
             logger.info("Custom fonts available this session: %s", ", ".join(unique_families))
 
-        # Font configuration: Primary is M Ying Hei PRC W5, secondary is Helvetica
+        # Font configuration
         if "M Ying Hei PRC W5" in unique_families:
             self.app.setFont(QFont("M Ying Hei PRC W5", 10))
         elif "M Ying Hei PRC" in unique_families:
@@ -46,22 +47,14 @@ class AttendanceApplication:
         elif "Helvetica" in unique_families:
             self.app.setFont(QFont("Helvetica", 10))
         else:
-            # System font database fallback
             app_font = QFont("M Ying Hei PRC W5", 10)
             app_font.setStyleHint(QFont.StyleHint.SansSerif)
             self.app.setFont(app_font)
 
         qss_path = base_dir / STYLESHEET_RELATIVE_PATH
-        if not qss_path.exists():
-            logger.critical("Required stylesheet not found at: %s", qss_path)
-            raise FileNotFoundError(
-                f"The application theme stylesheet is missing: {qss_path}\n"
-                "The application cannot start without it. If you intentionally "
-                "moved or renamed this file, update STYLESHEET_RELATIVE_PATH "
-                "in src/ui/theme.py to match."
-            )
-        with open(qss_path, "r", encoding="utf-8") as f:
-            self.app.setStyleSheet(f.read())
+        if qss_path.exists():
+            with open(qss_path, "r", encoding="utf-8") as f:
+                self.app.setStyleSheet(f.read())
 
         icon_path = base_dir / "assets" / "images" / "logo.png"
         if icon_path.exists():

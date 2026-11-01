@@ -1,6 +1,8 @@
-"""Modal dialog components for time-out confirmation and guest visitor entry."""
+""""Themed modal overlays for Guest Visitor registration, manual ID entry, and action confirmation."""
 
-from PySide6.QtCore import Qt, QEasingCurve, QPropertyAnimation, QTimer
+from typing import Optional
+
+from PySide6.QtCore import QEasingCurve, QPropertyAnimation, Qt, QTimer
 from PySide6.QtGui import QKeyEvent
 from PySide6.QtWidgets import (
     QDialog,
@@ -10,85 +12,68 @@ from PySide6.QtWidgets import (
     QProgressBar,
     QPushButton,
     QVBoxLayout,
+    QWidget,
 )
 
 from src.core.exceptions import ValidationError
 from src.ui.components.animations import attach_press_feedback, fade_in_widget
-from src.ui.theme import Colors, ObjectNames
+from src.ui.theme import Colors, ObjectNames, Radius, Spacing, Typography
 from src.utils.validators import validate_person_name, validate_student_id_format
 
 
 class _BaseCountdownDialog(QDialog):
-    """Base modal dialog with minimal clean styling and auto-close countdown."""
+    """Base modal dialog with styled container and auto-close countdown progress bar."""
 
-    def __init__(self, timeout_seconds: int = 20, parent=None):
+    def __init__(self, timeout_seconds: int = 20, parent: Optional[QWidget] = None):
         super().__init__(parent)
         self.setModal(True)
         self.setMinimumWidth(440)
-        self.setStyleSheet(
-            f"""
-            QDialog {{
-                background-color: {Colors.BACKGROUND};
-                border: 1px solid {Colors.BORDER};
-                border-radius: 6px;
-            }}
-            """
-        )
-        self.timeout_ms = timeout_seconds * 1000
-        self.remaining_ms = self.timeout_ms
+        self.setObjectName("baseCountdownDialog")
+
+        self.timeout_seconds = timeout_seconds
+        self.remaining_seconds = timeout_seconds
         self._fade_anim = None
 
-        self.timer = QTimer(self)
-        self.timer.setInterval(100)
-        self.timer.timeout.connect(self._on_timer_tick)
+        # 1-Second Interval Timer for Label Counter
+        self.counter_timer = QTimer(self)
+        self.counter_timer.setInterval(1000)
+        self.counter_timer.timeout.connect(self._on_counter_tick)
 
+        # Smooth Progress Bar Indicator
         self.progress_bar = QProgressBar()
-        self.progress_bar.setRange(0, 100)
-        self.progress_bar.setValue(100)
+        self.progress_bar.setRange(0, 1000)
+        self.progress_bar.setValue(1000)
         self.progress_bar.setTextVisible(False)
-        self.progress_bar.setFixedHeight(3)
-        self.progress_bar.setStyleSheet(
-            f"""
-            QProgressBar {{
-                background-color: {Colors.SECONDARY};
-                border: none;
-                border-radius: 1px;
-            }}
-            QProgressBar::chunk {{
-                background-color: {Colors.ACCENT_DARK};
-                border-radius: 1px;
-            }}
-            """
-        )
+        self.progress_bar.setFixedHeight(4)
+        self.progress_bar.setObjectName("modalProgressBar")
 
+        # Single Continuous 60 FPS Linear Animation
         self._progress_anim = QPropertyAnimation(self.progress_bar, b"value", self)
-        self._progress_anim.setDuration(100)
+        self._progress_anim.setDuration(timeout_seconds * 1000)
+        self._progress_anim.setStartValue(1000)
+        self._progress_anim.setEndValue(0)
         self._progress_anim.setEasingCurve(QEasingCurve.Type.Linear)
+        self._progress_anim.finished.connect(self.reject)
 
         self.lbl_countdown = QLabel(f"Auto-closing in {timeout_seconds}s")
         self.lbl_countdown.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lbl_countdown.setObjectName(ObjectNames.TEXT_MUTED)
 
     def start_countdown(self) -> None:
-        self.timer.start()
+        """Starts the countdown timer and smooth progress animation simultaneously."""
+        self.counter_timer.start()
+        self._progress_anim.start()
 
-    def _on_timer_tick(self) -> None:
-        self.remaining_ms -= 100
-        if self.remaining_ms <= 0:
-            self.timer.stop()
-            self.reject()
+    def _on_counter_tick(self) -> None:
+        self.remaining_seconds -= 1
+        if self.remaining_seconds <= 0:
+            self.counter_timer.stop()
         else:
-            pct = int((self.remaining_ms / self.timeout_ms) * 100)
-            self._progress_anim.stop()
-            self._progress_anim.setStartValue(self.progress_bar.value())
-            self._progress_anim.setEndValue(pct)
-            self._progress_anim.start()
-            secs = int(self.remaining_ms / 1000) + 1
-            self.lbl_countdown.setText(f"Auto-closing in {secs}s")
+            self.lbl_countdown.setText(f"Auto-closing in {self.remaining_seconds}s")
 
     def done(self, r: int) -> None:
-        if self.timer.isActive():
-            self.timer.stop()
+        if self.counter_timer.isActive():
+            self.counter_timer.stop()
         if self._progress_anim.state() == QPropertyAnimation.State.Running:
             self._progress_anim.stop()
         super().done(r)
@@ -101,7 +86,7 @@ class _BaseCountdownDialog(QDialog):
 class TimeOutConfirmationDialog(_BaseCountdownDialog):
     """Modal dialog prompting active staffer or visitor for explicit Time-Out confirmation."""
 
-    def __init__(self, full_name: str, role_or_type: str, time_in_str: str, parent=None):
+    def __init__(self, full_name: str, role_or_type: str, time_in_str: str, parent: Optional[QWidget] = None):
         super().__init__(timeout_seconds=20, parent=parent)
 
         self.setWindowTitle("Confirm Time-Out")
@@ -110,11 +95,11 @@ class TimeOutConfirmationDialog(_BaseCountdownDialog):
 
     def _init_ui(self, full_name: str, role_or_type: str, time_in_str: str) -> None:
         layout = QVBoxLayout(self)
-        layout.setSpacing(14)
-        layout.setContentsMargins(28, 28, 28, 24)
+        layout.setSpacing(Spacing.MD)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
 
         lbl_header = QLabel("TIME-OUT CONFIRMATION")
-        lbl_header.setStyleSheet(f"color: {Colors.DANGER_SOLID}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
+        lbl_header.setObjectName("dialogHeaderDanger")
         lbl_header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_header)
 
@@ -134,26 +119,29 @@ class TimeOutConfirmationDialog(_BaseCountdownDialog):
         lbl_time.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_time)
 
+        # Button Layout HIG Standards: [Cancel (Secondary)] [Confirm (Primary/Danger)]
         btn_layout = QHBoxLayout()
-        btn_layout.setSpacing(14)
-
-        btn_confirm = QPushButton("Confirm Time-Out (Enter)")
-        btn_confirm.setCursor(Qt.CursorShape.PointingHandCursor)
-        btn_confirm.setObjectName(ObjectNames.BTN_DANGER_SOLID)
-        btn_confirm.clicked.connect(self.accept)
-        attach_press_feedback(btn_confirm)
+        btn_layout.setSpacing(Spacing.MD)
 
         btn_cancel = QPushButton("Cancel (Esc)")
+        btn_cancel.setFixedHeight(40)
         btn_cancel.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_cancel.setObjectName(ObjectNames.BTN_CANCEL)
         btn_cancel.clicked.connect(self.reject)
         attach_press_feedback(btn_cancel)
 
-        btn_layout.addWidget(btn_confirm)
+        btn_confirm = QPushButton("Confirm Time-Out (Enter)")
+        btn_confirm.setFixedHeight(40)
+        btn_confirm.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn_confirm.setObjectName(ObjectNames.BTN_DANGER_SOLID)
+        btn_confirm.clicked.connect(self.accept)
+        attach_press_feedback(btn_confirm)
+
         btn_layout.addWidget(btn_cancel)
+        btn_layout.addWidget(btn_confirm)
         layout.addLayout(btn_layout)
 
-        layout.addSpacing(6)
+        layout.addSpacing(Spacing.XS)
         layout.addWidget(self.progress_bar)
         layout.addWidget(self.lbl_countdown)
 
@@ -170,7 +158,7 @@ class TimeOutConfirmationDialog(_BaseCountdownDialog):
 class GuestVisitorNameDialog(_BaseCountdownDialog):
     """Modal dialog asking an unregistered guest student to input their full legal name."""
 
-    def __init__(self, student_id_no: str, parent=None):
+    def __init__(self, student_id_no: str, parent: Optional[QWidget] = None):
         super().__init__(timeout_seconds=30, parent=parent)
         self.entered_name = ""
 
@@ -180,11 +168,11 @@ class GuestVisitorNameDialog(_BaseCountdownDialog):
 
     def _init_ui(self, student_id_no: str) -> None:
         layout = QVBoxLayout(self)
-        layout.setSpacing(14)
-        layout.setContentsMargins(28, 28, 28, 24)
+        layout.setSpacing(Spacing.MD)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
 
         lbl_header = QLabel("GUEST VISITOR CHECK-IN")
-        lbl_header.setStyleSheet(f"color: {Colors.ACCENT_DARK}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
+        lbl_header.setObjectName("dialogHeaderInfo")
         lbl_header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_header)
 
@@ -194,6 +182,7 @@ class GuestVisitorNameDialog(_BaseCountdownDialog):
         layout.addWidget(lbl_id)
 
         self.txt_name = QLineEdit()
+        self.txt_name.setFixedHeight(40)
         self.txt_name.setPlaceholderText("Enter visitor full legal name...")
         self.txt_name.returnPressed.connect(self._handle_submit)
         layout.addWidget(self.txt_name)
@@ -203,26 +192,29 @@ class GuestVisitorNameDialog(_BaseCountdownDialog):
         self.lbl_error.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(self.lbl_error)
 
+        # Button Layout HIG Standards: [Cancel (Secondary)] [Confirm (Primary)]
         btn_layout = QHBoxLayout()
-        btn_layout.setSpacing(12)
-
-        btn_submit = QPushButton("Confirm Check-In")
-        btn_submit.setCursor(Qt.CursorShape.PointingHandCursor)
-        btn_submit.setObjectName(ObjectNames.BTN_PRIMARY)
-        btn_submit.clicked.connect(self._handle_submit)
-        attach_press_feedback(btn_submit)
+        btn_layout.setSpacing(Spacing.MD)
 
         btn_cancel = QPushButton("Cancel")
+        btn_cancel.setFixedHeight(40)
         btn_cancel.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_cancel.setObjectName(ObjectNames.BTN_CANCEL)
         btn_cancel.clicked.connect(self.reject)
         attach_press_feedback(btn_cancel)
 
-        btn_layout.addWidget(btn_submit)
+        btn_submit = QPushButton("Confirm Check-In")
+        btn_submit.setFixedHeight(40)
+        btn_submit.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn_submit.setObjectName(ObjectNames.BTN_PRIMARY)
+        btn_submit.clicked.connect(self._handle_submit)
+        attach_press_feedback(btn_submit)
+
         btn_layout.addWidget(btn_cancel)
+        btn_layout.addWidget(btn_submit)
         layout.addLayout(btn_layout)
 
-        layout.addSpacing(6)
+        layout.addSpacing(Spacing.XS)
         layout.addWidget(self.progress_bar)
         layout.addWidget(self.lbl_countdown)
 
@@ -245,9 +237,9 @@ class GuestVisitorNameDialog(_BaseCountdownDialog):
 
 
 class ManualIdEntryDialog(_BaseCountdownDialog):
-    """Modal dialog allowing manual Student ID entry when camera hardware is offline."""
+    """Modal dialog allowing manual Student ID entry."""
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QWidget] = None):
         super().__init__(timeout_seconds=30, parent=parent)
         self.entered_id = ""
 
@@ -257,11 +249,11 @@ class ManualIdEntryDialog(_BaseCountdownDialog):
 
     def _init_ui(self) -> None:
         layout = QVBoxLayout(self)
-        layout.setSpacing(14)
-        layout.setContentsMargins(28, 28, 28, 24)
+        layout.setSpacing(Spacing.MD)
+        layout.setContentsMargins(Spacing.LG, Spacing.LG, Spacing.LG, Spacing.LG)
 
         lbl_header = QLabel("MANUAL STUDENT ID ENTRY")
-        lbl_header.setStyleSheet(f"color: {Colors.ACCENT_DARK}; font-size: 13px; font-weight: 800; letter-spacing: 0.8px;")
+        lbl_header.setObjectName("dialogHeaderInfo")
         lbl_header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(lbl_header)
 
@@ -271,6 +263,7 @@ class ManualIdEntryDialog(_BaseCountdownDialog):
         layout.addWidget(lbl_instruct)
 
         self.txt_id = QLineEdit()
+        self.txt_id.setFixedHeight(40)
         self.txt_id.setPlaceholderText("Format: XXX-XXXXX")
         self.txt_id.returnPressed.connect(self._handle_submit)
         layout.addWidget(self.txt_id)
@@ -280,26 +273,29 @@ class ManualIdEntryDialog(_BaseCountdownDialog):
         self.lbl_error.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(self.lbl_error)
 
+        # Button Layout HIG Standards: [Cancel (Secondary)] [Submit (Primary)]
         btn_layout = QHBoxLayout()
-        btn_layout.setSpacing(12)
-
-        btn_submit = QPushButton("Submit ID")
-        btn_submit.setCursor(Qt.CursorShape.PointingHandCursor)
-        btn_submit.setObjectName(ObjectNames.BTN_PRIMARY)
-        btn_submit.clicked.connect(self._handle_submit)
-        attach_press_feedback(btn_submit)
+        btn_layout.setSpacing(Spacing.MD)
 
         btn_cancel = QPushButton("Cancel")
+        btn_cancel.setFixedHeight(40)
         btn_cancel.setCursor(Qt.CursorShape.PointingHandCursor)
         btn_cancel.setObjectName(ObjectNames.BTN_CANCEL)
         btn_cancel.clicked.connect(self.reject)
         attach_press_feedback(btn_cancel)
 
-        btn_layout.addWidget(btn_submit)
+        btn_submit = QPushButton("Submit ID")
+        btn_submit.setFixedHeight(40)
+        btn_submit.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn_submit.setObjectName(ObjectNames.BTN_PRIMARY)
+        btn_submit.clicked.connect(self._handle_submit)
+        attach_press_feedback(btn_submit)
+
         btn_layout.addWidget(btn_cancel)
+        btn_layout.addWidget(btn_submit)
         layout.addLayout(btn_layout)
 
-        layout.addSpacing(6)
+        layout.addSpacing(Spacing.XS)
         layout.addWidget(self.progress_bar)
         layout.addWidget(self.lbl_countdown)
 

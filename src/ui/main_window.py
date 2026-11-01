@@ -1,8 +1,8 @@
-""""Top-level Kiosk Main Window supporting window controls and title bar layout."""
+""""Top-level Kiosk Main Window supporting window controls, title bar layout, and workstation routing."""
 
 import sys
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 from PySide6.QtCore import QSize, Qt, QTimer
 from PySide6.QtGui import QIcon, QKeySequence, QPixmap, QShortcut
@@ -18,7 +18,7 @@ from PySide6.QtWidgets import (
 
 from src.database.connection import DatabaseConnectionManager
 from src.ui.components.animations import attach_press_feedback
-from src.ui.theme import Colors, ObjectNames
+from src.ui.theme import Colors, ObjectNames, Radius, Spacing, Typography
 from src.ui.views.admin_dashboard.dashboard_main import AdminDashboardWindow
 from src.ui.views.admin_login import AdminAuthDialog
 from src.ui.views.shutdown_dialog import ShutdownAuthDialog
@@ -28,7 +28,7 @@ from src.utils.time_utils import PHT_TIMEZONE
 
 
 class MainWindow(QMainWindow):
-    """Main window embedding the attendance station kiosk and administration controls."""
+    """Main workstation shell embedding the attendance station kiosk and administrative controls."""
 
     def __init__(self, db_manager: DatabaseConnectionManager, parent=None):
         super().__init__(parent)
@@ -36,11 +36,8 @@ class MainWindow(QMainWindow):
         self.db_manager = db_manager
         self.dashboard = None
 
-        # Simplified per this session's UX pass: the old "(Desktop Terminal
-        # v2.4)" suffix was a dev-build artifact duplicated on-screen; the
-        # window title itself is rarely user-visible on a kiosk anyway.
-        self.setWindowTitle("The Gold Panicles — Attendance System")
-        self.setMinimumSize(1024, 640)
+        self.setWindowTitle("The Gold Panicles")
+        self.setMinimumSize(1280, 768)
 
         if getattr(sys, "frozen", False):
             self._base_dir = Path(sys._MEIPASS)
@@ -52,55 +49,61 @@ class MainWindow(QMainWindow):
             self.setWindowIcon(QIcon(str(self._logo_path)))
 
         self._init_ui()
+        self._register_keyboard_shortcuts()
 
-        self.f2_shortcut = QShortcut(QKeySequence(Qt.Key.Key_F2), self)
-        self.f2_shortcut.activated.connect(self._trigger_manual_entry)
-
-        # NEW THIS SESSION: F11 toggles distraction-free fullscreen kiosk
-        # mode. There is intentionally no on-screen "exit fullscreen"
-        # button -- pressing F11 again, the window manager's close control,
-        # or Alt+F4 all still route through closeEvent()'s
-        # ShutdownAuthDialog guard exactly as before. Removing the in-app
-        # Exit button does NOT remove the admin-authorization requirement
-        # to actually quit the application.
-        self.f11_shortcut = QShortcut(QKeySequence(Qt.Key.Key_F11), self)
-        self.f11_shortcut.activated.connect(self._toggle_fullscreen)
-
+        # Real-time PHT Clock Timer
         self.clock_timer = QTimer(self)
         self.clock_timer.timeout.connect(self._update_clock)
         self.clock_timer.start(1000)
         self._update_clock()
 
+    def _register_keyboard_shortcuts(self) -> None:
+        """Configures global workstation keyboard navigation shortcuts."""
+        # F2: Focus Primary Hardware Input Receiver
+        self.f2_shortcut = QShortcut(QKeySequence(Qt.Key.Key_F2), self)
+        self.f2_shortcut.activated.connect(self._trigger_manual_entry)
+
+        # F5: Refresh Attendance Board Feed
+        self.f5_shortcut = QShortcut(QKeySequence(Qt.Key.Key_F5), self)
+        self.f5_shortcut.activated.connect(self._trigger_refresh)
+
+        # F11: Toggle Fullscreen Mode
+        self.f11_shortcut = QShortcut(QKeySequence(Qt.Key.Key_F11), self)
+        self.f11_shortcut.activated.connect(self._toggle_fullscreen)
+
+        # Escape: Clear Input and Restore Receiver Focus
+        self.esc_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Escape), self)
+        self.esc_shortcut.activated.connect(self._handle_escape)
+
     def _init_ui(self) -> None:
         central_container = QWidget()
+        central_container.setObjectName("mainContainer")
+
         main_layout = QVBoxLayout(central_container)
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
-        # REMOVED THIS SESSION: the old 32px "Desktop OS Header Bar" that
-        # duplicated the window title text ("The Gold Panicles — Attendance
-        # System (Desktop Terminal v2.4)") as a second, redundant on-screen
-        # label above the real brand header. The brand header below already
-        # carries full brand identity.
-
-        # Brand Title Bar & Header Actions
+        # Masthead Header Bar (64px standard height)
         header = QFrame()
-        header.setFixedHeight(54)
+        header.setFixedHeight(64)
         header.setObjectName(ObjectNames.MAIN_HEADER_FRAME)
+
         header_layout = QHBoxLayout(header)
-        header_layout.setContentsMargins(16, 0, 16, 0)
-        header_layout.setSpacing(12)
+        header_layout.setContentsMargins(Spacing.MD, 0, Spacing.MD, 0)
+        header_layout.setSpacing(Spacing.MD)
 
         if self._logo_path.exists():
             lbl_logo = QLabel()
             pix = QPixmap(str(self._logo_path)).scaled(
-                32, 32, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
+                34, 34, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
             )
             lbl_logo.setPixmap(pix)
-            header_layout.addWidget(lbl_logo)
+            lbl_logo.setStyleSheet("background: transparent; border: none;")
+            header_layout.addWidget(lbl_logo, alignment=Qt.AlignmentFlag.AlignVCenter)
 
         title_box = QVBoxLayout()
-        title_box.setSpacing(0)
+        title_box.setSpacing(1)
+        title_box.setContentsMargins(0, 8, 0, 8)
 
         lbl_title = QLabel("THE GOLD PANICLES")
         lbl_title.setObjectName(ObjectNames.BRAND_TITLE)
@@ -114,27 +117,27 @@ class MainWindow(QMainWindow):
 
         header_layout.addStretch()
 
+        # Live Clock Display
         self.lbl_clock = QLabel("")
         self.lbl_clock.setObjectName(ObjectNames.LIVE_CLOCK)
-        header_layout.addWidget(self.lbl_clock)
+        self.lbl_clock.setFixedHeight(36)
+        self.lbl_clock.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        header_layout.addWidget(self.lbl_clock, alignment=Qt.AlignmentFlag.AlignVCenter)
 
-        btn_admin = QPushButton("Admin Console")
+        # Admin Auth Trigger
+        btn_admin = QPushButton(" Admin Console")
         btn_admin.setObjectName(ObjectNames.BTN_CHROME)
+        btn_admin.setFixedHeight(36)
         btn_admin.setCursor(Qt.CursorShape.PointingHandCursor)
-        btn_admin.setIcon(IconHelper.get_icon("shield", color=Colors.TEXT_PRIMARY, size=16))
-        btn_admin.setIconSize(QSize(16, 16))
+        btn_admin.setIcon(IconHelper.get_icon("shield", color=Colors.ACCENT_GOLD, size=15))
+        btn_admin.setIconSize(QSize(15, 15))
         btn_admin.clicked.connect(self._open_admin_console)
         attach_press_feedback(btn_admin)
-        header_layout.addWidget(btn_admin)
-
-        # REMOVED THIS SESSION: the header "Exit" button. Quitting is still
-        # fully gated behind ShutdownAuthDialog via closeEvent() below --
-        # reachable via the window manager's close control or Alt+F4 -- this
-        # only removes the redundant always-visible in-app button.
+        header_layout.addWidget(btn_admin, alignment=Qt.AlignmentFlag.AlignVCenter)
 
         main_layout.addWidget(header)
 
-        # Workstation Area
+        # Primary Kiosk Workstation Viewport
         self.station_view = StationView(self.db_manager, parent=self)
         main_layout.addWidget(self.station_view, stretch=1)
 
@@ -144,16 +147,30 @@ class MainWindow(QMainWindow):
         if hasattr(self, "station_view") and hasattr(self.station_view, "focus_hardware_input"):
             self.station_view.focus_hardware_input()
 
+    def _trigger_refresh(self) -> None:
+        if hasattr(self, "station_view"):
+            if hasattr(self.station_view, "force_refresh"):
+                self.station_view.force_refresh()
+            elif hasattr(self.station_view, "refresh_board"):
+                self.station_view.refresh_board()
+
+    def _handle_escape(self) -> None:
+        if hasattr(self, "station_view"):
+            if hasattr(self.station_view, "hardware_input"):
+                self.station_view.hardware_input.clear()
+            if hasattr(self.station_view, "focus_hardware_input"):
+                self.station_view.focus_hardware_input()
+
     def _toggle_fullscreen(self) -> None:
         if self.isFullScreen():
             self.showNormal()
         else:
             self.showFullScreen()
-        QTimer.singleShot(0, self._trigger_manual_entry)
+        QTimer.singleShot(50, self._trigger_manual_entry)
 
     def _update_clock(self) -> None:
         pht_now = datetime.now(PHT_TIMEZONE)
-        self.lbl_clock.setText(pht_now.strftime("%b %d, %Y  •  %I:%M:%S %p PHT"))
+        self.lbl_clock.setText(pht_now.strftime("%b %d, %Y  •  %I:%M:%S %p PHT").upper())
 
     def _open_admin_console(self) -> None:
         if self.dashboard is not None:
@@ -172,8 +189,9 @@ class MainWindow(QMainWindow):
             )
             self.dashboard.show()
 
-        self.station_view.refresh_board()
-        self.station_view.focus_hardware_input()
+        if hasattr(self, "station_view"):
+            self.station_view.refresh_board()
+            self.station_view.focus_hardware_input()
 
     def closeEvent(self, event) -> None:
         dialog = ShutdownAuthDialog(self.db_manager, parent=self)

@@ -1,4 +1,4 @@
-"""Main Kiosk Station View — Parity build matching HTML v2.4 layout matrix."""
+""""Main Front-Desk Kiosk Station View — Hardware QR Scanner Receiver & Log Dashboard."""
 
 import csv
 import logging
@@ -7,18 +7,16 @@ from contextlib import contextmanager
 from datetime import datetime
 from typing import Optional
 
-from PySide6.QtCore import QDate, QEasingCurve, QEvent, QPropertyAnimation, QSize, QTimer, Qt
+from PySide6.QtCore import QDate, QEvent, QSize, QTimer, Qt
 from PySide6.QtGui import QColor, QCursor
 from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
     QFileDialog,
     QFrame,
-    QGraphicsOpacityEffect,
     QHBoxLayout,
     QLabel,
     QLineEdit,
-    QMessageBox,
     QPushButton,
     QVBoxLayout,
     QWidget,
@@ -30,32 +28,32 @@ from src.ui.components.animations import attach_press_feedback
 from src.ui.components.attendance_board import AttendanceBoardWidget
 from src.ui.components.modals import GuestVisitorNameDialog
 from src.ui.components.toast import show_toast
-from src.ui.theme import Colors, ObjectNames, Spacing
+from src.ui.theme import Colors, ObjectNames, Radius, Spacing, Typography
 from src.ui.widgets.gold_calendar import GoldCalendar
 from src.ui.widgets.pill_widget import PillWidget
 from src.utils.icon_helper import IconHelper
-from src.utils.time_utils import PHT_TIMEZONE
+from src.utils.time_utils import PHT_TIMEZONE, format_iso_to_pht
 
 logger = logging.getLogger(__name__)
 
 QR_SCAN_DEBOUNCE_SECONDS = 2.0
 BOARD_AUTO_REFRESH_MS = 30_000
 FOCUS_GUARD_INTERVAL_MS = 250
-EDGE_GLOW_DURATION_MS = 300
+EDGE_GLOW_DURATION_MS = 400
 
 STATUS_FILTERS = [
     ("All", "ALL", "list"),
-    ("Active Duty", "OPEN", "user-check"),
+    ("Active Duty (IN)", "IN", "user-check"),
     ("Overdue", "OVERDUE", "alert-triangle"),
-    ("Completed", "COMPLETED", "check-circle"),
+    ("Completed (OUT)", "OUT", "check-circle"),
 ]
 
-_VERIFY_ICON_DEFAULT = "scan-line"
+_VERIFY_ICON_DEFAULT = "qr-code"
 _FOCUS_GUARD_RELEASE_DELAY_MS = 150
 
 
 class StationView(QWidget):
-    """Main front-desk attendance station view with 2-panel architecture."""
+    """Main front-desk attendance station view with dual-column layout."""
 
     def __init__(self, db_manager: DatabaseConnectionManager, parent=None):
         super().__init__(parent)
@@ -67,14 +65,13 @@ class StationView(QWidget):
         self._dates_with_records: Optional[set] = None
 
         self._last_full_feed: list = []
+        self._last_filtered_feed: list = []
         self._current_status_filter: str = "ALL"
 
         self._last_scanned_payload = None
         self._last_scan_timestamp = None
         self._active_toast = None
 
-        # Guards against the hardware-input refocus timer stealing focus
-        # away from a button mid-click (see _install_focus_guard_exemptions).
         self._focus_guard_suspended = False
         self._focus_guard_exempt_widgets: set = set()
 
@@ -92,30 +89,31 @@ class StationView(QWidget):
         self.focus_hardware_input()
 
     def _init_ui(self) -> None:
-        layout = QHBoxLayout(self)
-        layout.setContentsMargins(Spacing.MD, Spacing.MD, Spacing.MD, Spacing.MD)
-        layout.setSpacing(Spacing.MD)
+        main_layout = QVBoxLayout(self)
+        main_layout.setContentsMargins(Spacing.MD, Spacing.MD, Spacing.MD, Spacing.MD)
+        main_layout.setSpacing(Spacing.MD)
 
-        # 70% Left Section (Column 8) / 30% Right Sidebar (Column 4)
-        layout.addWidget(self._build_main_column(), 70)
-        layout.addWidget(self._build_sidebar(), 30)
+        cols_layout = QHBoxLayout()
+        cols_layout.setSpacing(Spacing.MD)
 
-        # Scan Flash Edge Feedback Overlay
+        cols_layout.addWidget(self._build_main_column(), 70)
+        cols_layout.addWidget(self._build_sidebar(), 30)
+
+        main_layout.addLayout(cols_layout, stretch=1)
+
         self._edge_glow_overlay = QFrame(self)
         self._edge_glow_overlay.setObjectName("edgeGlowOverlay")
         self._edge_glow_overlay.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents)
         self._edge_glow_overlay.setStyleSheet(
             "QFrame#edgeGlowOverlay { background-color: transparent; border: none; }"
         )
-        self._edge_glow_effect = QGraphicsOpacityEffect(self._edge_glow_overlay)
-        self._edge_glow_effect.setOpacity(0.0)
-        self._edge_glow_overlay.setGraphicsEffect(self._edge_glow_effect)
-        self._edge_glow_anim = QPropertyAnimation(self._edge_glow_effect, b"opacity", self)
         self._edge_glow_overlay.setGeometry(self.rect())
-        self._edge_glow_overlay.show()
-        self._edge_glow_overlay.raise_()
+        self._edge_glow_overlay.hide()
 
-        # Must run last, after every button in the view tree exists.
+        self._edge_glow_timer = QTimer(self)
+        self._edge_glow_timer.setSingleShot(True)
+        self._edge_glow_timer.timeout.connect(self._edge_glow_overlay.hide)
+
         self._install_focus_guard_exemptions()
 
     def resizeEvent(self, event) -> None:
@@ -128,29 +126,28 @@ class StationView(QWidget):
         title: Optional[str] = None,
         decorative: bool = False,
         accent_color: Optional[str] = None,
+        object_name: Optional[str] = None,
     ) -> QFrame:
         card = QFrame()
-        if decorative:
-            # The asymmetric "Super Graphic" brand treatment is intentionally
-            # reserved for low-density, mostly-idle surfaces (the calendar,
-            # the last-scan-result panel) instead of every card -- on dense
-            #/functional surfaces (the table, the input row, the metric
-            # tiles) it competed with real content rather than enhancing it.
-            card.setObjectName(ObjectNames.CARD_SUPER)
-        else:
-            border_left = f"border-left: 3px solid {accent_color};" if accent_color else ""
-            card.setStyleSheet(
-                "QFrame { background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; "
-                f"border-radius: 6px; {border_left} }}"
-            )
+        card_id = object_name or (ObjectNames.CARD_SUPER if decorative else "stationCard")
+        card.setObjectName(card_id)
+
+        border_left = f"border-left: 3px solid {accent_color};" if accent_color else ""
+        card.setStyleSheet(
+            f"QFrame#{card_id} {{ "
+            f"background-color: {Colors.SURFACE}; border: 1px solid {Colors.BORDER}; "
+            f"border-radius: {Radius.CARD}px; {border_left} }}"
+        )
+
         layout = QVBoxLayout(card)
         layout.setContentsMargins(Spacing.MD, Spacing.MD, Spacing.MD, Spacing.MD)
         layout.setSpacing(Spacing.XS)
+
         if title:
             lbl = QLabel(title.upper())
             lbl.setStyleSheet(
                 f"color: {Colors.TEXT_PRIMARY}; font-weight: 800; font-size: 10px; "
-                "letter-spacing: 0.5px; background: transparent;"
+                "letter-spacing: 0.6px; background: transparent; border: none;"
             )
             layout.addWidget(lbl)
         return card
@@ -159,8 +156,8 @@ class StationView(QWidget):
     def _icon_button_style() -> str:
         return (
             f"QPushButton {{ background-color: {Colors.SURFACE_ALT}; border: 1px solid {Colors.BORDER}; "
-            "border-radius: 4px; padding: 0px; }} "
-            f"QPushButton:hover {{ border-color: {Colors.ACCENT_DARK}; background-color: {Colors.SURFACE}; }}"
+            f"border-radius: {Radius.BUTTON}px; padding: 0px; }} "
+            f"QPushButton:hover {{ border-color: {Colors.ACCENT_GOLD}; background-color: {Colors.SURFACE}; }}"
             f"QPushButton:disabled {{ border-color: {Colors.BORDER}; color: {Colors.TEXT_MUTED}; }}"
         )
 
@@ -169,34 +166,24 @@ class StationView(QWidget):
         wrap = QWidget()
         row = QHBoxLayout(wrap)
         row.setContentsMargins(0, 0, 0, 0)
-        row.setSpacing(4)
+        row.setSpacing(Spacing.XS)
+
         if icon_name:
             icon_lbl = QLabel()
-            icon_lbl.setPixmap(IconHelper.get_pixmap(icon_name, color=Colors.TEXT_MUTED, size=11))
-            icon_lbl.setStyleSheet("background: transparent;")
-            row.addWidget(icon_lbl)
+            icon_lbl.setPixmap(IconHelper.get_pixmap(icon_name, color=Colors.TEXT_MUTED, size=12))
+            icon_lbl.setStyleSheet("background: transparent; border: none;")
+            row.addWidget(icon_lbl, alignment=Qt.AlignmentFlag.AlignVCenter)
+
         lbl = QLabel(text.upper())
         lbl.setStyleSheet(
-            f"color: {Colors.TEXT_MUTED}; font-weight: 800; font-size: 9px; "
-            "letter-spacing: 1px; background: transparent;"
+            f"color: {Colors.TEXT_MUTED}; font-weight: 800; font-size: 10px; "
+            f"letter-spacing: 1px; font-family: {Typography.MONO_FAMILY}; background: transparent; border: none;"
         )
-        row.addWidget(lbl)
+        row.addWidget(lbl, alignment=Qt.AlignmentFlag.AlignVCenter)
         row.addStretch()
         return wrap
 
-    # ------------------------------------------------------------------
-    # Focus-guard hover/click exemption
-    # ------------------------------------------------------------------
-
     def _install_focus_guard_exemptions(self) -> None:
-        """Prevent the periodic hardware-input refocus guard from stealing
-        focus away from a button while the user is hovering/clicking it.
-
-        Root cause of the 'need to double-click buttons' bug: the guard
-        timer fires every FOCUS_GUARD_INTERVAL_MS regardless of what the
-        user is doing, and could reclaim focus mid-click, cancelling the
-        press/release sequence on whatever button was being pressed.
-        """
         for btn in self.findChildren(QPushButton):
             btn.installEventFilter(self)
             self._focus_guard_exempt_widgets.add(btn)
@@ -215,53 +202,29 @@ class StationView(QWidget):
         if widget_under_cursor not in self._focus_guard_exempt_widgets:
             self._focus_guard_suspended = False
 
-    # ------------------------------------------------------------------
-    # Left Main Section (Log Stream & Receiver)
-    # ------------------------------------------------------------------
-
     def _build_main_column(self) -> QWidget:
         col = QWidget()
         layout = QVBoxLayout(col)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(Spacing.MD)
 
-        # Hardware Scanner Receiver Bar
         layout.addWidget(self._build_receiver_card())
 
-        # Log Table Container
         table_container = self._make_super_card(None)
         table_layout = table_container.layout()
-
-        table_layout.addWidget(self._eyebrow_label("Attendance Log", icon_name="list"))
-
-        # Toolbar & Filters Row
+        table_layout.addWidget(self._eyebrow_label("Attendance Activity Log", icon_name="list"))
         table_layout.addWidget(self._build_search_filter_row())
 
-        # Attendance Table
         self.board_widget = AttendanceBoardWidget()
         table_layout.addWidget(self.board_widget, stretch=1)
 
-        # Table Footer Summary
         footer_row = QHBoxLayout()
-
         self.lbl_record_count = QLabel("Showing: 0 entries")
-        self.lbl_record_count.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-family: monospace; font-size: 10px;")
-        footer_row.addWidget(self.lbl_record_count)
-        footer_row.addSpacing(12)
-
-        sync_box = QHBoxLayout()
-        sync_box.setSpacing(4)
-        sync_icon = QLabel()
-        sync_icon.setPixmap(IconHelper.get_pixmap("database", color=Colors.STATUS_OPEN, size=10))
-        sync_icon.setStyleSheet("background: transparent;")
-        sync_box.addWidget(sync_icon)
-        lbl_sync = QLabel("Database Synced")
-        lbl_sync.setStyleSheet(f"color: {Colors.STATUS_OPEN}; font-family: monospace; font-size: 10px;")
-        sync_box.addWidget(lbl_sync)
-        footer_row.addLayout(sync_box)
-
+        self.lbl_record_count.setStyleSheet(
+            f"color: {Colors.TEXT_MUTED}; font-family: {Typography.MONO_FAMILY}; font-size: 10px; background: transparent; border: none;"
+        )
+        footer_row.addWidget(self.lbl_record_count, alignment=Qt.AlignmentFlag.AlignVCenter)
         footer_row.addStretch()
-
         table_layout.addLayout(footer_row)
 
         layout.addWidget(table_container, stretch=1)
@@ -274,28 +237,9 @@ class StationView(QWidget):
         input_row = QHBoxLayout()
         input_row.setSpacing(Spacing.SM)
 
-        ready_frame = QFrame()
-        ready_frame.setStyleSheet(
-            f"background-color: {Colors.SURFACE_ALT}; border: 1px solid {Colors.BORDER}; border-radius: 4px;"
-        )
-        ready_layout = QHBoxLayout(ready_frame)
-        ready_layout.setContentsMargins(10, 6, 10, 6)
-        ready_layout.setSpacing(6)
-
-        ready_icon = QLabel()
-        ready_icon.setPixmap(IconHelper.get_pixmap("zap", color=Colors.STATUS_OPEN, size=12))
-        ready_icon.setStyleSheet("background: transparent;")
-        ready_layout.addWidget(ready_icon)
-
-        lbl_ready = QLabel("READY")
-        lbl_ready.setStyleSheet(
-            f"color: {Colors.STATUS_OPEN}; font-weight: 800; font-size: 10px; font-family: monospace; background: transparent;"
-        )
-        ready_layout.addWidget(lbl_ready)
-        input_row.addWidget(ready_frame)
-
         self.hardware_input = QLineEdit()
         self.hardware_input.setObjectName(ObjectNames.GP_SUPER_INPUT)
+        self.hardware_input.setFixedHeight(40)
         self.hardware_input.setPlaceholderText("Scan QR code or type ID number (e.g. 261-00105)...")
         self.hardware_input.addAction(
             IconHelper.get_icon("qr-code", color=Colors.ACCENT_GOLD, size=16),
@@ -304,10 +248,11 @@ class StationView(QWidget):
         self.hardware_input.returnPressed.connect(self._submit_hardware_input)
         input_row.addWidget(self.hardware_input, stretch=1)
 
-        btn_scan = QPushButton("Scan ID")
-        btn_scan.setObjectName("btn_primary")
+        btn_scan = QPushButton(" Submit ID")
+        btn_scan.setObjectName(ObjectNames.BTN_PRIMARY)
+        btn_scan.setFixedHeight(40)
         btn_scan.setCursor(Qt.CursorShape.PointingHandCursor)
-        btn_scan.setIcon(IconHelper.get_icon("qr-code", color="#FBFBFE", size=16))
+        btn_scan.setIcon(IconHelper.get_icon("qr-code", color=Colors.BACKGROUND, size=16))
         btn_scan.setIconSize(QSize(16, 16))
         btn_scan.clicked.connect(self._submit_hardware_input)
         attach_press_feedback(btn_scan)
@@ -331,32 +276,34 @@ class StationView(QWidget):
                 btn.setChecked(True)
             btn.clicked.connect(lambda _checked, key=status_key: self._set_status_filter(key))
             self._filter_button_group.addButton(btn)
-            row.addWidget(btn)
+            row.addWidget(btn, alignment=Qt.AlignmentFlag.AlignVCenter)
 
         row.addStretch()
 
         self.search_input = QLineEdit()
         self.search_input.setObjectName(ObjectNames.SEARCH_INPUT)
+        self.search_input.setFixedHeight(32)
         self.search_input.setPlaceholderText("Search logs...")
-        self.search_input.setFixedWidth(170)
+        self.search_input.setFixedWidth(220)
         self.search_input.addAction(
             IconHelper.get_icon("search", color=Colors.TEXT_MUTED, size=14),
             QLineEdit.ActionPosition.LeadingPosition,
         )
         self.search_input.textChanged.connect(self._apply_board_filters)
-        row.addWidget(self.search_input)
+        row.addWidget(self.search_input, alignment=Qt.AlignmentFlag.AlignVCenter)
 
         return row_widget
 
     def _make_filter_button(self, label: str, status_key: str, icon_name: str) -> QPushButton:
         btn = QPushButton(label)
         btn.setObjectName(ObjectNames.FILTER_PILL)
+        btn.setFixedHeight(32)
         btn.setCheckable(True)
         btn.setCursor(Qt.CursorShape.PointingHandCursor)
         btn.setIconSize(QSize(13, 13))
 
         icon_unchecked = IconHelper.get_icon(icon_name, color=Colors.TEXT_SECONDARY, size=13)
-        icon_checked = IconHelper.get_icon(icon_name, color="#FBFBFE", size=13)
+        icon_checked = IconHelper.get_icon(icon_name, color=Colors.BACKGROUND, size=13)
         btn.setIcon(icon_unchecked)
 
         def _sync_icon(checked: bool, _u=icon_unchecked, _c=icon_checked, _b=btn) -> None:
@@ -372,10 +319,6 @@ class StationView(QWidget):
         self._current_status_filter = status_key
         self._apply_board_filters()
 
-    # ------------------------------------------------------------------
-    # Right Sidebar Area
-    # ------------------------------------------------------------------
-
     def _build_sidebar(self) -> QWidget:
         col = QWidget()
         layout = QVBoxLayout(col)
@@ -389,50 +332,73 @@ class StationView(QWidget):
         return col
 
     def _build_verification_card(self) -> QFrame:
-        card = self._make_super_card("Last Scan Result", decorative=True)
-        card.setObjectName(ObjectNames.VERIFICATION_CARD)
+        card = self._make_super_card("Last Scan Verification", decorative=True, object_name=ObjectNames.VERIFICATION_CARD)
         layout = card.layout()
 
         self.lbl_verify_icon = QLabel()
         self.lbl_verify_icon.setFixedSize(20, 20)
-        self.lbl_verify_icon.setStyleSheet("background: transparent;")
+        self.lbl_verify_icon.setStyleSheet("background: transparent; border: none;")
 
         self.lbl_verify_name = QLabel("Awaiting Scan")
-        self.lbl_verify_name.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-size: 14px; font-weight: 800;")
+        self.lbl_verify_name.setStyleSheet(
+            f"color: {Colors.TEXT_PRIMARY}; font-size: 13px; font-weight: 800; background: transparent; border: none;"
+        )
 
         self.lbl_verify_id = QLabel("—")
-        self.lbl_verify_id.setStyleSheet(f"color: {Colors.ACCENT_DARK}; font-family: monospace; font-size: 10px; font-weight: 700;")
+        self.lbl_verify_id.setStyleSheet(
+            f"color: {Colors.ACCENT_GOLD}; font-family: {Typography.MONO_FAMILY}; font-size: 11px; font-weight: 700; background: transparent; border: none;"
+        )
 
         header_row = QHBoxLayout()
-        header_row.setSpacing(8)
-        header_row.addWidget(self.lbl_verify_icon)
-        header_row.addWidget(self.lbl_verify_name)
+        header_row.setSpacing(Spacing.XS)
+        header_row.addWidget(self.lbl_verify_icon, alignment=Qt.AlignmentFlag.AlignVCenter)
+        header_row.addWidget(self.lbl_verify_name, alignment=Qt.AlignmentFlag.AlignVCenter)
         header_row.addStretch()
-        header_row.addWidget(self.lbl_verify_id)
+        header_row.addWidget(self.lbl_verify_id, alignment=Qt.AlignmentFlag.AlignVCenter)
         layout.addLayout(header_row)
 
         self.lbl_verify_designation = QLabel("Scan QR code to log attendance")
         self.lbl_verify_designation.setObjectName(ObjectNames.TEXT_SECONDARY)
+        self.lbl_verify_designation.setStyleSheet(
+            f"color: {Colors.TEXT_SECONDARY}; font-size: 11px; background: transparent; border: none;"
+        )
         layout.addWidget(self.lbl_verify_designation)
 
         time_box = QFrame()
-        time_box.setStyleSheet(f"background-color: {Colors.SURFACE_ALT}; border: 1px solid {Colors.BORDER}; border-radius: 4px;")
+        time_box.setObjectName("verifyTimeBox")
+        time_box.setStyleSheet(
+            f"QFrame#verifyTimeBox {{ background-color: {Colors.SURFACE_ALT}; border: 1px solid {Colors.BORDER}; border-radius: {Radius.BUTTON}px; }}"
+        )
         tb_layout = QHBoxLayout(time_box)
-        tb_layout.setContentsMargins(8, 6, 8, 6)
+        tb_layout.setContentsMargins(Spacing.SM, Spacing.XS, Spacing.SM, Spacing.XS)
 
         v_in = QVBoxLayout()
+        v_in.setSpacing(2)
         lbl_in_t = QLabel("TIME IN")
-        lbl_in_t.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 8px; font-family: monospace;")
+        lbl_in_t.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        lbl_in_t.setStyleSheet(
+            f"color: {Colors.TEXT_MUTED}; font-size: 10px; font-family: {Typography.MONO_FAMILY}; font-weight: 700; background: transparent; border: none;"
+        )
         self.lbl_verify_time_in = QLabel("--:--:--")
-        self.lbl_verify_time_in.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-size: 10px; font-weight: 700; font-family: monospace;")
+        self.lbl_verify_time_in.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.lbl_verify_time_in.setStyleSheet(
+            f"color: {Colors.TEXT_PRIMARY}; font-size: 11px; font-weight: 700; font-family: {Typography.MONO_FAMILY}; background: transparent; border: none;"
+        )
         v_in.addWidget(lbl_in_t)
         v_in.addWidget(self.lbl_verify_time_in)
 
         v_out = QVBoxLayout()
+        v_out.setSpacing(2)
         lbl_out_t = QLabel("TIME OUT")
-        lbl_out_t.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 8px; font-family: monospace;")
+        lbl_out_t.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        lbl_out_t.setStyleSheet(
+            f"color: {Colors.TEXT_MUTED}; font-size: 10px; font-family: {Typography.MONO_FAMILY}; font-weight: 700; background: transparent; border: none;"
+        )
         self.lbl_verify_time_out = QLabel("--:--:--")
-        self.lbl_verify_time_out.setStyleSheet(f"color: {Colors.TEXT_PRIMARY}; font-size: 10px; font-weight: 700; font-family: monospace;")
+        self.lbl_verify_time_out.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.lbl_verify_time_out.setStyleSheet(
+            f"color: {Colors.TEXT_PRIMARY}; font-size: 11px; font-weight: 700; font-family: {Typography.MONO_FAMILY}; background: transparent; border: none;"
+        )
         v_out.addWidget(lbl_out_t)
         v_out.addWidget(self.lbl_verify_time_out)
 
@@ -444,8 +410,9 @@ class StationView(QWidget):
             text="READY",
             bg_color=QColor(Colors.CHIP_NEUTRAL_BG),
             text_color=QColor(Colors.TEXT_MUTED),
+            fixed_size=QSize(100, 24),
         )
-        layout.addWidget(self.verify_status_pill)
+        layout.addWidget(self.verify_status_pill, alignment=Qt.AlignmentFlag.AlignCenter)
 
         self._reset_verification_card()
         return card
@@ -487,122 +454,160 @@ class StationView(QWidget):
 
     @staticmethod
     def _verification_status_style(status_key: str):
-        if status_key == "OPEN":
-            return QColor(Colors.STATUS_OPEN_BG), QColor(Colors.STATUS_OPEN), QColor(Colors.STATUS_OPEN_BORDER)
-        if status_key == "COMPLETED":
-            return QColor(Colors.STATUS_COMPLETED_BG), QColor(Colors.STATUS_COMPLETED), QColor(Colors.STATUS_COMPLETED_BORDER)
+        if status_key in ("IN", "OPEN"):
+            return QColor(Colors.STATUS_IN_BG), QColor(Colors.STATUS_IN), None
+        if status_key in ("OUT", "COMPLETED"):
+            return QColor(Colors.STATUS_OUT_BG), QColor(Colors.STATUS_OUT), None
         return QColor(Colors.CHIP_NEUTRAL_BG), QColor(Colors.TEXT_PRIMARY), None
 
-    def _build_summary_metrics_card(self) -> QWidget:
-        row = QHBoxLayout()
-        row.setSpacing(Spacing.SM)
-
-        self.lbl_gauge_total = self._build_metric_tile(row, "Total", Colors.TEXT_PRIMARY, "layers", Colors.ACCENT_DARK)
-        self.lbl_gauge_duty = self._build_metric_tile(row, "Duty", Colors.STATUS_COMPLETED, "briefcase", Colors.STATUS_COMPLETED)
-        self.lbl_gauge_visitors = self._build_metric_tile(row, "Visitors", Colors.STATUS_OPEN, "users", Colors.STATUS_OPEN)
-
-        container = QWidget()
-        container.setLayout(row)
-        return container
-
-    def _build_metric_tile(
-        self, parent_layout: QHBoxLayout, title: str, text_color: str, icon_name: str, accent_color: str
-    ) -> QLabel:
-        card = self._make_super_card(None, accent_color=accent_color)
+    def _build_summary_metrics_card(self) -> QFrame:
+        """Segmented KPI Metrics Banner Card."""
+        card = self._make_super_card(None, decorative=True, object_name="metricsCard")
         layout = card.layout()
 
-        title_row = QHBoxLayout()
-        title_row.setSpacing(4)
-        icon_lbl = QLabel()
-        icon_lbl.setPixmap(IconHelper.get_pixmap(icon_name, color=Colors.TEXT_MUTED, size=10))
-        icon_lbl.setStyleSheet("background: transparent;")
-        title_row.addWidget(icon_lbl)
+        layout.addWidget(self._eyebrow_label("Desk Metrics Summary", icon_name="layers"))
 
-        lbl_t = QLabel(title.upper())
-        lbl_t.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 8px; font-family: monospace;")
-        title_row.addWidget(lbl_t)
-        title_row.addStretch()
+        banner_box = QFrame()
+        banner_box.setObjectName("metricsBannerBox")
+        banner_box.setStyleSheet(
+            f"QFrame#metricsBannerBox {{ background-color: {Colors.SURFACE_ALT}; border: 1px solid {Colors.BORDER}; border-radius: {Radius.BUTTON}px; }}"
+        )
+        b_layout = QHBoxLayout(banner_box)
+        b_layout.setContentsMargins(Spacing.XS, Spacing.SM, Spacing.XS, Spacing.SM)
+        b_layout.setSpacing(0)
 
-        val_lbl = QLabel("0")
-        val_lbl.setStyleSheet(f"color: {text_color}; font-size: 16px; font-weight: 800; font-family: monospace;")
+        # 1. Total Segment
+        v_tot = QVBoxLayout()
+        v_tot.setSpacing(1)
+        lbl_tot = QLabel("TOTAL")
+        lbl_tot.setStyleSheet(
+            f"color: {Colors.TEXT_MUTED}; font-size: 10px; font-family: {Typography.MONO_FAMILY}; font-weight: 700; background: transparent; border: none;"
+        )
+        self.lbl_gauge_total = QLabel("0")
+        self.lbl_gauge_total.setStyleSheet(
+            f"color: {Colors.ACCENT_GOLD}; font-size: 18px; font-weight: 800; font-family: {Typography.MONO_FAMILY}; background: transparent; border: none;"
+        )
+        lbl_tot_sub = QLabel("Logs Today")
+        lbl_tot_sub.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 10px; background: transparent; border: none;")
+        v_tot.addWidget(lbl_tot, alignment=Qt.AlignmentFlag.AlignCenter)
+        v_tot.addWidget(self.lbl_gauge_total, alignment=Qt.AlignmentFlag.AlignCenter)
+        v_tot.addWidget(lbl_tot_sub, alignment=Qt.AlignmentFlag.AlignCenter)
+        b_layout.addLayout(v_tot, stretch=1)
 
-        layout.addLayout(title_row)
-        layout.addWidget(val_lbl)
-        parent_layout.addWidget(card)
-        return val_lbl
+        # Divider 1
+        div1 = QFrame()
+        div1.setFrameShape(QFrame.Shape.VLine)
+        div1.setStyleSheet(f"background-color: {Colors.BORDER}; max-width: 1px; border: none; margin: 0px {Spacing.XS}px;")
+        b_layout.addWidget(div1)
+
+        # 2. On Duty Segment
+        v_duty = QVBoxLayout()
+        v_duty.setSpacing(1)
+        lbl_duty = QLabel("ON DUTY")
+        lbl_duty.setStyleSheet(
+            f"color: {Colors.TEXT_MUTED}; font-size: 10px; font-family: {Typography.MONO_FAMILY}; font-weight: 700; background: transparent; border: none;"
+        )
+        self.lbl_gauge_duty = QLabel("0")
+        self.lbl_gauge_duty.setStyleSheet(
+            f"color: {Colors.STATUS_IN}; font-size: 18px; font-weight: 800; font-family: {Typography.MONO_FAMILY}; background: transparent; border: none;"
+        )
+        lbl_duty_sub = QLabel("Active Staff")
+        lbl_duty_sub.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 10px; background: transparent; border: none;")
+        v_duty.addWidget(lbl_duty, alignment=Qt.AlignmentFlag.AlignCenter)
+        v_duty.addWidget(self.lbl_gauge_duty, alignment=Qt.AlignmentFlag.AlignCenter)
+        v_duty.addWidget(lbl_duty_sub, alignment=Qt.AlignmentFlag.AlignCenter)
+        b_layout.addLayout(v_duty, stretch=1)
+
+        # Divider 2
+        div2 = QFrame()
+        div2.setFrameShape(QFrame.Shape.VLine)
+        div2.setStyleSheet(f"background-color: {Colors.BORDER}; max-width: 1px; border: none; margin: 0px {Spacing.XS}px;")
+        b_layout.addWidget(div2)
+
+        # 3. Visitors Segment
+        v_vis = QVBoxLayout()
+        v_vis.setSpacing(1)
+        lbl_vis = QLabel("VISITORS")
+        lbl_vis.setStyleSheet(
+            f"color: {Colors.TEXT_MUTED}; font-size: 10px; font-family: {Typography.MONO_FAMILY}; font-weight: 700; background: transparent; border: none;"
+        )
+        self.lbl_gauge_visitors = QLabel("0")
+        self.lbl_gauge_visitors.setStyleSheet(
+            f"color: {Colors.PURPOSE_VISIT}; font-size: 18px; font-weight: 800; font-family: {Typography.MONO_FAMILY}; background: transparent; border: none;"
+        )
+        lbl_vis_sub = QLabel("Guest Visits")
+        lbl_vis_sub.setStyleSheet(f"color: {Colors.TEXT_MUTED}; font-size: 10px; background: transparent; border: none;")
+        v_vis.addWidget(lbl_vis, alignment=Qt.AlignmentFlag.AlignCenter)
+        v_vis.addWidget(self.lbl_gauge_visitors, alignment=Qt.AlignmentFlag.AlignCenter)
+        v_vis.addWidget(lbl_vis_sub, alignment=Qt.AlignmentFlag.AlignCenter)
+        b_layout.addLayout(v_vis, stretch=1)
+
+        layout.addWidget(banner_box)
+        return card
 
     def _flash_edge_glow(self, success: bool) -> None:
         color = Colors.ACCENT_GOLD if success else Colors.DANGER_SOLID
         self._edge_glow_overlay.setStyleSheet(
             f"QFrame#edgeGlowOverlay {{ background-color: transparent; border: 3px solid {color}; }}"
         )
-        self._edge_glow_anim.stop()
-        self._edge_glow_effect.setOpacity(0.0)
-        self._edge_glow_anim.setDuration(EDGE_GLOW_DURATION_MS)
-        self._edge_glow_anim.setKeyValueAt(0.0, 0.0)
-        self._edge_glow_anim.setKeyValueAt(0.5, 0.8)
-        self._edge_glow_anim.setKeyValueAt(1.0, 0.0)
-        self._edge_glow_anim.setEasingCurve(QEasingCurve.Type.OutCubic)
-        self._edge_glow_anim.start()
-
-    # ------------------------------------------------------------------
-    # Calendar
-    # ------------------------------------------------------------------
+        self._edge_glow_overlay.setGeometry(self.rect())
+        self._edge_glow_overlay.show()
+        self._edge_glow_overlay.raise_()
+        self._edge_glow_timer.start(EDGE_GLOW_DURATION_MS)
 
     def _build_calendar_card(self) -> QFrame:
-        card = self._make_super_card(None, decorative=True)
+        card = self._make_super_card(None, decorative=True, object_name="calendarCard")
         layout = card.layout()
 
-        layout.addWidget(self._eyebrow_label("Calendar", icon_name="calendar-check"))
+        layout.addWidget(self._eyebrow_label("Calendar Navigation", icon_name="calendar"))
 
         header_row = QHBoxLayout()
         header_row.setSpacing(Spacing.XS)
 
         self.btn_cal_prev = QPushButton()
-        self.btn_cal_prev.setFixedSize(28, 28)
+        self.btn_cal_prev.setFixedSize(32, 32)
         self.btn_cal_prev.setStyleSheet(self._icon_button_style())
         self.btn_cal_prev.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.btn_cal_prev.setIcon(IconHelper.get_icon("chevron-left", color=Colors.TEXT_PRIMARY, size=16))
-        self.btn_cal_prev.setIconSize(QSize(16, 16))
+        self.btn_cal_prev.setIcon(IconHelper.get_icon("chevron-left", color=Colors.TEXT_PRIMARY, size=14))
+        self.btn_cal_prev.setIconSize(QSize(14, 14))
         attach_press_feedback(self.btn_cal_prev)
 
         self.lbl_cal_title = QLabel("")
         self.lbl_cal_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lbl_cal_title.setStyleSheet(
-            f"color: {Colors.ACCENT_DARK}; font-weight: 800; font-size: 12px; letter-spacing: 0.6px; background: transparent;"
+            f"color: {Colors.ACCENT_GOLD}; font-weight: 800; font-size: 11px; letter-spacing: 0.6px; background: transparent; border: none;"
         )
 
         self.btn_cal_next = QPushButton()
-        self.btn_cal_next.setFixedSize(28, 28)
+        self.btn_cal_next.setFixedSize(32, 32)
         self.btn_cal_next.setStyleSheet(self._icon_button_style())
         self.btn_cal_next.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.btn_cal_next.setIcon(IconHelper.get_icon("chevron-right", color=Colors.TEXT_PRIMARY, size=16))
-        self.btn_cal_next.setIconSize(QSize(16, 16))
+        self.btn_cal_next.setIcon(IconHelper.get_icon("chevron-right", color=Colors.TEXT_PRIMARY, size=14))
+        self.btn_cal_next.setIconSize(QSize(14, 14))
         attach_press_feedback(self.btn_cal_next)
 
         self.btn_cal_today = QPushButton()
-        self.btn_cal_today.setFixedSize(28, 28)
+        self.btn_cal_today.setFixedSize(32, 32)
         self.btn_cal_today.setStyleSheet(self._icon_button_style())
         self.btn_cal_today.setCursor(Qt.CursorShape.PointingHandCursor)
         self.btn_cal_today.setToolTip("Jump to today")
-        self.btn_cal_today.setIcon(IconHelper.get_icon("calendar-check", color=Colors.ACCENT_GOLD, size=16))
-        self.btn_cal_today.setIconSize(QSize(16, 16))
+        self.btn_cal_today.setIcon(IconHelper.get_icon("calendar", color=Colors.ACCENT_GOLD, size=14))
+        self.btn_cal_today.setIconSize(QSize(14, 14))
         self.btn_cal_today.clicked.connect(self.jump_calendar_to_today)
         attach_press_feedback(self.btn_cal_today)
 
-        header_row.addWidget(self.btn_cal_prev)
-        header_row.addWidget(self.lbl_cal_title, stretch=1)
-        header_row.addWidget(self.btn_cal_next)
-        header_row.addWidget(self.btn_cal_today)
+        header_row.addWidget(self.btn_cal_prev, alignment=Qt.AlignmentFlag.AlignVCenter)
+        header_row.addWidget(self.lbl_cal_title, stretch=1, alignment=Qt.AlignmentFlag.AlignVCenter)
+        header_row.addWidget(self.btn_cal_next, alignment=Qt.AlignmentFlag.AlignVCenter)
+        header_row.addWidget(self.btn_cal_today, alignment=Qt.AlignmentFlag.AlignVCenter)
         layout.addLayout(header_row)
 
         self.calendar = GoldCalendar()
         self.calendar.dateSelected.connect(self._on_calendar_date_selected)
         self.calendar.pageChanged.connect(self._on_calendar_page_changed)
         self.calendar.canNavigateNextChanged.connect(self.btn_cal_next.setEnabled)
+        self.calendar.canNavigatePrevChanged.connect(self.btn_cal_prev.setEnabled)
 
-        # FIXED THIS SESSION: prev/next buttons previously had no .clicked
-        # connection at all -- month navigation was completely non-functional.
         self.btn_cal_prev.clicked.connect(self.calendar.go_previous_month)
         self.btn_cal_next.clicked.connect(self.calendar.go_next_month)
 
@@ -610,30 +615,27 @@ class StationView(QWidget):
         self.calendar.set_selected_date(QDate.currentDate())
         layout.addWidget(self.calendar, stretch=1)
 
-        # Live / viewing-past-date status strip with an explicit way back.
         status_row = QHBoxLayout()
         status_row.setSpacing(Spacing.XS)
 
-        # FIXED THIS SESSION: this was a plain QLabel with no background/
-        # padding/radius -- never actually rendered as a pill. Now reuses
-        # the same PillWidget component as the verification card's status.
         self.cal_status_pill = PillWidget(
-            text="LIVE",
-            bg_color=QColor(Colors.STATUS_OPEN_BG),
-            text_color=QColor(Colors.STATUS_OPEN),
+            text="LIVE — TODAY'S FEED",
+            bg_color=QColor(Colors.STATUS_IN_BG),
+            text_color=QColor(Colors.STATUS_IN),
+            fixed_size=QSize(140, 22),
         )
-        status_row.addWidget(self.cal_status_pill)
+        status_row.addWidget(self.cal_status_pill, alignment=Qt.AlignmentFlag.AlignVCenter)
         status_row.addStretch()
 
-        self.btn_return_to_live = QPushButton("Back to Live")
+        self.btn_return_to_live = QPushButton(" Back to Live")
         self.btn_return_to_live.setObjectName(ObjectNames.BTN_TONAL)
         self.btn_return_to_live.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.btn_return_to_live.setIcon(IconHelper.get_icon("rotate-ccw", color=Colors.ACCENT_GOLD_HOVER, size=14))
-        self.btn_return_to_live.setIconSize(QSize(14, 14))
+        self.btn_return_to_live.setIcon(IconHelper.get_icon("rotate-ccw", color=Colors.ACCENT_GOLD, size=12))
+        self.btn_return_to_live.setIconSize(QSize(12, 12))
         self.btn_return_to_live.clicked.connect(self._on_return_to_live_clicked)
         self.btn_return_to_live.hide()
         attach_press_feedback(self.btn_return_to_live)
-        status_row.addWidget(self.btn_return_to_live)
+        status_row.addWidget(self.btn_return_to_live, alignment=Qt.AlignmentFlag.AlignVCenter)
 
         layout.addLayout(status_row)
 
@@ -650,7 +652,7 @@ class StationView(QWidget):
     def _update_calendar_status_strip(self) -> None:
         if self._viewing_date is None:
             self.cal_status_pill.set_colors(
-                QColor(Colors.STATUS_OPEN_BG), QColor(Colors.STATUS_OPEN), QColor(Colors.STATUS_OPEN_BORDER)
+                QColor(Colors.STATUS_IN_BG), QColor(Colors.STATUS_IN), None
             )
             self.cal_status_pill.set_text("LIVE — TODAY'S FEED")
             self.btn_return_to_live.hide()
@@ -662,10 +664,6 @@ class StationView(QWidget):
     def _on_return_to_live_clicked(self) -> None:
         self._return_to_live()
         self.refresh_board()
-
-    # ------------------------------------------------------------------
-    # Board Refresh & Calendar Filtering Logic
-    # ------------------------------------------------------------------
 
     def refresh_board(self) -> None:
         stats = self.attendance_service.get_quick_stats()
@@ -691,9 +689,9 @@ class StationView(QWidget):
         self._show_toast("Board refreshed.", kind="info", duration_ms=1500)
 
     def export_attendance_csv(self) -> None:
-        rows = self._last_full_feed
+        rows = self._last_filtered_feed
         if not rows:
-            self._show_toast("Nothing to export — the board is currently empty.", kind="info")
+            self._show_toast("Nothing to export — no rows match the current view.", kind="info")
             return
 
         default_name = f"gp_attendance_{datetime.now(PHT_TIMEZONE).strftime('%Y-%m-%d_%H%M%S')}.csv"
@@ -709,15 +707,12 @@ class StationView(QWidget):
                 writer.writeheader()
                 for item in rows:
                     writer.writerow({k: item.get(k, "") for k in fieldnames})
-            self._show_toast(f"Exported {len(rows)} record(s).", kind="success")
+            filter_note = "" if self._current_status_filter == "ALL" and not self.search_input.text().strip() else " (filtered view)"
+            self._show_toast(f"Exported {len(rows)} record(s){filter_note}.", kind="success")
         except OSError as e:
             self._show_toast(f"Export failed: {e}", kind="error", duration_ms=4000)
 
     def jump_calendar_to_today(self) -> None:
-        # Unconditional: works regardless of which month is currently shown
-        # or whether the board is already live (fixes a prior dead-end where
-        # paging to a different month without selecting a date left the
-        # "Today" button unable to bring the page back).
         today = QDate.currentDate()
         self.calendar.set_selected_date(today)
         self._update_calendar_title()
@@ -736,14 +731,21 @@ class StationView(QWidget):
 
         filtered = []
         for item in self._last_full_feed:
-            if status_key != "ALL" and item.get("status") != status_key:
+            item_status = (item.get("status") or "").upper()
+            if status_key == "IN" and item_status not in ("IN", "OPEN"):
                 continue
+            elif status_key == "OUT" and item_status not in ("OUT", "COMPLETED"):
+                continue
+            elif status_key == "OVERDUE" and item_status != "OVERDUE":
+                continue
+
             if search_text:
                 haystack = f"{item.get('full_name', '')} {item.get('student_id_no', '')}".lower()
                 if search_text not in haystack:
                     continue
             filtered.append(item)
 
+        self._last_filtered_feed = filtered
         self.board_widget.populate_feed(filtered)
         self.lbl_record_count.setText(f"Showing: {len(filtered)} entries")
 
@@ -803,10 +805,6 @@ class StationView(QWidget):
         self.calendar.set_selected_date(QDate.currentDate())
         self._update_calendar_status_strip()
 
-    # ------------------------------------------------------------------
-    # Input Focus & Modals
-    # ------------------------------------------------------------------
-
     def focus_hardware_input(self) -> None:
         self.hardware_input.setFocus(Qt.FocusReason.ShortcutFocusReason)
 
@@ -819,7 +817,13 @@ class StationView(QWidget):
             return
 
         focus_widget = QApplication.focusWidget()
-        if focus_widget is self.hardware_input or focus_widget is self.search_input:
+        if focus_widget is self.hardware_input:
+            return
+
+        if focus_widget is self.search_input:
+            return
+
+        if self.hardware_input.text():
             return
 
         self.hardware_input.setFocus(Qt.FocusReason.OtherFocusReason)
@@ -859,7 +863,15 @@ class StationView(QWidget):
                 pass
             self._active_toast = None
 
-        toast = show_toast(self, message, kind=kind, duration_ms=duration_ms)
+        # Parent to main window to prevent internal child container geometry clipping
+        parent_target = self.window() if self.window() is not None else self
+        # A toast is purely cosmetic feedback. If it fails to build, log it and move on
+        # so the scan/export workflow (and its own error handler) is never interrupted.
+        try:
+            toast = show_toast(parent_target, message, kind=kind, duration_ms=duration_ms)
+        except Exception:
+            logger.exception("Failed to display toast notification: %s", message)
+            return
         self._active_toast = toast
         toast.destroyed.connect(lambda: self._on_toast_destroyed(toast))
 
@@ -873,27 +885,46 @@ class StationView(QWidget):
             action_type = eval_result.get("type")
             now_str = datetime.now(PHT_TIMEZONE).strftime("%I:%M:%S %p")
 
-            if action_type == "STAFF_TIME_IN_SELECT_CATEGORY":
+            # Guaranteed auto-return to live mode so current check-ins appear on screen immediately
+            self._return_to_live()
+
+            if action_type in ("STAFF_TIME_IN_READY", "STAFF_TIME_IN_SELECT_CATEGORY"):
                 staff = eval_result["staff"]
                 self.attendance_service.confirm_staff_time_in(staff["id"], category="Duty")
                 self._flash_edge_glow(True)
                 self._update_verification_card(
                     staff.get("full_name", "—"), staff.get("student_id_no", "—"),
-                    staff.get("designation", "—"), "ON DUTY", "OPEN", now_str, "--:--:--",
+                    staff.get("designation", "—"), "IN", "IN", now_str, "--:--:--",
                     icon_name="briefcase",
                 )
+                self._show_toast(f"Time In: {staff.get('full_name')} (On Duty)", kind="success")
 
             elif action_type == "STAFF_TIME_OUT_READY":
                 staff = eval_result["staff"]
                 open_session = eval_result["open_session"]
                 self.attendance_service.confirm_staff_time_out(open_session["id"])
                 self._flash_edge_glow(True)
+
+                raw_time_in = open_session.get("time_in")
+                time_in_str = format_iso_to_pht(raw_time_in) if raw_time_in else open_session.get("time_in_display", "--:--:--")
+
                 self._update_verification_card(
                     staff.get("full_name", "—"), staff.get("student_id_no", "—"),
-                    staff.get("designation", "—"), "COMPLETED", "COMPLETED",
-                    open_session.get("time_in_display", "--:--:--"), now_str,
+                    staff.get("designation", "—"), "OUT", "OUT",
+                    time_in_str, now_str,
                     icon_name="check-circle",
                 )
+                self._show_toast(f"Time Out: {staff.get('full_name')}", kind="success")
+
+            elif action_type in ("STAFF_TIME_OUT_COOLDOWN", "VISITOR_TIME_OUT_COOLDOWN"):
+                self._flash_edge_glow(False)
+                remaining = eval_result.get("seconds_remaining", 1)
+                self._show_toast(f"Cooldown active: please wait {remaining}s before timing out.", kind="error")
+
+            elif action_type == "INACTIVE_STAFF":
+                self._flash_edge_glow(False)
+                msg = eval_result.get("message", "Staff account is deactivated.")
+                self._show_toast(msg, kind="error")
 
             elif action_type == "GUEST_VISITOR_NEW":
                 student_id = eval_result["student_id_no"]
@@ -905,33 +936,37 @@ class StationView(QWidget):
                     self.attendance_service.confirm_visitor_time_in(student_id, visitor_name)
                     self._flash_edge_glow(True)
                     self._update_verification_card(
-                        visitor_name, student_id, "Guest Visitor", "VISITING", "OPEN", now_str, "--:--:--",
-                        icon_name="user-round",
+                        visitor_name, student_id, "Guest Visitor", "IN", "IN", now_str, "--:--:--",
+                        icon_name="user-check",
                     )
+                    self._show_toast(f"Visitor Time In: {visitor_name}", kind="success")
 
             elif action_type == "VISITOR_TIME_OUT_READY":
                 open_visit = eval_result["open_visit"]
                 self.attendance_service.confirm_visitor_time_out(open_visit["id"])
                 self._flash_edge_glow(True)
+
+                raw_time_in = open_visit.get("time_in")
+                time_in_str = format_iso_to_pht(raw_time_in) if raw_time_in else open_visit.get("time_in_display", "--:--:--")
+
                 self._update_verification_card(
                     open_visit.get("visitor_name", "—"), open_visit.get("student_id_no", "—"),
-                    "Guest Visitor", "COMPLETED", "COMPLETED",
-                    open_visit.get("time_in_display", "--:--:--"), now_str,
+                    "Guest Visitor", "OUT", "OUT",
+                    time_in_str, now_str,
                     icon_name="check-circle",
                 )
+                self._show_toast(f"Visitor Time Out: {open_visit.get('visitor_name', 'Visitor')}", kind="success")
 
             elif action_type in ("STAFF_OVERDUE_LOCKED", "VISITOR_OVERDUE_LOCKED"):
                 self._flash_edge_glow(False)
                 msg = eval_result.get("message", "Session is overdue and requires administrator resolution.")
-                with self._modal_guard():
-                    QMessageBox.warning(self, "Overdue Session Locked", msg)
+                self._show_toast(msg, kind="error", duration_ms=4000)
 
             self.refresh_board()
 
         except Exception as e:
             self._flash_edge_glow(False)
-            with self._modal_guard():
-                QMessageBox.critical(self, "Attendance Error", str(e))
+            self._show_toast(f"Error: {e}", kind="error", duration_ms=4000)
 
     def closeEvent(self, event) -> None:
         self._board_refresh_timer.stop()

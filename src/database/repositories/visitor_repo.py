@@ -41,7 +41,7 @@ class VisitorRepository:
     def close_visit(self, visit_id: int, time_out: str) -> bool:
         with self.db.transaction() as conn:
             cursor = conn.execute("PRAGMA table_info(visitor_visits)")
-            col_info = {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            col_info = {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
 
             time_out_value = time_out
             if col_info.get("time_out") in ("INTEGER", "INT"):
@@ -71,7 +71,7 @@ class VisitorRepository:
     def update_visit(self, visit_id: int, **kwargs) -> bool:
         with self.db.transaction() as conn:
             cursor = conn.execute("PRAGMA table_info(visitor_visits)")
-            col_info = {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            col_info = {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
             col_names = set(col_info.keys())
 
             fields = []
@@ -153,7 +153,7 @@ class VisitorRepository:
     def flag_overdue_visits(self, cutoff_hours: int = 12) -> int:
         with self.db.transaction() as conn:
             cursor = conn.execute("PRAGMA table_info(visitor_visits)")
-            col_info = {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            col_info = {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
 
             cutoff_dt = datetime.now(timezone.utc) - timedelta(hours=cutoff_hours)
 
@@ -186,7 +186,7 @@ class VisitorRepository:
 
         with self.db.transaction() as conn:
             cursor = conn.execute("PRAGMA table_info(visitor_visits)")
-            col_info = {row[1]: (row[2] or "TEXT").upper() for row in cursor.fetchall()}
+            col_info = {str(row[1]): (row[2] or "TEXT").upper() for row in cursor.fetchall()}
             col_names = set(col_info.keys())
 
             time_in_is_epoch = col_info.get("time_in") in ("INTEGER", "INT")

@@ -1,4 +1,4 @@
-""""Shared custom-painted pill/badge widget used across board tables and verification cards."""
+""""Shared custom-painted pill/badge widget used across board tables, visitor logs, and verification cards."""
 
 from typing import Optional
 
@@ -6,15 +6,15 @@ from PySide6.QtCore import QRectF, QSize, Qt
 from PySide6.QtGui import QColor, QFont, QPainter, QPen
 from PySide6.QtWidgets import QWidget
 
-from src.ui.theme import Colors, Spacing
+from src.ui.theme import Colors, Radius, Spacing, Typography
 
 
 class PillWidget(QWidget):
-    """Rounded pill/badge widget with soft borders and optional gold flash animation."""
+    """Rounded translucent status chip / badge widget with high-DPI vector precision and Apple HIG styling."""
 
-    _V_PADDING = Spacing.SM
-    _H_PADDING = 14
-    _BORDER_WIDTH = 1.2
+    _V_PADDING = 3
+    _H_PADDING = Spacing.SM
+    _BORDER_WIDTH = 1.0
 
     def __init__(
         self,
@@ -26,28 +26,36 @@ class PillWidget(QWidget):
         parent=None,
     ):
         super().__init__(parent)
-        self._text = text
+        self._text = text.upper()
         self._bg_color = bg_color
         self._text_color = text_color
         self._border_color = border_color
         self._fixed_size = fixed_size
         self._highlight_alpha = 0
+        self._gold_color = Colors.parse_qcolor(Colors.ACCENT_GOLD)
+
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
-        label_font = QFont(self.font())
-        label_font.setWeight(QFont.Weight.Medium)
+        label_font = QFont(Typography.MONO_FAMILY, 9.5)
+        label_font.setWeight(QFont.Weight.Bold)
+        label_font.setStyleStrategy(QFont.StyleStrategy.PreferAntialias)
         self.setFont(label_font)
 
         if fixed_size is not None:
             self.setFixedSize(fixed_size)
 
     def set_text(self, text: str) -> None:
-        self._text = text
+        self._text = text.upper()
         if self._fixed_size is None:
             self.updateGeometry()
         self.update()
 
-    def set_colors(self, bg_color: QColor, text_color: QColor, border_color: Optional[QColor] = None) -> None:
+    def set_colors(
+        self,
+        bg_color: QColor,
+        text_color: QColor,
+        border_color: Optional[QColor] = None,
+    ) -> None:
         self._bg_color = bg_color
         self._text_color = text_color
         self._border_color = border_color
@@ -58,60 +66,64 @@ class PillWidget(QWidget):
         self.update()
 
     def _computed_pill_rect(self) -> QRectF:
-        """FIXED THIS SESSION: pill width was never clamped against the
-        widget's own actual width, unlike pill height (which already clamps
-        via `min(self.height() - 4, natural_height)`). Every call site in
-        attendance_board.py passes a `fixed_size` (e.g. QSize(84, 26) /
-        QSize(112, 26)); with the current fixed vocabulary of status/category
-        strings this didn't visibly overflow, but it was a real missing
-        bounds check -- any future longer label would have drawn a rounded
-        rect wider than the widget itself, which gets hard-clipped at the
-        widget edge (turning the capsule into a flat-cut shape and
-        potentially clipping the text). Now clamped the same way height is.
-        """
+        """Calculates sub-pixel vector geometry for anti-aliased chip bounds with stroke padding."""
+        offset = self._BORDER_WIDTH / 2.0
         metrics = self.fontMetrics()
         text_width = metrics.horizontalAdvance(self._text)
-        natural_height = metrics.height() + self._V_PADDING
-        pill_height = min(self.height() - 4, natural_height) if self.height() > 4 else natural_height
-        natural_width = text_width + (self._H_PADDING * 2)
-        pill_width = min(self.width(), natural_width) if self.width() > 0 else natural_width
-        return QRectF(
-            (self.width() - pill_width) / 2.0,
-            (self.height() - pill_height) / 2.0,
-            pill_width,
-            pill_height,
-        )
+        natural_height = metrics.height() + (self._V_PADDING * 2)
+
+        available_w = max(0.0, float(self.width()) - (offset * 2.0))
+        available_h = max(0.0, float(self.height()) - (offset * 2.0))
+
+        natural_width = float(text_width + (self._H_PADDING * 2))
+        pill_width = min(available_w, natural_width) if available_w > 0 else natural_width
+        pill_height = min(available_h, float(natural_height)) if available_h > 0 else float(natural_height)
+
+        x = (float(self.width()) - pill_width) / 2.0
+        y = (float(self.height()) - pill_height) / 2.0
+
+        return QRectF(x, y, pill_width, pill_height)
 
     def sizeHint(self) -> QSize:
         if self._fixed_size is not None:
             return self._fixed_size
         metrics = self.fontMetrics()
         text_width = metrics.horizontalAdvance(self._text)
-        width = text_width + (self._H_PADDING * 2)
-        height = metrics.height() + self._V_PADDING
+        width = text_width + (self._H_PADDING * 2) + 4
+        height = metrics.height() + (self._V_PADDING * 2) + 2
         return QSize(width, height)
 
     def paintEvent(self, event) -> None:
-        painter = QPainter(self)
-        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        painter = QPainter()
+        if not painter.begin(self):
+            return
 
-        pill_rect = self._computed_pill_rect()
-        radius = pill_rect.height() / 2.0
+        try:
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 
-        if self._border_color is not None:
-            painter.setPen(QPen(self._border_color, self._BORDER_WIDTH))
-        else:
-            painter.setPen(Qt.PenStyle.NoPen)
-        painter.setBrush(self._bg_color)
-        painter.drawRoundedRect(pill_rect, radius, radius)
+            pill_rect = self._computed_pill_rect()
+            radius = float(getattr(Radius, "CHIP", 6))
 
-        if self._highlight_alpha > 0:
-            overlay = QColor(Colors.ACCENT_GOLD)
-            overlay.setAlpha(self._highlight_alpha)
-            painter.setPen(Qt.PenStyle.NoPen)
-            painter.setBrush(overlay)
+            # Background Surface & Pen Border
+            if self._border_color is not None:
+                painter.setPen(QPen(self._border_color, self._BORDER_WIDTH))
+            else:
+                painter.setPen(Qt.PenStyle.NoPen)
+
+            painter.setBrush(self._bg_color)
             painter.drawRoundedRect(pill_rect, radius, radius)
 
-        painter.setPen(self._text_color)
-        painter.drawText(pill_rect, Qt.AlignmentFlag.AlignCenter, self._text)
-        painter.end()
+            # Pulse Glow Overlay
+            if self._highlight_alpha > 0:
+                overlay = QColor(self._gold_color)
+                overlay.setAlpha(self._highlight_alpha)
+                painter.setPen(Qt.PenStyle.NoPen)
+                painter.setBrush(overlay)
+                painter.drawRoundedRect(pill_rect, radius, radius)
+
+            # Text Label
+            painter.setFont(self.font())
+            painter.setPen(self._text_color)
+            painter.drawText(pill_rect, Qt.AlignmentFlag.AlignCenter, self._text)
+        finally:
+            painter.end()

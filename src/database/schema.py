@@ -29,19 +29,22 @@ class SchemaInitializer:
     def _run_migrations(self, conn) -> None:
         """Applies schema migrations for legacy database compatibility."""
         cursor = conn.execute("PRAGMA table_info(admin_users);")
-        admin_cols = [row[1] for row in cursor.fetchall()]
+        admin_cols = [str(row[1]) for row in cursor.fetchall()]
 
         if "last_login" not in admin_cols:
-            if "last_login_at" in admin_cols:
-                try:
-                    conn.execute("ALTER TABLE admin_users RENAME COLUMN last_login_at TO last_login;")
-                except Exception:
-                    conn.execute("ALTER TABLE admin_users ADD COLUMN last_login TEXT;")
-            else:
+            try:
                 conn.execute("ALTER TABLE admin_users ADD COLUMN last_login TEXT;")
+            except Exception:
+                pass
+
+        if "updated_at" not in admin_cols:
+            try:
+                conn.execute("ALTER TABLE admin_users ADD COLUMN updated_at TEXT;")
+            except Exception:
+                pass
 
         cursor = conn.execute("PRAGMA table_info(staff);")
-        staff_cols = [row[1] for row in cursor.fetchall()]
+        staff_cols = [str(row[1]) for row in cursor.fetchall()]
 
         if "designation" not in staff_cols:
             conn.execute("ALTER TABLE staff ADD COLUMN designation TEXT NOT NULL DEFAULT 'Staffer';")

