@@ -1,0 +1,3134 @@
+(['C:\\Users\\Brian Escol\\Documents\\TGP QR App\\main.py'],
+ ['C:\\Users\\Brian Escol\\Documents\\TGP QR App'],
+ ['argon2',
+  'cv2',
+  'pyzbar',
+  'pyzbar.pyzbar',
+  'PySide6',
+  'PySide6.QtCore',
+  'PySide6.QtGui',
+  'PySide6.QtWidgets',
+  'sqlite3',
+  'src',
+  'src.core',
+  'src.core.constants',
+  'src.core.exceptions',
+  'src.database',
+  'src.database.connection',
+  'src.database.repositories',
+  'src.database.repositories.admin_repo',
+  'src.database.repositories.attendance_repo',
+  'src.database.repositories.audit_repo',
+  'src.database.repositories.staff_repo',
+  'src.database.repositories.visitor_repo',
+  'src.database.schema',
+  'src.services',
+  'src.services.attendance_service',
+  'src.services.audit_service',
+  'src.services.auth_service',
+  'src.services.backup_service',
+  'src.services.directory_service',
+  'src.services.overdue_service',
+  'src.services.sync_service',
+  'src.ui',
+  'src.ui.components',
+  'src.ui.components.animations',
+  'src.ui.components.attendance_board',
+  'src.ui.components.camera_preview',
+  'src.ui.components.modals',
+  'src.ui.components.toast',
+  'src.ui.main_window',
+  'src.ui.theme',
+  'src.ui.views',
+  'src.ui.views.admin_dashboard',
+  'src.ui.views.admin_dashboard.attendance_logs',
+  'src.ui.views.admin_dashboard.dashboard_main',
+  'src.ui.views.admin_dashboard.overdue_resolution',
+  'src.ui.views.admin_dashboard.overview',
+  'src.ui.views.admin_dashboard.reports',
+  'src.ui.views.admin_dashboard.settings_view',
+  'src.ui.views.admin_dashboard.staff_mgmt',
+  'src.ui.views.admin_login',
+  'src.ui.views.shutdown_dialog',
+  'src.ui.views.station_view',
+  'src.utils',
+  'src.utils.font_loader',
+  'src.utils.icon_helper',
+  'src.utils.time_utils',
+  'src.utils.validators'],
+ [('C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\numpy\\_pyinstaller',
+   0),
+  ('C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks',
+   -1000),
+  ('C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib',
+   -1000)],
+ {},
+ ['tkinter', 'unittest', '__main__'],
+ [],
+ False,
+ {},
+ 0,
+ [],
+ [('assets\\fonts\\Inter_18pt-Black.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Black.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-BlackItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-BlackItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Bold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Bold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-BoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-BoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ExtraBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ExtraBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ExtraBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ExtraBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ExtraLight.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ExtraLight.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ExtraLightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ExtraLightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Italic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Italic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Light.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Light.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-LightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-LightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Medium.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Medium.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-MediumItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-MediumItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Regular.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Regular.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-SemiBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-SemiBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-SemiBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-SemiBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Thin.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Thin.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ThinItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ThinItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Black.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Black.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-BlackItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-BlackItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Bold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Bold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-BoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-BoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ExtraBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ExtraBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ExtraBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ExtraBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ExtraLight.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ExtraLight.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ExtraLightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ExtraLightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Italic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Italic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Light.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Light.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-LightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-LightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Medium.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Medium.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-MediumItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-MediumItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Regular.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Regular.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-SemiBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-SemiBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-SemiBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-SemiBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Thin.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Thin.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ThinItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ThinItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Black.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Black.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-BlackItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-BlackItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Bold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Bold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-BoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-BoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ExtraBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ExtraBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ExtraBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ExtraBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ExtraLight.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ExtraLight.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ExtraLightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ExtraLightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Italic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Italic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Light.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Light.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-LightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-LightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Medium.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Medium.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-MediumItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-MediumItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Regular.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Regular.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-SemiBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-SemiBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-SemiBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-SemiBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Thin.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Thin.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ThinItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ThinItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Bold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Bold.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-BoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-BoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ExtraBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ExtraBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ExtraBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ExtraBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ExtraLight.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ExtraLight.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ExtraLightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ExtraLightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Italic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Italic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Light.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Light.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-LightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-LightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Medium.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Medium.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-MediumItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-MediumItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Regular.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Regular.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-SemiBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-SemiBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-SemiBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-SemiBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Thin.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Thin.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ThinItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ThinItalic.ttf',
+   'DATA'),
+  ('assets\\icons\\lucide\\activity.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\activity.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\alert-circle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\alert-circle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\alert-triangle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\alert-triangle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\arrow-left.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\arrow-left.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\bar-chart-3.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\bar-chart-3.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\briefcase.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\briefcase.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\calendar-check.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\calendar-check.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\check-circle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\check-circle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\chevron-left.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\chevron-left.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\chevron-right.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\chevron-right.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\cloud.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\cloud.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\database.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\database.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\download.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\download.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\edit-2.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\edit-2.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\file-text.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\file-text.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\info.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\info.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\layers.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\layers.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\list.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\list.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\lock.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\lock.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\log-out.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\log-out.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\plus-circle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\plus-circle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\qr-code.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\qr-code.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\refresh-cw.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\refresh-cw.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\rotate-ccw.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\rotate-ccw.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\rotate-cw.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\rotate-cw.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\scan-line.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\scan-line.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\search.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\search.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\settings.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\settings.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\shield-check.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\shield-check.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\shield.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\shield.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\table-2.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\table-2.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\trash-2.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\trash-2.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\user-check.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\user-check.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\user-plus.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\user-plus.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\user-round.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\user-round.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\user-x.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\user-x.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\users.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\users.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\x-circle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\x-circle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\zap.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\zap.svg',
+   'DATA'),
+  ('assets\\images\\logo.jpg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\assets\\images\\logo.jpg',
+   'DATA'),
+  ('assets\\images\\logo.png',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\assets\\images\\logo.png',
+   'DATA'),
+  ('src\\database\\schema.sql',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\database\\schema.sql',
+   'DATA'),
+  ('src\\ui\\styles\\theme.qss',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\styles\\theme.qss',
+   'DATA')],
+ '3.15.0 (tags/v3.15.0:d220409, Oct  9 2026, 11:55:56) [MSC v.1951 64 bit '
+ '(AMD64)]',
+ [('pyi_rth_inspect',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_pyside6',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pyside6.py',
+   'PYSOURCE'),
+  ('main',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\main.py',
+   'PYSOURCE')],
+ [('_pyi_rth_utils.qt',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PyInstaller\\fake-modules\\_pyi_rth_utils\\qt.py',
+   'PYMODULE'),
+  ('importlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\__init__.py',
+   'PYMODULE'),
+  ('importlib._bootstrap_external',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\_bootstrap_external.py',
+   'PYMODULE'),
+  ('importlib.metadata',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\__init__.py',
+   'PYMODULE'),
+  ('inspect',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\inspect.py',
+   'PYMODULE'),
+  ('argparse',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\argparse.py',
+   'PYMODULE'),
+  ('difflib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\difflib.py',
+   'PYMODULE'),
+  ('shutil',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\shutil.py',
+   'PYMODULE'),
+  ('tarfile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\tarfile.py',
+   'PYMODULE'),
+  ('gzip',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\gzip.py',
+   'PYMODULE'),
+  ('compression._common._streams',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\_common\\_streams.py',
+   'PYMODULE'),
+  ('compression._common',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\_common\\__init__.py',
+   'PYMODULE'),
+  ('struct',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\struct.py',
+   'PYMODULE'),
+  ('_strptime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_strptime.py',
+   'PYMODULE'),
+  ('datetime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\datetime.py',
+   'PYMODULE'),
+  ('_pydatetime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_pydatetime.py',
+   'PYMODULE'),
+  ('calendar',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\calendar.py',
+   'PYMODULE'),
+  ('compression.zstd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\zstd\\__init__.py',
+   'PYMODULE'),
+  ('compression.zstd._zstdfile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\zstd\\_zstdfile.py',
+   'PYMODULE'),
+  ('compression',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\__init__.py',
+   'PYMODULE'),
+  ('lzma',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\lzma.py',
+   'PYMODULE'),
+  ('bz2',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\bz2.py',
+   'PYMODULE'),
+  ('fnmatch',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\fnmatch.py',
+   'PYMODULE'),
+  ('copy',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\copy.py',
+   'PYMODULE'),
+  ('_colorize',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_colorize.py',
+   'PYMODULE'),
+  ('dataclasses',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\dataclasses.py',
+   'PYMODULE'),
+  ('gettext',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\gettext.py',
+   'PYMODULE'),
+  ('token',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\token.py',
+   'PYMODULE'),
+  ('importlib.machinery',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\machinery.py',
+   'PYMODULE'),
+  ('dis',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\dis.py',
+   'PYMODULE'),
+  ('opcode',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\opcode.py',
+   'PYMODULE'),
+  ('_opcode_metadata',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_opcode_metadata.py',
+   'PYMODULE'),
+  ('ast',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ast.py',
+   'PYMODULE'),
+  ('_ast_unparse',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_ast_unparse.py',
+   'PYMODULE'),
+  ('annotationlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\annotationlib.py',
+   'PYMODULE'),
+  ('zipfile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\zipfile\\__init__.py',
+   'PYMODULE'),
+  ('zipfile._path',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\zipfile\\_path\\__init__.py',
+   'PYMODULE'),
+  ('zipfile._path.glob',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\zipfile\\_path\\glob.py',
+   'PYMODULE'),
+  ('zipfile._path._functools',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\zipfile\\_path\\_functools.py',
+   'PYMODULE'),
+  ('py_compile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\py_compile.py',
+   'PYMODULE'),
+  ('threading',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\threading.py',
+   'PYMODULE'),
+  ('_threading_local',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_threading_local.py',
+   'PYMODULE'),
+  ('importlib.util',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\util.py',
+   'PYMODULE'),
+  ('importlib._abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\_abc.py',
+   'PYMODULE'),
+  ('json',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\json\\__init__.py',
+   'PYMODULE'),
+  ('json.encoder',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\json\\encoder.py',
+   'PYMODULE'),
+  ('json.decoder',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\json\\decoder.py',
+   'PYMODULE'),
+  ('json.scanner',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\json\\scanner.py',
+   'PYMODULE'),
+  ('csv',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\csv.py',
+   'PYMODULE'),
+  ('importlib.metadata._adapters',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_adapters.py',
+   'PYMODULE'),
+  ('importlib.metadata._text',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_text.py',
+   'PYMODULE'),
+  ('email.policy',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\policy.py',
+   'PYMODULE'),
+  ('email.contentmanager',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\contentmanager.py',
+   'PYMODULE'),
+  ('email.quoprimime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\quoprimime.py',
+   'PYMODULE'),
+  ('string',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\string\\__init__.py',
+   'PYMODULE'),
+  ('email.errors',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\errors.py',
+   'PYMODULE'),
+  ('email.charset',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\charset.py',
+   'PYMODULE'),
+  ('email.encoders',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\encoders.py',
+   'PYMODULE'),
+  ('quopri',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\quopri.py',
+   'PYMODULE'),
+  ('getopt',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\getopt.py',
+   'PYMODULE'),
+  ('base64',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\base64.py',
+   'PYMODULE'),
+  ('email.base64mime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\base64mime.py',
+   'PYMODULE'),
+  ('email.headerregistry',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\headerregistry.py',
+   'PYMODULE'),
+  ('email._header_value_parser',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\_header_value_parser.py',
+   'PYMODULE'),
+  ('email._encoded_words',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\_encoded_words.py',
+   'PYMODULE'),
+  ('urllib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\__init__.py',
+   'PYMODULE'),
+  ('email.utils',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\utils.py',
+   'PYMODULE'),
+  ('socket',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\socket.py',
+   'PYMODULE'),
+  ('selectors',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\selectors.py',
+   'PYMODULE'),
+  ('random',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\random.py',
+   'PYMODULE'),
+  ('statistics',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\statistics.py',
+   'PYMODULE'),
+  ('decimal',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\decimal.py',
+   'PYMODULE'),
+  ('_pydecimal',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_pydecimal.py',
+   'PYMODULE'),
+  ('contextvars',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\contextvars.py',
+   'PYMODULE'),
+  ('fractions',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\fractions.py',
+   'PYMODULE'),
+  ('numbers',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\numbers.py',
+   'PYMODULE'),
+  ('hashlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\hashlib.py',
+   'PYMODULE'),
+  ('bisect',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\bisect.py',
+   'PYMODULE'),
+  ('email._parseaddr',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\_parseaddr.py',
+   'PYMODULE'),
+  ('urllib.parse',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\parse.py',
+   'PYMODULE'),
+  ('ipaddress',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ipaddress.py',
+   'PYMODULE'),
+  ('email._policybase',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\_policybase.py',
+   'PYMODULE'),
+  ('email.header',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\header.py',
+   'PYMODULE'),
+  ('email.message',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\message.py',
+   'PYMODULE'),
+  ('email.iterators',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\iterators.py',
+   'PYMODULE'),
+  ('email.generator',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\generator.py',
+   'PYMODULE'),
+  ('importlib.metadata._typing',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_typing.py',
+   'PYMODULE'),
+  ('importlib.metadata._itertools',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_itertools.py',
+   'PYMODULE'),
+  ('importlib.metadata._functools',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_functools.py',
+   'PYMODULE'),
+  ('importlib.metadata._context',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_context.py',
+   'PYMODULE'),
+  ('importlib.metadata._collections',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_collections.py',
+   'PYMODULE'),
+  ('importlib.metadata._meta',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_meta.py',
+   'PYMODULE'),
+  ('typing',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\typing.py',
+   'PYMODULE'),
+  ('importlib.abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\abc.py',
+   'PYMODULE'),
+  ('contextlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\contextlib.py',
+   'PYMODULE'),
+  ('textwrap',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\textwrap.py',
+   'PYMODULE'),
+  ('email',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\__init__.py',
+   'PYMODULE'),
+  ('email.parser',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\parser.py',
+   'PYMODULE'),
+  ('email.feedparser',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\feedparser.py',
+   'PYMODULE'),
+  ('__future__',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\__future__.py',
+   'PYMODULE'),
+  ('importlib.readers',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\readers.py',
+   'PYMODULE'),
+  ('importlib.resources.readers',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\readers.py',
+   'PYMODULE'),
+  ('importlib.resources._itertools',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\_itertools.py',
+   'PYMODULE'),
+  ('importlib.resources.abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\abc.py',
+   'PYMODULE'),
+  ('importlib.resources',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\__init__.py',
+   'PYMODULE'),
+  ('importlib.resources._functional',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\_functional.py',
+   'PYMODULE'),
+  ('importlib.resources._common',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\_common.py',
+   'PYMODULE'),
+  ('importlib.resources._adapters',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\_adapters.py',
+   'PYMODULE'),
+  ('tempfile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\tempfile.py',
+   'PYMODULE'),
+  ('tokenize',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\tokenize.py',
+   'PYMODULE'),
+  ('importlib._bootstrap',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\_bootstrap.py',
+   'PYMODULE'),
+  ('_pyi_rth_utils',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PyInstaller\\fake-modules\\_pyi_rth_utils\\__init__.py',
+   'PYMODULE'),
+  ('src.utils.validators',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\validators.py',
+   'PYMODULE'),
+  ('src.utils.time_utils',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\time_utils.py',
+   'PYMODULE'),
+  ('src.utils.icon_helper',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\icon_helper.py',
+   'PYMODULE'),
+  ('shiboken6',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\shiboken6\\__init__.py',
+   'PYMODULE'),
+  ('src.utils',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.views.station_view',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\station_view.py',
+   'PYMODULE'),
+  ('src.ui.widgets.pill_widget',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\widgets\\pill_widget.py',
+   'PYMODULE'),
+  ('src.ui.widgets', '-', 'PYMODULE'),
+  ('src.ui.widgets.gold_calendar',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\widgets\\gold_calendar.py',
+   'PYMODULE'),
+  ('src.ui.views.shutdown_dialog',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\shutdown_dialog.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_login',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_login.py',
+   'PYMODULE'),
+  ('ctypes',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ctypes\\__init__.py',
+   'PYMODULE'),
+  ('ctypes._endian',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ctypes\\_endian.py',
+   'PYMODULE'),
+  ('ctypes._layout',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ctypes\\_layout.py',
+   'PYMODULE'),
+  ('sysconfig',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sysconfig\\__init__.py',
+   'PYMODULE'),
+  ('_aix_support',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_aix_support.py',
+   'PYMODULE'),
+  ('subprocess',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\subprocess.py',
+   'PYMODULE'),
+  ('signal',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\signal.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.staff_mgmt',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\staff_mgmt.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.settings_view',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\settings_view.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.reports',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\reports.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.overview',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\overview.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.overdue_resolution',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\overdue_resolution.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.dashboard_main',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\dashboard_main.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.attendance_logs',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\attendance_logs.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.views',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\views\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.components.toast',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\toast.py',
+   'PYMODULE'),
+  ('src.ui.components.modals',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\modals.py',
+   'PYMODULE'),
+  ('src.ui.components.camera_preview',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\camera_preview.py',
+   'PYMODULE'),
+  ('src.ui.components.attendance_board',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\attendance_board.py',
+   'PYMODULE'),
+  ('src.ui.components.animations',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\animations.py',
+   'PYMODULE'),
+  ('src.ui.components',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\__init__.py',
+   'PYMODULE'),
+  ('src.ui',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\__init__.py',
+   'PYMODULE'),
+  ('src.services.sync_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\sync_service.py',
+   'PYMODULE'),
+  ('src.services.overdue_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\overdue_service.py',
+   'PYMODULE'),
+  ('src.services.directory_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\directory_service.py',
+   'PYMODULE'),
+  ('src.services.backup_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\backup_service.py',
+   'PYMODULE'),
+  ('src.services.audit_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\audit_service.py',
+   'PYMODULE'),
+  ('src.services.attendance_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\attendance_service.py',
+   'PYMODULE'),
+  ('src.services',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\services\\__init__.py',
+   'PYMODULE'),
+  ('src.database.repositories.visitor_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\visitor_repo.py',
+   'PYMODULE'),
+  ('src.database.repositories.staff_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\staff_repo.py',
+   'PYMODULE'),
+  ('src.database.repositories.audit_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\audit_repo.py',
+   'PYMODULE'),
+  ('src.database.repositories.attendance_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\attendance_repo.py',
+   'PYMODULE'),
+  ('src.database.repositories.admin_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\admin_repo.py',
+   'PYMODULE'),
+  ('src.database.repositories',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\__init__.py',
+   'PYMODULE'),
+  ('src.database',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\database\\__init__.py',
+   'PYMODULE'),
+  ('src.core.exceptions',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\core\\exceptions.py',
+   'PYMODULE'),
+  ('src.core.constants',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\core\\constants.py',
+   'PYMODULE'),
+  ('src.core',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\core\\__init__.py',
+   'PYMODULE'),
+  ('src',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\__init__.py',
+   'PYMODULE'),
+  ('sqlite3',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\__init__.py',
+   'PYMODULE'),
+  ('sqlite3.dump',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\dump.py',
+   'PYMODULE'),
+  ('sqlite3._completer',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\_completer.py',
+   'PYMODULE'),
+  ('sqlite3.__main__',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\__main__.py',
+   'PYMODULE'),
+  ('code',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\code.py',
+   'PYMODULE'),
+  ('codeop',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\codeop.py',
+   'PYMODULE'),
+  ('sqlite3.dbapi2',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\dbapi2.py',
+   'PYMODULE'),
+  ('PySide6',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\__init__.py',
+   'PYMODULE'),
+  ('PySide6.support.deprecated',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\support\\deprecated.py',
+   'PYMODULE'),
+  ('PySide6.support',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\support\\__init__.py',
+   'PYMODULE'),
+  ('argon2',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\__init__.py',
+   'PYMODULE'),
+  ('argon2._utils',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\_utils.py',
+   'PYMODULE'),
+  ('platform',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\platform.py',
+   'PYMODULE'),
+  ('argon2._password_hasher',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\_password_hasher.py',
+   'PYMODULE'),
+  ('argon2._legacy',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\_legacy.py',
+   'PYMODULE'),
+  ('argon2.profiles',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\profiles.py',
+   'PYMODULE'),
+  ('argon2.low_level',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\low_level.py',
+   'PYMODULE'),
+  ('_argon2_cffi_bindings',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\_argon2_cffi_bindings\\__init__.py',
+   'PYMODULE'),
+  ('argon2.exceptions',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\exceptions.py',
+   'PYMODULE'),
+  ('_py_abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_py_abc.py',
+   'PYMODULE'),
+  ('_py_warnings',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_py_warnings.py',
+   'PYMODULE'),
+  ('tracemalloc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\tracemalloc.py',
+   'PYMODULE'),
+  ('pickle',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\pickle.py',
+   'PYMODULE'),
+  ('pprint',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\pprint.py',
+   'PYMODULE'),
+  ('_compat_pickle',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_compat_pickle.py',
+   'PYMODULE'),
+  ('stringprep',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\stringprep.py',
+   'PYMODULE'),
+  ('src.utils.font_loader',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\font_loader.py',
+   'PYMODULE'),
+  ('src.ui.theme',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\theme.py',
+   'PYMODULE'),
+  ('src.ui.main_window',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\main_window.py',
+   'PYMODULE'),
+  ('src.services.auth_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\auth_service.py',
+   'PYMODULE'),
+  ('src.database.schema',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\database\\schema.py',
+   'PYMODULE'),
+  ('src.database.connection',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\connection.py',
+   'PYMODULE'),
+  ('pathlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\pathlib\\__init__.py',
+   'PYMODULE'),
+  ('urllib.error',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\error.py',
+   'PYMODULE'),
+  ('urllib.response',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\response.py',
+   'PYMODULE'),
+  ('urllib.request',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\request.py',
+   'PYMODULE'),
+  ('ftplib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ftplib.py',
+   'PYMODULE'),
+  ('netrc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\netrc.py',
+   'PYMODULE'),
+  ('mimetypes',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\mimetypes.py',
+   'PYMODULE'),
+  ('http.cookiejar',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\http\\cookiejar.py',
+   'PYMODULE'),
+  ('http',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\http\\__init__.py',
+   'PYMODULE'),
+  ('ssl',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ssl.py',
+   'PYMODULE'),
+  ('http.client',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\http\\client.py',
+   'PYMODULE'),
+  ('pathlib._os',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\pathlib\\_os.py',
+   'PYMODULE'),
+  ('glob',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\glob.py',
+   'PYMODULE'),
+  ('logging',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\logging\\__init__.py',
+   'PYMODULE')],
+ [('python315.dll',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\python315.dll',
+   'BINARY'),
+  ('PySide6\\opengl32sw.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\opengl32sw.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\tls\\qopensslbackend.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\tls\\qopensslbackend.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\networkinformation\\qnetworklistmanager.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\networkinformation\\qnetworklistmanager.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\tls\\qschannelbackend.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\tls\\qschannelbackend.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\tls\\qcertonlybackend.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\tls\\qcertonlybackend.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\styles\\qmodernwindowsstyle.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\styles\\qmodernwindowsstyle.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qicns.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qicns.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\platforms\\qminimal.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\platforms\\qminimal.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qgif.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qgif.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\platforms\\qwindows.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\platforms\\qwindows.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\platforms\\qoffscreen.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\platforms\\qoffscreen.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qtga.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qtga.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qsvg.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qsvg.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qtiff.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qtiff.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qwbmp.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qwbmp.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qwebp.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qwebp.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\generic\\qtuiotouchplugin.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\generic\\qtuiotouchplugin.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qjpeg.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qjpeg.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qpdf.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qpdf.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\iconengines\\qsvgicon.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\iconengines\\qsvgicon.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\imageformats\\qico.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\imageformats\\qico.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\platforms\\qdirect2d.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\platforms\\qdirect2d.dll',
+   'BINARY'),
+  ('PySide6\\plugins\\platforminputcontexts\\qtvirtualkeyboardplugin.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\plugins\\platforminputcontexts\\qtvirtualkeyboardplugin.dll',
+   'BINARY'),
+  ('_zstd.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_zstd.pyd',
+   'EXTENSION'),
+  ('_lzma.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_lzma.pyd',
+   'EXTENSION'),
+  ('_bz2.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_bz2.pyd',
+   'EXTENSION'),
+  ('select.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\select.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('_decimal.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('unicodedata.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('PySide6\\QtSvg.pyd',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\QtSvg.pyd',
+   'EXTENSION'),
+  ('shiboken6\\Shiboken.pyd',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\shiboken6\\Shiboken.pyd',
+   'EXTENSION'),
+  ('_ctypes.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_ctypes.pyd',
+   'EXTENSION'),
+  ('_sqlite3.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_sqlite3.pyd',
+   'EXTENSION'),
+  ('PySide6\\QtNetwork.pyd',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\QtNetwork.pyd',
+   'EXTENSION'),
+  ('_cffi_backend.cp315-win_amd64.pyd',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\_cffi_backend.cp315-win_amd64.pyd',
+   'EXTENSION'),
+  ('_wmi.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_wmi.pyd',
+   'EXTENSION'),
+  ('_argon2_cffi_bindings\\_ffi.pyd',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\_argon2_cffi_bindings\\_ffi.pyd',
+   'EXTENSION'),
+  ('PySide6\\QtWidgets.pyd',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\QtWidgets.pyd',
+   'EXTENSION'),
+  ('PySide6\\QtGui.pyd',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\QtGui.pyd',
+   'EXTENSION'),
+  ('PySide6\\QtCore.pyd',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\QtCore.pyd',
+   'EXTENSION'),
+  ('_ssl.pyd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\_ssl.pyd',
+   'EXTENSION'),
+  ('VCRUNTIME140.dll',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('PySide6\\Qt6Network.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6Network.dll',
+   'BINARY'),
+  ('shiboken6\\MSVCP140.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\shiboken6\\MSVCP140.dll',
+   'BINARY'),
+  ('PySide6\\Qt6Core.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6Core.dll',
+   'BINARY'),
+  ('VCRUNTIME140_1.dll',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('PySide6\\Qt6Gui.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6Gui.dll',
+   'BINARY'),
+  ('PySide6\\Qt6Widgets.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6Widgets.dll',
+   'BINARY'),
+  ('PySide6\\Qt6Svg.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6Svg.dll',
+   'BINARY'),
+  ('PySide6\\Qt6Pdf.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6Pdf.dll',
+   'BINARY'),
+  ('PySide6\\Qt6VirtualKeyboard.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6VirtualKeyboard.dll',
+   'BINARY'),
+  ('libcrypto-3.dll',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\libcrypto-3.dll',
+   'BINARY'),
+  ('PySide6\\VCRUNTIME140.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('shiboken6\\shiboken6.abi3.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\shiboken6\\shiboken6.abi3.dll',
+   'BINARY'),
+  ('python3.dll',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\python3.dll',
+   'BINARY'),
+  ('PySide6\\pyside6.abi3.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\pyside6.abi3.dll',
+   'BINARY'),
+  ('PySide6\\MSVCP140.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\MSVCP140.dll',
+   'BINARY'),
+  ('PySide6\\VCRUNTIME140_1.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('shiboken6\\VCRUNTIME140.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\shiboken6\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('shiboken6\\VCRUNTIME140_1.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\shiboken6\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('libffi-8.dll',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\libffi-8.dll',
+   'BINARY'),
+  ('sqlite3.dll',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\sqlite3.dll',
+   'BINARY'),
+  ('PySide6\\MSVCP140_2.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\MSVCP140_2.dll',
+   'BINARY'),
+  ('libssl-3.dll',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\DLLs\\libssl-3.dll',
+   'BINARY'),
+  ('PySide6\\MSVCP140_1.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\MSVCP140_1.dll',
+   'BINARY'),
+  ('PySide6\\Qt6Qml.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6Qml.dll',
+   'BINARY'),
+  ('PySide6\\Qt6Quick.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6Quick.dll',
+   'BINARY'),
+  ('PySide6\\Qt6OpenGL.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6OpenGL.dll',
+   'BINARY'),
+  ('PySide6\\Qt6QmlMeta.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6QmlMeta.dll',
+   'BINARY'),
+  ('PySide6\\Qt6QmlModels.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6QmlModels.dll',
+   'BINARY'),
+  ('PySide6\\Qt6QmlWorkerScript.dll',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\Qt6QmlWorkerScript.dll',
+   'BINARY')],
+ [],
+ [],
+ [('assets\\fonts\\Inter_18pt-Black.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Black.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-BlackItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-BlackItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Bold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Bold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-BoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-BoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ExtraBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ExtraBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ExtraBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ExtraBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ExtraLight.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ExtraLight.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ExtraLightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ExtraLightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Italic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Italic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Light.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Light.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-LightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-LightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Medium.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Medium.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-MediumItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-MediumItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Regular.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Regular.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-SemiBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-SemiBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-SemiBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-SemiBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-Thin.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-Thin.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_18pt-ThinItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_18pt-ThinItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Black.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Black.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-BlackItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-BlackItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Bold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Bold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-BoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-BoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ExtraBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ExtraBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ExtraBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ExtraBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ExtraLight.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ExtraLight.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ExtraLightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ExtraLightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Italic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Italic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Light.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Light.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-LightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-LightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Medium.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Medium.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-MediumItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-MediumItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Regular.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Regular.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-SemiBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-SemiBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-SemiBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-SemiBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-Thin.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-Thin.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_24pt-ThinItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_24pt-ThinItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Black.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Black.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-BlackItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-BlackItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Bold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Bold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-BoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-BoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ExtraBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ExtraBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ExtraBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ExtraBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ExtraLight.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ExtraLight.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ExtraLightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ExtraLightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Italic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Italic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Light.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Light.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-LightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-LightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Medium.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Medium.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-MediumItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-MediumItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Regular.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Regular.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-SemiBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-SemiBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-SemiBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-SemiBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-Thin.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-Thin.ttf',
+   'DATA'),
+  ('assets\\fonts\\Inter_28pt-ThinItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\Inter_28pt-ThinItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Bold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Bold.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-BoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-BoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ExtraBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ExtraBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ExtraBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ExtraBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ExtraLight.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ExtraLight.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ExtraLightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ExtraLightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Italic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Italic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Light.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Light.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-LightItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-LightItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Medium.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Medium.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-MediumItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-MediumItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Regular.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Regular.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-SemiBold.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-SemiBold.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-SemiBoldItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-SemiBoldItalic.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-Thin.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-Thin.ttf',
+   'DATA'),
+  ('assets\\fonts\\JetBrainsMono-ThinItalic.ttf',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\fonts\\JetBrainsMono-ThinItalic.ttf',
+   'DATA'),
+  ('assets\\icons\\lucide\\activity.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\activity.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\alert-circle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\alert-circle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\alert-triangle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\alert-triangle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\arrow-left.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\arrow-left.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\bar-chart-3.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\bar-chart-3.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\briefcase.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\briefcase.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\calendar-check.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\calendar-check.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\check-circle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\check-circle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\chevron-left.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\chevron-left.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\chevron-right.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\chevron-right.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\cloud.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\cloud.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\database.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\database.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\download.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\download.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\edit-2.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\edit-2.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\file-text.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\file-text.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\info.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\info.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\layers.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\layers.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\list.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\list.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\lock.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\lock.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\log-out.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\log-out.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\plus-circle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\plus-circle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\qr-code.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\qr-code.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\refresh-cw.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\refresh-cw.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\rotate-ccw.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\rotate-ccw.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\rotate-cw.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\rotate-cw.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\scan-line.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\scan-line.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\search.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\search.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\settings.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\settings.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\shield-check.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\shield-check.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\shield.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\shield.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\table-2.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\table-2.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\trash-2.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\trash-2.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\user-check.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\user-check.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\user-plus.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\user-plus.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\user-round.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\user-round.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\user-x.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\user-x.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\users.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\users.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\x-circle.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\x-circle.svg',
+   'DATA'),
+  ('assets\\icons\\lucide\\zap.svg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\assets\\icons\\lucide\\zap.svg',
+   'DATA'),
+  ('assets\\images\\logo.jpg',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\assets\\images\\logo.jpg',
+   'DATA'),
+  ('assets\\images\\logo.png',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\assets\\images\\logo.png',
+   'DATA'),
+  ('src\\database\\schema.sql',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\database\\schema.sql',
+   'DATA'),
+  ('src\\ui\\styles\\theme.qss',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\styles\\theme.qss',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_pl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_pl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_nl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_nl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_nn.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_nn.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_bg.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_bg.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_fa.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_fa.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_sk.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_sk.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_uk.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_uk.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_zh_TW.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_zh_TW.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_tr.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_tr.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_gl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_gl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_sk.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_sk.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_fi.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_fi.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_kk.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_kk.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_hr.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_hr.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_it.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_it.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_lt.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_lt.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_es.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_es.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_fa.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_fa.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_ko.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_ko.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_ko.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_ko.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_lv.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_lv.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_ca.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_ca.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_uk.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_uk.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_hr.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_hr.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_nl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_nl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_ru.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_ru.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_de.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_de.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_kk.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_kk.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_ja.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_ja.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_gl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_gl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_ca.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_ca.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_ru.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_ru.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_uk.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_uk.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_ka.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_ka.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_zh_CN.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_zh_CN.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_ca.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_ca.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_es.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_es.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_hu.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_hu.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_zh_CN.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_zh_CN.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_hr.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_hr.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_sv.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_sv.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_nl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_nl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_pt_BR.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_pt_BR.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_gd.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_gd.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_it.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_it.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_ar.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_ar.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_ja.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_ja.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_he.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_he.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_da.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_da.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_pt_BR.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_pt_BR.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_gd.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_gd.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_pl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_pl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_ar.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_ar.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_de.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_de.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_it.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_it.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_lg.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_lg.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_cs.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_cs.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_ka.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_ka.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_en.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_en.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_fi.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_fi.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_cs.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_cs.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_kk.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_kk.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_zh_TW.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_zh_TW.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_zh_CN.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_zh_CN.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_ar.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_ar.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_pt_PT.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_pt_PT.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_ru.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_ru.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_cs.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_cs.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_hu.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_hu.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_da.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_da.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_sv.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_sv.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_tr.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_tr.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_lg.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_lg.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_sl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_sl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_nn.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_nn.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_bg.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_bg.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_pt_BR.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_pt_BR.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_ka.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_ka.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_en.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_en.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_lv.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_lv.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_pl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_pl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_nn.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_nn.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_sk.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_sk.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_zh_TW.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_zh_TW.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_sl.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_sl.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_sv.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_sv.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_fr.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_fr.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_en.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_en.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_hu.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_hu.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_fr.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_fr.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_es.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_es.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_de.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_de.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_tr.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_tr.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_he.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_he.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_ja.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_ja.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_ko.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_ko.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_bg.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_bg.qm',
+   'DATA'),
+  ('PySide6\\translations\\qtbase_fr.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qtbase_fr.qm',
+   'DATA'),
+  ('PySide6\\translations\\qt_help_da.qm',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\translations\\qt_help_da.qm',
+   'DATA'),
+  ('argon2_cffi-25.1.0.dist-info\\METADATA',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2_cffi-25.1.0.dist-info\\METADATA',
+   'DATA'),
+  ('argon2_cffi-25.1.0.dist-info\\licenses\\LICENSE',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2_cffi-25.1.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('argon2_cffi-25.1.0.dist-info\\WHEEL',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2_cffi-25.1.0.dist-info\\WHEEL',
+   'DATA'),
+  ('argon2_cffi-25.1.0.dist-info\\INSTALLER',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2_cffi-25.1.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('argon2_cffi-25.1.0.dist-info\\REQUESTED',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2_cffi-25.1.0.dist-info\\REQUESTED',
+   'DATA'),
+  ('argon2_cffi-25.1.0.dist-info\\RECORD',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2_cffi-25.1.0.dist-info\\RECORD',
+   'DATA'),
+  ('base_library.zip',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\build\\tgp_attendance\\base_library.zip',
+   'DATA')],
+ [('genericpath',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\genericpath.py',
+   'PYMODULE'),
+  ('ntpath',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ntpath.py',
+   'PYMODULE'),
+  ('traceback',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\traceback.py',
+   'PYMODULE'),
+  ('functools',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\functools.py',
+   'PYMODULE'),
+  ('abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\abc.py',
+   'PYMODULE'),
+  ('io',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\io.py',
+   'PYMODULE'),
+  ('_weakrefset',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_weakrefset.py',
+   'PYMODULE'),
+  ('copyreg',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\copyreg.py',
+   'PYMODULE'),
+  ('heapq',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\heapq.py',
+   'PYMODULE'),
+  ('warnings',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\warnings.py',
+   'PYMODULE'),
+  ('weakref',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\weakref.py',
+   'PYMODULE'),
+  ('enum',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\enum.py',
+   'PYMODULE'),
+  ('codecs',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\codecs.py',
+   'PYMODULE'),
+  ('locale',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\locale.py',
+   'PYMODULE'),
+  ('stat',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\stat.py',
+   'PYMODULE'),
+  ('reprlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\reprlib.py',
+   'PYMODULE'),
+  ('re._parser',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\re\\_parser.py',
+   'PYMODULE'),
+  ('re._constants',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\re\\_constants.py',
+   'PYMODULE'),
+  ('re._compiler',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\re\\_compiler.py',
+   'PYMODULE'),
+  ('re._casefix',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\re\\_casefix.py',
+   'PYMODULE'),
+  ('re',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\re\\__init__.py',
+   'PYMODULE'),
+  ('os',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\os.py',
+   'PYMODULE'),
+  ('keyword',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\keyword.py',
+   'PYMODULE'),
+  ('collections',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\collections\\__init__.py',
+   'PYMODULE'),
+  ('operator',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\operator.py',
+   'PYMODULE'),
+  ('posixpath',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\posixpath.py',
+   'PYMODULE'),
+  ('types',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\types.py',
+   'PYMODULE'),
+  ('linecache',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\linecache.py',
+   'PYMODULE'),
+  ('_collections_abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_collections_abc.py',
+   'PYMODULE'),
+  ('encodings.zlib_codec',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\zlib_codec.py',
+   'PYMODULE'),
+  ('encodings.uu_codec',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\uu_codec.py',
+   'PYMODULE'),
+  ('encodings.utf_8_sig',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\utf_8_sig.py',
+   'PYMODULE'),
+  ('encodings.utf_8',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\utf_8.py',
+   'PYMODULE'),
+  ('encodings.utf_7',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\utf_7.py',
+   'PYMODULE'),
+  ('encodings.utf_32_le',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\utf_32_le.py',
+   'PYMODULE'),
+  ('encodings.utf_32_be',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\utf_32_be.py',
+   'PYMODULE'),
+  ('encodings.utf_32',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\utf_32.py',
+   'PYMODULE'),
+  ('encodings.utf_16_le',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\utf_16_le.py',
+   'PYMODULE'),
+  ('encodings.utf_16_be',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\utf_16_be.py',
+   'PYMODULE'),
+  ('encodings.utf_16',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\utf_16.py',
+   'PYMODULE'),
+  ('encodings.unicode_escape',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\unicode_escape.py',
+   'PYMODULE'),
+  ('encodings.undefined',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\undefined.py',
+   'PYMODULE'),
+  ('encodings.tis_620',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\tis_620.py',
+   'PYMODULE'),
+  ('encodings.shift_jisx0213',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\shift_jisx0213.py',
+   'PYMODULE'),
+  ('encodings.shift_jis_2004',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\shift_jis_2004.py',
+   'PYMODULE'),
+  ('encodings.shift_jis',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\shift_jis.py',
+   'PYMODULE'),
+  ('encodings.rot_13',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\rot_13.py',
+   'PYMODULE'),
+  ('encodings.raw_unicode_escape',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\raw_unicode_escape.py',
+   'PYMODULE'),
+  ('encodings.quopri_codec',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\quopri_codec.py',
+   'PYMODULE'),
+  ('encodings.punycode',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\punycode.py',
+   'PYMODULE'),
+  ('encodings.ptcp154',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\ptcp154.py',
+   'PYMODULE'),
+  ('encodings.palmos',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\palmos.py',
+   'PYMODULE'),
+  ('encodings.oem',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\oem.py',
+   'PYMODULE'),
+  ('encodings.mbcs',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mbcs.py',
+   'PYMODULE'),
+  ('encodings.mac_turkish',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_turkish.py',
+   'PYMODULE'),
+  ('encodings.mac_romanian',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_romanian.py',
+   'PYMODULE'),
+  ('encodings.mac_roman',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_roman.py',
+   'PYMODULE'),
+  ('encodings.mac_latin2',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_latin2.py',
+   'PYMODULE'),
+  ('encodings.mac_iceland',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_iceland.py',
+   'PYMODULE'),
+  ('encodings.mac_greek',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_greek.py',
+   'PYMODULE'),
+  ('encodings.mac_farsi',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_farsi.py',
+   'PYMODULE'),
+  ('encodings.mac_cyrillic',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_cyrillic.py',
+   'PYMODULE'),
+  ('encodings.mac_croatian',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_croatian.py',
+   'PYMODULE'),
+  ('encodings.mac_arabic',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\mac_arabic.py',
+   'PYMODULE'),
+  ('encodings.latin_1',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\latin_1.py',
+   'PYMODULE'),
+  ('encodings.kz1048',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\kz1048.py',
+   'PYMODULE'),
+  ('encodings.koi8_u',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\koi8_u.py',
+   'PYMODULE'),
+  ('encodings.koi8_t',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\koi8_t.py',
+   'PYMODULE'),
+  ('encodings.koi8_r',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\koi8_r.py',
+   'PYMODULE'),
+  ('encodings.johab',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\johab.py',
+   'PYMODULE'),
+  ('encodings.iso8859_9',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_9.py',
+   'PYMODULE'),
+  ('encodings.iso8859_8',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_8.py',
+   'PYMODULE'),
+  ('encodings.iso8859_7',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_7.py',
+   'PYMODULE'),
+  ('encodings.iso8859_6',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_6.py',
+   'PYMODULE'),
+  ('encodings.iso8859_5',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_5.py',
+   'PYMODULE'),
+  ('encodings.iso8859_4',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_4.py',
+   'PYMODULE'),
+  ('encodings.iso8859_3',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_3.py',
+   'PYMODULE'),
+  ('encodings.iso8859_2',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_2.py',
+   'PYMODULE'),
+  ('encodings.iso8859_16',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_16.py',
+   'PYMODULE'),
+  ('encodings.iso8859_15',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_15.py',
+   'PYMODULE'),
+  ('encodings.iso8859_14',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_14.py',
+   'PYMODULE'),
+  ('encodings.iso8859_13',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_13.py',
+   'PYMODULE'),
+  ('encodings.iso8859_11',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_11.py',
+   'PYMODULE'),
+  ('encodings.iso8859_10',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_10.py',
+   'PYMODULE'),
+  ('encodings.iso8859_1',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso8859_1.py',
+   'PYMODULE'),
+  ('encodings.iso2022_kr',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso2022_kr.py',
+   'PYMODULE'),
+  ('encodings.iso2022_jp_ext',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso2022_jp_ext.py',
+   'PYMODULE'),
+  ('encodings.iso2022_jp_3',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso2022_jp_3.py',
+   'PYMODULE'),
+  ('encodings.iso2022_jp_2004',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso2022_jp_2004.py',
+   'PYMODULE'),
+  ('encodings.iso2022_jp_2',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso2022_jp_2.py',
+   'PYMODULE'),
+  ('encodings.iso2022_jp_1',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso2022_jp_1.py',
+   'PYMODULE'),
+  ('encodings.iso2022_jp',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\iso2022_jp.py',
+   'PYMODULE'),
+  ('encodings.idna',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\idna.py',
+   'PYMODULE'),
+  ('encodings.hz',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\hz.py',
+   'PYMODULE'),
+  ('encodings.hp_roman8',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\hp_roman8.py',
+   'PYMODULE'),
+  ('encodings.hex_codec',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\hex_codec.py',
+   'PYMODULE'),
+  ('encodings.gbk',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\gbk.py',
+   'PYMODULE'),
+  ('encodings.gb2312',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\gb2312.py',
+   'PYMODULE'),
+  ('encodings.gb18030',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\gb18030.py',
+   'PYMODULE'),
+  ('encodings.euc_kr',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\euc_kr.py',
+   'PYMODULE'),
+  ('encodings.euc_jp',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\euc_jp.py',
+   'PYMODULE'),
+  ('encodings.euc_jisx0213',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\euc_jisx0213.py',
+   'PYMODULE'),
+  ('encodings.euc_jis_2004',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\euc_jis_2004.py',
+   'PYMODULE'),
+  ('encodings.cp950',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp950.py',
+   'PYMODULE'),
+  ('encodings.cp949',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp949.py',
+   'PYMODULE'),
+  ('encodings.cp932',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp932.py',
+   'PYMODULE'),
+  ('encodings.cp875',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp875.py',
+   'PYMODULE'),
+  ('encodings.cp874',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp874.py',
+   'PYMODULE'),
+  ('encodings.cp869',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp869.py',
+   'PYMODULE'),
+  ('encodings.cp866',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp866.py',
+   'PYMODULE'),
+  ('encodings.cp865',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp865.py',
+   'PYMODULE'),
+  ('encodings.cp864',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp864.py',
+   'PYMODULE'),
+  ('encodings.cp863',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp863.py',
+   'PYMODULE'),
+  ('encodings.cp862',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp862.py',
+   'PYMODULE'),
+  ('encodings.cp861',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp861.py',
+   'PYMODULE'),
+  ('encodings.cp860',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp860.py',
+   'PYMODULE'),
+  ('encodings.cp858',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp858.py',
+   'PYMODULE'),
+  ('encodings.cp857',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp857.py',
+   'PYMODULE'),
+  ('encodings.cp856',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp856.py',
+   'PYMODULE'),
+  ('encodings.cp855',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp855.py',
+   'PYMODULE'),
+  ('encodings.cp852',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp852.py',
+   'PYMODULE'),
+  ('encodings.cp850',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp850.py',
+   'PYMODULE'),
+  ('encodings.cp775',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp775.py',
+   'PYMODULE'),
+  ('encodings.cp737',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp737.py',
+   'PYMODULE'),
+  ('encodings.cp720',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp720.py',
+   'PYMODULE'),
+  ('encodings.cp500',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp500.py',
+   'PYMODULE'),
+  ('encodings.cp437',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp437.py',
+   'PYMODULE'),
+  ('encodings.cp424',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp424.py',
+   'PYMODULE'),
+  ('encodings.cp273',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp273.py',
+   'PYMODULE'),
+  ('encodings.cp1258',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1258.py',
+   'PYMODULE'),
+  ('encodings.cp1257',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1257.py',
+   'PYMODULE'),
+  ('encodings.cp1256',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1256.py',
+   'PYMODULE'),
+  ('encodings.cp1255',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1255.py',
+   'PYMODULE'),
+  ('encodings.cp1254',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1254.py',
+   'PYMODULE'),
+  ('encodings.cp1253',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1253.py',
+   'PYMODULE'),
+  ('encodings.cp1252',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1252.py',
+   'PYMODULE'),
+  ('encodings.cp1251',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1251.py',
+   'PYMODULE'),
+  ('encodings.cp1250',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1250.py',
+   'PYMODULE'),
+  ('encodings.cp1140',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1140.py',
+   'PYMODULE'),
+  ('encodings.cp1125',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1125.py',
+   'PYMODULE'),
+  ('encodings.cp1026',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1026.py',
+   'PYMODULE'),
+  ('encodings.cp1006',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp1006.py',
+   'PYMODULE'),
+  ('encodings.cp037',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\cp037.py',
+   'PYMODULE'),
+  ('encodings.charmap',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\charmap.py',
+   'PYMODULE'),
+  ('encodings.bz2_codec',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\bz2_codec.py',
+   'PYMODULE'),
+  ('encodings.big5hkscs',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\big5hkscs.py',
+   'PYMODULE'),
+  ('encodings.big5',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\big5.py',
+   'PYMODULE'),
+  ('encodings.base64_codec',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\base64_codec.py',
+   'PYMODULE'),
+  ('encodings.ascii',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\ascii.py',
+   'PYMODULE'),
+  ('encodings.aliases',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\aliases.py',
+   'PYMODULE'),
+  ('encodings._win_cp_codecs',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\_win_cp_codecs.py',
+   'PYMODULE'),
+  ('encodings',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\encodings\\__init__.py',
+   'PYMODULE')])

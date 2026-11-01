@@ -1,0 +1,819 @@
+('C:\\Users\\Brian Escol\\Documents\\TGP QR '
+ 'App\\build\\tgp_attendance\\PYZ-00.pyz',
+ [('PySide6',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\__init__.py',
+   'PYMODULE'),
+  ('PySide6.support',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\support\\__init__.py',
+   'PYMODULE'),
+  ('PySide6.support.deprecated',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PySide6\\support\\deprecated.py',
+   'PYMODULE'),
+  ('__future__',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\__future__.py',
+   'PYMODULE'),
+  ('_aix_support',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_aix_support.py',
+   'PYMODULE'),
+  ('_argon2_cffi_bindings',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\_argon2_cffi_bindings\\__init__.py',
+   'PYMODULE'),
+  ('_ast_unparse',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_ast_unparse.py',
+   'PYMODULE'),
+  ('_colorize',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_colorize.py',
+   'PYMODULE'),
+  ('_compat_pickle',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_compat_pickle.py',
+   'PYMODULE'),
+  ('_opcode_metadata',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_opcode_metadata.py',
+   'PYMODULE'),
+  ('_py_abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_py_abc.py',
+   'PYMODULE'),
+  ('_py_warnings',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_py_warnings.py',
+   'PYMODULE'),
+  ('_pydatetime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_pydatetime.py',
+   'PYMODULE'),
+  ('_pydecimal',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_pydecimal.py',
+   'PYMODULE'),
+  ('_pyi_rth_utils',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PyInstaller\\fake-modules\\_pyi_rth_utils\\__init__.py',
+   'PYMODULE'),
+  ('_pyi_rth_utils.qt',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\PyInstaller\\fake-modules\\_pyi_rth_utils\\qt.py',
+   'PYMODULE'),
+  ('_strptime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_strptime.py',
+   'PYMODULE'),
+  ('_threading_local',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\_threading_local.py',
+   'PYMODULE'),
+  ('annotationlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\annotationlib.py',
+   'PYMODULE'),
+  ('argon2',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\__init__.py',
+   'PYMODULE'),
+  ('argon2._legacy',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\_legacy.py',
+   'PYMODULE'),
+  ('argon2._password_hasher',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\_password_hasher.py',
+   'PYMODULE'),
+  ('argon2._utils',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\_utils.py',
+   'PYMODULE'),
+  ('argon2.exceptions',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\exceptions.py',
+   'PYMODULE'),
+  ('argon2.low_level',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\low_level.py',
+   'PYMODULE'),
+  ('argon2.profiles',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\argon2\\profiles.py',
+   'PYMODULE'),
+  ('argparse',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\argparse.py',
+   'PYMODULE'),
+  ('ast',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ast.py',
+   'PYMODULE'),
+  ('base64',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\base64.py',
+   'PYMODULE'),
+  ('bisect',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\bisect.py',
+   'PYMODULE'),
+  ('bz2',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\bz2.py',
+   'PYMODULE'),
+  ('calendar',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\calendar.py',
+   'PYMODULE'),
+  ('code',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\code.py',
+   'PYMODULE'),
+  ('codeop',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\codeop.py',
+   'PYMODULE'),
+  ('compression',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\__init__.py',
+   'PYMODULE'),
+  ('compression._common',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\_common\\__init__.py',
+   'PYMODULE'),
+  ('compression._common._streams',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\_common\\_streams.py',
+   'PYMODULE'),
+  ('compression.zstd',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\zstd\\__init__.py',
+   'PYMODULE'),
+  ('compression.zstd._zstdfile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\compression\\zstd\\_zstdfile.py',
+   'PYMODULE'),
+  ('contextlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\contextlib.py',
+   'PYMODULE'),
+  ('contextvars',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\contextvars.py',
+   'PYMODULE'),
+  ('copy',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\copy.py',
+   'PYMODULE'),
+  ('csv',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\csv.py',
+   'PYMODULE'),
+  ('ctypes',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ctypes\\__init__.py',
+   'PYMODULE'),
+  ('ctypes._endian',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ctypes\\_endian.py',
+   'PYMODULE'),
+  ('ctypes._layout',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ctypes\\_layout.py',
+   'PYMODULE'),
+  ('dataclasses',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\dataclasses.py',
+   'PYMODULE'),
+  ('datetime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\datetime.py',
+   'PYMODULE'),
+  ('decimal',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\decimal.py',
+   'PYMODULE'),
+  ('difflib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\difflib.py',
+   'PYMODULE'),
+  ('dis',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\dis.py',
+   'PYMODULE'),
+  ('email',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\__init__.py',
+   'PYMODULE'),
+  ('email._encoded_words',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\_encoded_words.py',
+   'PYMODULE'),
+  ('email._header_value_parser',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\_header_value_parser.py',
+   'PYMODULE'),
+  ('email._parseaddr',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\_parseaddr.py',
+   'PYMODULE'),
+  ('email._policybase',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\_policybase.py',
+   'PYMODULE'),
+  ('email.base64mime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\base64mime.py',
+   'PYMODULE'),
+  ('email.charset',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\charset.py',
+   'PYMODULE'),
+  ('email.contentmanager',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\contentmanager.py',
+   'PYMODULE'),
+  ('email.encoders',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\encoders.py',
+   'PYMODULE'),
+  ('email.errors',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\errors.py',
+   'PYMODULE'),
+  ('email.feedparser',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\feedparser.py',
+   'PYMODULE'),
+  ('email.generator',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\generator.py',
+   'PYMODULE'),
+  ('email.header',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\header.py',
+   'PYMODULE'),
+  ('email.headerregistry',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\headerregistry.py',
+   'PYMODULE'),
+  ('email.iterators',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\iterators.py',
+   'PYMODULE'),
+  ('email.message',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\message.py',
+   'PYMODULE'),
+  ('email.parser',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\parser.py',
+   'PYMODULE'),
+  ('email.policy',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\policy.py',
+   'PYMODULE'),
+  ('email.quoprimime',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\quoprimime.py',
+   'PYMODULE'),
+  ('email.utils',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\email\\utils.py',
+   'PYMODULE'),
+  ('fnmatch',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\fnmatch.py',
+   'PYMODULE'),
+  ('fractions',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\fractions.py',
+   'PYMODULE'),
+  ('ftplib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ftplib.py',
+   'PYMODULE'),
+  ('getopt',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\getopt.py',
+   'PYMODULE'),
+  ('gettext',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\gettext.py',
+   'PYMODULE'),
+  ('glob',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\glob.py',
+   'PYMODULE'),
+  ('gzip',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\gzip.py',
+   'PYMODULE'),
+  ('hashlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\hashlib.py',
+   'PYMODULE'),
+  ('http',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\http\\__init__.py',
+   'PYMODULE'),
+  ('http.client',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\http\\client.py',
+   'PYMODULE'),
+  ('http.cookiejar',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\http\\cookiejar.py',
+   'PYMODULE'),
+  ('importlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\__init__.py',
+   'PYMODULE'),
+  ('importlib._abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\_abc.py',
+   'PYMODULE'),
+  ('importlib._bootstrap',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\_bootstrap.py',
+   'PYMODULE'),
+  ('importlib._bootstrap_external',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\_bootstrap_external.py',
+   'PYMODULE'),
+  ('importlib.abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\abc.py',
+   'PYMODULE'),
+  ('importlib.machinery',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\machinery.py',
+   'PYMODULE'),
+  ('importlib.metadata',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\__init__.py',
+   'PYMODULE'),
+  ('importlib.metadata._adapters',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_adapters.py',
+   'PYMODULE'),
+  ('importlib.metadata._collections',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_collections.py',
+   'PYMODULE'),
+  ('importlib.metadata._context',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_context.py',
+   'PYMODULE'),
+  ('importlib.metadata._functools',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_functools.py',
+   'PYMODULE'),
+  ('importlib.metadata._itertools',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_itertools.py',
+   'PYMODULE'),
+  ('importlib.metadata._meta',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_meta.py',
+   'PYMODULE'),
+  ('importlib.metadata._text',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_text.py',
+   'PYMODULE'),
+  ('importlib.metadata._typing',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\metadata\\_typing.py',
+   'PYMODULE'),
+  ('importlib.readers',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\readers.py',
+   'PYMODULE'),
+  ('importlib.resources',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\__init__.py',
+   'PYMODULE'),
+  ('importlib.resources._adapters',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\_adapters.py',
+   'PYMODULE'),
+  ('importlib.resources._common',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\_common.py',
+   'PYMODULE'),
+  ('importlib.resources._functional',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\_functional.py',
+   'PYMODULE'),
+  ('importlib.resources._itertools',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\_itertools.py',
+   'PYMODULE'),
+  ('importlib.resources.abc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\abc.py',
+   'PYMODULE'),
+  ('importlib.resources.readers',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\resources\\readers.py',
+   'PYMODULE'),
+  ('importlib.util',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\importlib\\util.py',
+   'PYMODULE'),
+  ('inspect',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\inspect.py',
+   'PYMODULE'),
+  ('ipaddress',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ipaddress.py',
+   'PYMODULE'),
+  ('json',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\json\\__init__.py',
+   'PYMODULE'),
+  ('json.decoder',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\json\\decoder.py',
+   'PYMODULE'),
+  ('json.encoder',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\json\\encoder.py',
+   'PYMODULE'),
+  ('json.scanner',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\json\\scanner.py',
+   'PYMODULE'),
+  ('logging',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\logging\\__init__.py',
+   'PYMODULE'),
+  ('lzma',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\lzma.py',
+   'PYMODULE'),
+  ('mimetypes',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\mimetypes.py',
+   'PYMODULE'),
+  ('netrc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\netrc.py',
+   'PYMODULE'),
+  ('numbers',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\numbers.py',
+   'PYMODULE'),
+  ('opcode',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\opcode.py',
+   'PYMODULE'),
+  ('pathlib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\pathlib\\__init__.py',
+   'PYMODULE'),
+  ('pathlib._os',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\pathlib\\_os.py',
+   'PYMODULE'),
+  ('pickle',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\pickle.py',
+   'PYMODULE'),
+  ('platform',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\platform.py',
+   'PYMODULE'),
+  ('pprint',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\pprint.py',
+   'PYMODULE'),
+  ('py_compile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\py_compile.py',
+   'PYMODULE'),
+  ('quopri',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\quopri.py',
+   'PYMODULE'),
+  ('random',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\random.py',
+   'PYMODULE'),
+  ('selectors',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\selectors.py',
+   'PYMODULE'),
+  ('shiboken6',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\venv\\Lib\\site-packages\\shiboken6\\__init__.py',
+   'PYMODULE'),
+  ('shutil',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\shutil.py',
+   'PYMODULE'),
+  ('signal',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\signal.py',
+   'PYMODULE'),
+  ('socket',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\socket.py',
+   'PYMODULE'),
+  ('sqlite3',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\__init__.py',
+   'PYMODULE'),
+  ('sqlite3.__main__',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\__main__.py',
+   'PYMODULE'),
+  ('sqlite3._completer',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\_completer.py',
+   'PYMODULE'),
+  ('sqlite3.dbapi2',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\dbapi2.py',
+   'PYMODULE'),
+  ('sqlite3.dump',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sqlite3\\dump.py',
+   'PYMODULE'),
+  ('src',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\__init__.py',
+   'PYMODULE'),
+  ('src.core',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\core\\__init__.py',
+   'PYMODULE'),
+  ('src.core.constants',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\core\\constants.py',
+   'PYMODULE'),
+  ('src.core.exceptions',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\core\\exceptions.py',
+   'PYMODULE'),
+  ('src.database',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\database\\__init__.py',
+   'PYMODULE'),
+  ('src.database.connection',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\connection.py',
+   'PYMODULE'),
+  ('src.database.repositories',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\__init__.py',
+   'PYMODULE'),
+  ('src.database.repositories.admin_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\admin_repo.py',
+   'PYMODULE'),
+  ('src.database.repositories.attendance_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\attendance_repo.py',
+   'PYMODULE'),
+  ('src.database.repositories.audit_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\audit_repo.py',
+   'PYMODULE'),
+  ('src.database.repositories.staff_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\staff_repo.py',
+   'PYMODULE'),
+  ('src.database.repositories.visitor_repo',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\database\\repositories\\visitor_repo.py',
+   'PYMODULE'),
+  ('src.database.schema',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\database\\schema.py',
+   'PYMODULE'),
+  ('src.services',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\services\\__init__.py',
+   'PYMODULE'),
+  ('src.services.attendance_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\attendance_service.py',
+   'PYMODULE'),
+  ('src.services.audit_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\audit_service.py',
+   'PYMODULE'),
+  ('src.services.auth_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\auth_service.py',
+   'PYMODULE'),
+  ('src.services.backup_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\backup_service.py',
+   'PYMODULE'),
+  ('src.services.directory_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\directory_service.py',
+   'PYMODULE'),
+  ('src.services.overdue_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\overdue_service.py',
+   'PYMODULE'),
+  ('src.services.sync_service',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\services\\sync_service.py',
+   'PYMODULE'),
+  ('src.ui',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.components',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.components.animations',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\animations.py',
+   'PYMODULE'),
+  ('src.ui.components.attendance_board',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\attendance_board.py',
+   'PYMODULE'),
+  ('src.ui.components.camera_preview',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\camera_preview.py',
+   'PYMODULE'),
+  ('src.ui.components.modals',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\modals.py',
+   'PYMODULE'),
+  ('src.ui.components.toast',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\components\\toast.py',
+   'PYMODULE'),
+  ('src.ui.main_window',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\main_window.py',
+   'PYMODULE'),
+  ('src.ui.theme',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\theme.py',
+   'PYMODULE'),
+  ('src.ui.views',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\ui\\views\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\__init__.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.attendance_logs',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\attendance_logs.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.dashboard_main',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\dashboard_main.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.overdue_resolution',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\overdue_resolution.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.overview',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\overview.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.reports',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\reports.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.settings_view',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\settings_view.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_dashboard.staff_mgmt',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_dashboard\\staff_mgmt.py',
+   'PYMODULE'),
+  ('src.ui.views.admin_login',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\admin_login.py',
+   'PYMODULE'),
+  ('src.ui.views.shutdown_dialog',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\shutdown_dialog.py',
+   'PYMODULE'),
+  ('src.ui.views.station_view',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\views\\station_view.py',
+   'PYMODULE'),
+  ('src.ui.widgets', '-', 'PYMODULE'),
+  ('src.ui.widgets.gold_calendar',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\widgets\\gold_calendar.py',
+   'PYMODULE'),
+  ('src.ui.widgets.pill_widget',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR '
+   'App\\src\\ui\\widgets\\pill_widget.py',
+   'PYMODULE'),
+  ('src.utils',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\__init__.py',
+   'PYMODULE'),
+  ('src.utils.font_loader',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\font_loader.py',
+   'PYMODULE'),
+  ('src.utils.icon_helper',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\icon_helper.py',
+   'PYMODULE'),
+  ('src.utils.time_utils',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\time_utils.py',
+   'PYMODULE'),
+  ('src.utils.validators',
+   'C:\\Users\\Brian Escol\\Documents\\TGP QR App\\src\\utils\\validators.py',
+   'PYMODULE'),
+  ('ssl',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\ssl.py',
+   'PYMODULE'),
+  ('statistics',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\statistics.py',
+   'PYMODULE'),
+  ('string',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\string\\__init__.py',
+   'PYMODULE'),
+  ('stringprep',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\stringprep.py',
+   'PYMODULE'),
+  ('subprocess',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\subprocess.py',
+   'PYMODULE'),
+  ('sysconfig',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\sysconfig\\__init__.py',
+   'PYMODULE'),
+  ('tarfile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\tarfile.py',
+   'PYMODULE'),
+  ('tempfile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\tempfile.py',
+   'PYMODULE'),
+  ('textwrap',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\textwrap.py',
+   'PYMODULE'),
+  ('threading',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\threading.py',
+   'PYMODULE'),
+  ('token',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\token.py',
+   'PYMODULE'),
+  ('tokenize',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\tokenize.py',
+   'PYMODULE'),
+  ('tracemalloc',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\tracemalloc.py',
+   'PYMODULE'),
+  ('typing',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\typing.py',
+   'PYMODULE'),
+  ('urllib',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\__init__.py',
+   'PYMODULE'),
+  ('urllib.error',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\error.py',
+   'PYMODULE'),
+  ('urllib.parse',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\parse.py',
+   'PYMODULE'),
+  ('urllib.request',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\request.py',
+   'PYMODULE'),
+  ('urllib.response',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\urllib\\response.py',
+   'PYMODULE'),
+  ('zipfile',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\zipfile\\__init__.py',
+   'PYMODULE'),
+  ('zipfile._path',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\zipfile\\_path\\__init__.py',
+   'PYMODULE'),
+  ('zipfile._path._functools',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\zipfile\\_path\\_functools.py',
+   'PYMODULE'),
+  ('zipfile._path.glob',
+   'C:\\Users\\Brian '
+   'Escol\\AppData\\Local\\Python\\pythoncore-3.15-64\\Lib\\zipfile\\_path\\glob.py',
+   'PYMODULE')])
